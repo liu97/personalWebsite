@@ -1,0 +1,209 @@
+body,html{
+	width: 100%;
+	height: 100%;
+	min-width: 48px;
+	overflow: visible;
+}
+/*遮罩共同样式*/
+.over_mask{
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.3);
+}
+/*第一页*/
+#page_header{
+	width: 100%;
+	height: 100%;
+	background: url(../images/index/page_header.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+/*遮罩*/
+#page_mask{ 
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+/*第一页内容*/
+#page_header_content{
+	text-align: center;	
+	width: 80%;
+	height: 80%;
+	text-shadow: 1px 1px 1px #ccc;
+}
+/*头像*/
+#page_head_portrait{
+	display: block;
+	width: 100px;
+	height: 100px;
+	border: 5px solid white;
+	border-radius: 55px;
+	margin: 5% auto;
+	-webkit-transition: all 1s; /* Safari */
+    -moz-transition: all 1s;
+    transition: all 1s;
+    cursor: pointer;
+}
+#page_head_portrait:hover{
+	-webkit-transform: rotate(180deg);
+	-moz-transform:rotate(180deg);
+	transform: rotate(180deg);
+}
+/*第一页icon*/
+#page_header_icon{
+	display: block;
+    -webkit-transition: all 1s; /* Safari */
+    -moz-transition: all 1s;
+    transition: all 1s;
+}
+#page_header_icon:hover{
+	-webkit-transform: translate(0px,15px);
+	-moz-transform:translate(0px,15px);
+	transform: translate(0px,15px);
+}
+/*第一页的文字*/
+.page_header_p,#page_header_icon{
+	font-weight: bold;
+	color: white;
+	margin:5% 0;
+}
+/*主页主要内容*/
+#page_main{
+	width: 100%;
+	height: 100%;
+}
+/*导航条*/
+#page_nav{
+	width: 100%;
+	height: 15%;
+	position: absolute;
+	top: 100%;
+	background: rgba(250,82,82,1);
+	display: flex;
+	justify-content: flex-end;
+}
+#page_nav_ul{
+	width: 60%;
+	height: 100%;
+	display: flex;
+	align-items: stretch;
+}
+.page_nav_li{
+	flex:1 1 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+/*导航条的a*/
+.page_nav_a{
+	color: white;
+}
+/*关于我*/
+#page_main_about_me{
+	width: 100%;
+	height: 100%;
+	background: url(../images/index/about_me.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+}
+/*关于我的遮罩*/
+#about_mask{
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	background: rgba(0,0,0,0.8);
+}
+/*关于我主要内容*/
+.page_main_common_article{
+	display: flex;
+	align-items: center;
+	width: 80%;
+	height: 80%;
+	background: rgba(45, 58, 75, 0.5);
+	color: white;
+}
+/*包含关于我图片的p*/
+#page_main_about_me_img_p{
+	flex:1 1 auto;
+}
+/*关于我的图片*/
+#page_main_about_me_img{
+	width: 100%;
+}
+/*关于我的文字*/
+#page_main_about_me_article{
+	padding: 0 10%;
+	flex:2 1 auto;
+}
+#page_main_about_me_h2{
+	font-weight: bold;
+	
+}
+#page_main_about_me_article_p{
+	margin: 20px 0;
+	text-indent: 2em;
+}
+
+@media screen and (max-width:768px){
+	.page_header_p,#page_main_about_me_h2{
+		font-size: 18px;
+	}
+	#page_header_icon{
+		font-size: 36px;
+	}
+	#page_main_about_me_article_p{
+		line-height: 16px;
+		font-size: 12px;
+	}
+	.page_nav_a{
+		font-size: 
+	}
+}
+@media screen and (min-width:768px){
+	.page_header_p,#page_main_about_me_h2{
+		font-size: 25px;
+	}
+	#page_header_icon{
+		font-size: 50px;
+	}
+	#page_main_about_me_article_p{
+		line-height: 18px;
+		font-size: 14px;
+	}
+	.page_nav_a{
+		font-size: 
+	}
+}
+@media screen and (min-width:992px){
+   	.page_header_p,#page_main_about_me_h2{
+		font-size: 35px;
+	}
+	#page_header_icon{
+		font-size: 70px;
+	}
+	#page_main_about_me_article_p{
+		line-height: 20px;
+		font-size: 16px;
+	}
+	.page_nav_a{
+		font-size: 
+	}
+}
+@media screen and (min-width:1200px){
+   	.page_header_p,#page_main_about_me_h2{
+		font-size: 40px;
+	}
+	#page_header_icon{
+		font-size: 80px;
+	}
+	#page_main_about_me_article_p{
+		line-height: 25px;
+		font-size: 18px;
+	}
+	.page_nav_a{
+		font-size: 
+	}
+}
