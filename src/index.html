@@ -16,7 +16,7 @@
 	<header id="page_header">
 		<div class="over_mask" id="page_mask">
 			<div id="page_header_content">
-				<img src="images/index/logo.jpg" alt="头像" class="head_portrait" id="page_head_portrait">
+				<img src="images/index/head_portrait.jpg" alt="头像" class="head_portrait" id="page_head_portrait">
 				<p class="page_header_p">Hello World</p>
 				<p class="page_header_p">Welcome to Liu Chuanfu's personal website</p>
 				<a href="#page_main_about_me" id="page_header_icon">
@@ -27,6 +27,7 @@
 	</header>
 	<main id="page_main">
 		<nav id="page_nav">
+			<img src="images/index/logo.png" alt="logo" class="logo">
 			<ul id="page_nav_ul">
 				<li class="page_nav_li page_nav_li_active">
 					<a href="#page_header" class="page_nav_a">HOME</a>
@@ -35,20 +36,20 @@
 					<a href="#page_main_about_me" class="page_nav_a">ABOUT ME</a>
 				</li>
 				<li class="page_nav_li">
-					<a href="" class="page_nav_a">BLOGS</a>
+					<a href="#page_main_blogs" class="page_nav_a">BLOGS</a>
 				</li>
 				<li class="page_nav_li">
-					<a href="" class="page_nav_a">COMMENT</a>
+					<a href="#page_main_comment" class="page_nav_a">COMMENT</a>
 				</li>
 				<li class="page_nav_li">
-					<a href="" class="page_nav_a">CONTACT</a>
+					<a href="#page_main_contact" class="page_nav_a">CONTACT</a>
 				</li>
 			</ul>
 			<a href="#" id="page_nav_bars">
 				<i class="fa fa-bars"></i>
 			</a>	
 		</nav>
-		<section id="page_main_about_me">
+		<section id="page_main_about_me" class="page_main_section">
 			<div class="over_mask" id="about_mask">
 				<article class="page_main_common_article">
 					<p id="page_main_about_me_img_p">
@@ -62,6 +63,15 @@
 					</article>
 				</article>
 			</div>
+		</section>
+		<section id="page_main_blogs" class="page_main_section">
+			<div class="over_mask" id="blogs_mask"></div>
+		</section>
+		<section id="page_main_comment" class="page_main_section">
+			<div class="over_mask" id="blogs_mask"></div>
+		</section>
+		<section id="page_main_contact" class="page_main_section">
+			<div class="over_mask" id="blogs_mask"></div>
 		</section>
 	</main>
 	<script src="js/plugins/jquery-3.3.1.js"></script>

@@ -53,6 +53,8 @@ body,html{
 }
 /*第一页icon*/
 #page_header_icon{
+	width: 100px;
+	height: 100px;
 	display: block;
     -webkit-transition: all 1s; /* Safari */
     -moz-transition: all 1s;
@@ -67,7 +69,7 @@ body,html{
 .page_header_p,#page_header_icon{
 	font-weight: bold;
 	color: white;
-	margin:5% 0;
+	margin:5% auto;
 }
 /*主页主要内容*/
 #page_main{
@@ -77,17 +79,29 @@ body,html{
 /*导航条*/
 #page_nav{
 	width: 100%;
-	height: 15%;
+	height: 12%;
 	position: absolute;
 	top: 100%;
 	background: rgba(250,82,82,1);
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
+	align-items: center;
+}
+.logo{
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	padding: 5px;
+	background-color: #fa5252;
+	border: 3px solid white;
+	margin:0 10%;
 }
 #page_nav_ul{
 	flex-wrap: wrap;
 	align-items: center;
 	background: rgba(250,82,82,1);
+	width: 60%;
+	margin-right: 5%;
 }
 .page_nav_li{
 	flex:1 1 auto;
@@ -95,36 +109,35 @@ body,html{
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
+
 }
 .page_nav_li_active{
 	border: 2px solid white;
+	border-radius: 3px;
 }
 /*导航条的a*/
 .page_nav_a{
+	font-size: 16px;
 	color: white;
 }
 #page_nav_bars{
 	display: none;
 	height: 100%;
-	width: 10%;
+	width: 15%;
 	font-size: 25px;
 	color: white;
 }
 /*关于我*/
 #page_main_about_me{
-	width: 100%;
-	height: 100%;
-	background: url(../images/index/about_me.png);
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-attachment: fixed; /*设置了fixed后不要将元素设置为display：relative，否则背景会出现卡顿情况*/
+	background: url(../images/index/about_me.png); 
+	background-attachment: fixed;
 }
 /*关于我的遮罩*/
 #about_mask{
 	display: flex;
 	align-items: flex-end;
 	justify-content: center;
-	background: rgba(0,0,0,0.8);
+	background: rgba(0,0,0,0.7);
 }
 /*关于我主要内容*/
 .page_main_common_article{
@@ -137,26 +150,50 @@ body,html{
 }
 /*包含关于我图片的p*/
 #page_main_about_me_img_p{
-	flex:1 1 auto;
+	flex:1 1 250px;
+	margin-left: 5%;
 }
 /*关于我的图片*/
 #page_main_about_me_img{
 	width: 100%;
+	border-radius: 250px;
 }
 /*关于我的文字*/
 #page_main_about_me_article{
-	padding: 0 10%;
-	flex:2 1 auto;
+	margin: 0 5%;
+	padding: 0 5%;
+	flex:2 1 400px;
+	height: 60%;
+	background:rgb(69,88,113);
+	border-radius: 20px;
 }
 #page_main_about_me_h2{
+	margin-top: 10px;
 	font-weight: bold;
 	
 }
 #page_main_about_me_article_p{
-	margin: 20px 0;
+	margin: 40px 0;
 	text-indent: 2em;
 }
-
+/*博客页*/
+#page_main_blogs{
+	background: url(../images/index/blogs.png);
+	background-attachment: fixed;
+}
+#blogs_mask{
+	background: rgba(0,0,0,0.7);
+}
+/*评论页*/
+#page_main_comment{
+	background: url(../images/index/comment.png);
+	background-attachment: fixed;
+}
+/*联系页*/
+#page_main_contact{
+	background: url(../images/index/contact.png);
+	background-attachment: fixed;
+}
 @media screen and (max-width:768px){
 	.page_header_p,#page_main_about_me_h2{
 		font-size: 18px;
@@ -171,19 +208,18 @@ body,html{
 	#page_nav_bars{
 		display: inline-flex;
 		align-items: center;
+		justify-content: center;
 	}
 	#page_nav_ul{
 		display: none;
-		width: 100%;
 		position: absolute;
 		top: 100%;
+		width: 100%;
+		border-top: 1px solid white;
 	}
 	.page_nav_li{
 		flex-basis: 100%;
 		height: 50px;
-	}
-	.page_nav_a{
-		font-size: 16px;
 	}
 }
 @media screen and (min-width:768px){
@@ -200,13 +236,9 @@ body,html{
 	#page_nav_ul{
 		display: flex;
 		height: 100%;
-		width: 90%;
 	}
 	.page_nav_li{
 		height: 40%;
-	}
-	.page_nav_a{
-		font-size: 16px;
 	}
 }
 @media screen and (min-width:992px){
@@ -223,13 +255,9 @@ body,html{
 	#page_nav_ul{
 		display: flex;
 		height: 100%;
-		width: 80%;
 	}
 	.page_nav_li{
 		height: 45%;
-	}
-	.page_nav_a{
-		font-size: 20px;
 	}
 }
 @media screen and (min-width:1200px){
@@ -246,12 +274,8 @@ body,html{
 	#page_nav_ul{
 		display: flex;
 		height: 100%;
-		width: 70%;
 	}
 	.page_nav_li{
 		height: 50%;
-	}
-	.page_nav_a{
-		font-size: 22px;
 	}
 }
