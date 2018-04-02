@@ -1,6 +1,4 @@
-.head_portrait{
-	display: inline-block;
-}
+/*more的默认样式*/
 .btn_more{
 	background-color: #fa5252;
 	border: 0;
@@ -9,7 +7,6 @@
 }
 .a_more{
 	color: white;
-	font-size: 16px;
 }
 @media screen and (max-width:768px){
 	.btn_more{
