@@ -23,6 +23,13 @@
 	background-size: cover;
 	/*background-attachment: fixed;*//*设置了fixed后不要将元素设置为display：relative，否则背景会出现卡顿情况*/
 }
+/*article通用样式*/
+.page_main_common_article{
+	width: 80%;
+	height: 80%;
+	background: rgba(45, 58, 75, 0.5);
+	color: white;
+}
 @media screen and (max-width:768px){
 	.btn_more{
 		width: 80px;

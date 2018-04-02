@@ -6,6 +6,8 @@ font-size:62.5%;
 } /* for IE/Win */
 html>body {
 font-size:10px;
+text-align: justify;
+text-justify: inter-ideograph;/*IE*/
 } /* for everything else */
 
 /*字体边框等初始化*/

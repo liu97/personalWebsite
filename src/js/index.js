@@ -33,6 +33,7 @@ $(window).scroll(function(event) {
 	
 	/* Act on the event */
 });
+//判断桌面宽度大小是否大于768px
 $(window).resize(function() {  
 	var width = $(this).width();        
   	if(width>768){
