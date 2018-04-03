@@ -20,14 +20,18 @@ $(window).scroll(function(event) {
 			top:"100%"
 		});
 	}
-	//导航条活动页面的选定
+	
 	for (let i = 0; i < $(".page_nav_li").length; i++) {
-		if($(document).scrollTop() >= $(window).height() *i){
+		if($(document).scrollTop() >= $(window).height() * i -80){
+			//导航条活动页面的选定
 			$(".page_nav_li").each(function(index, el) {
 				$(el).removeClass('page_nav_li_active');
 			});
 			$(".page_nav_li").eq(i).addClass('page_nav_li_active');
-
+			//页面翻转
+			if(i>0){ 
+				$(".page_turn_mask").eq(i-1).addClass('page_turn');
+			}
 		}
 	}
 	
