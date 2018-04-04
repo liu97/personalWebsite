@@ -6,7 +6,7 @@ body,html{
 }
 /*设置最小高度*/
 .min_height_block{
-	min-height: 768px;
+	min-height: 500px;
 }
 /*遮罩共同样式*/
 .over_mask{
@@ -207,6 +207,25 @@ body,html{
 	flex-basis: 100%;
 	color: white;
 	padding-top: 5%;
+}
+#page_main_blogs_h1_span{
+	position: absolute;
+	right: 10%;
+}
+#page_main_blogs_h1_span a{
+	color: white;
+	font-size: 14px;
+	position: relative;
+}
+.page_main_blogs_h1_span_i{
+    position: relative;
+    right: 0%;
+    -webkit-transition: all 0.5s; /* Safari */
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
+}
+#page_main_blogs_h1_span a:hover .page_main_blogs_h1_span_i{
+	right: -10%;
 }
 .page_main_blogs_article_ul{
 	position: absolute;

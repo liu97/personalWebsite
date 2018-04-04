@@ -8,7 +8,7 @@ $(function () {
 })
 $(window).scroll(function(event) {
 	//导航条定位的改变
-	if($(document).scrollTop() >= $(window).height()){
+	if($(document).scrollTop() >= $(".over_mask").eq(0).height()){
 		$("#page_nav").css({
 			position: 'fixed',
 			top: "0"
