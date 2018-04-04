@@ -22,7 +22,7 @@ $(window).scroll(function(event) {
 	}
 	
 	for (let i = 0; i < $(".page_nav_li").length; i++) {
-		if($(document).scrollTop() >= $(window).height() * i -80){
+		if($(document).scrollTop() >= $(".over_mask").eq(0).height() * i -80){
 			//导航条活动页面的选定
 			$(".page_nav_li").each(function(index, el) {
 				$(el).removeClass('page_nav_li_active');
