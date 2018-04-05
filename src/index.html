@@ -107,7 +107,21 @@
 			<div class="over_mask page_turn_mask" id="blogs_mask"></div>
 		</section>
 		<section id="page_main_contact" class="page_main_section min_height_block">
-			<div class="over_mask page_turn_mask" id="blogs_mask"></div>
+			<div class="over_mask page_turn_mask" id="blogs_mask">
+				<article class="page_main_common_article" id="page_main_contact_article">
+					<h1 id="page_main_contact_h1">联系我</h1>
+					<form action="#" method="post" id="page_main_contact_form">
+						<div id="page_main_contact_name_div" class="page_main_contact_div">
+							<input type="text" id="contact_name" class="contact_input" name="contact_name" placeholder="name">
+						</div>
+						<div id="page_main_contact_email_div" class="page_main_contact_div">
+							<input type="text" id="contact_email" class="contact_input" name="contact_email" placeholder="email">
+						</div>
+						<textarea name="contact_textarea" id="contact_textarea"   placeholder="message"></textarea>
+						<button type="submit" id="contact_btn">send</button>
+					</form>
+				</article>
+			</div>
 		</section>
 	</main>
 	<script src="js/plugins/jquery-3.3.1.js"></script>

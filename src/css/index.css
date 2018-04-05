@@ -200,6 +200,7 @@ body,html{
 #page_main_blogs_article{
 	position: relative;
 }
+/*博客h1*/
 #page_main_blogs_h1{
 	text-align: center;
 	font-weight: bold;
@@ -227,6 +228,7 @@ body,html{
 #page_main_blogs_h1_span a:hover .page_main_blogs_h1_span_i{
 	right: -10%;
 }
+/*博客主要内容*/
 .page_main_blogs_article_ul{
 	position: absolute;
 	left: 50%;	
@@ -247,6 +249,7 @@ body,html{
 	position: relative;
 	z-index: 1;
 }
+/*博客文字内容*/
 .page_main_blogs_li_article{
 	background-color: white;
 	width: 65%;
@@ -288,6 +291,73 @@ body,html{
 	background: url(../images/index/contact.png);
 	background-attachment: fixed;
 }
+/*联系页主要内容*/
+#page_main_contact_article{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+
+}
+/*联系页h1*/
+#page_main_contact_h1{
+	text-align: center;
+	font-weight: bold;
+	position: relative;
+	flex-basis: 100%;
+	color: white;
+}
+/*联系页表单*/
+#page_main_contact_form{
+	flex-basis: 70%;
+	height: 70%;
+	display: flex;
+	flex-wrap: wrap;
+	background-color: rgba(250, 250, 250, 0.03);
+	justify-content: center;
+	align-content: space-around;
+}
+.page_main_contact_div{
+	text-align: center;
+	flex-basis: 50%;
+}
+.contact_input{
+	width: 80%;
+	height: 40px;
+	padding-left: 2%;
+	background-color: rgba(250, 250, 250, 0.05);
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+}
+#contact_textarea{
+	width: 90%;
+	height: 100px;
+	padding-left: 1%;
+	padding-top: 1%;
+	background-color: rgba(250, 250, 250, 0.05);
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+}
+.contact_input:focus,#contact_textarea:focus{
+	outline: none;
+	box-shadow: 1px 1px 10px #315a75, -1px -1px 10px #315a75;
+}
+#contact_btn{
+	background-color: #fa5252;
+	border: 1px solid #fa5252;
+	border-radius: 3px;
+	cursor: pointer;
+	-webkit-transition: all 0.5s; /* Safari */
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
+    color: white;
+}
+#contact_btn:hover{
+	background-color: rgba(250, 250, 250, 0.05);
+	border: 1px solid #fa5252;
+	color: #fa5252;
+}
 /*页面css3动画*/
 #page_main section{
 	 perspective: 800px;
@@ -328,7 +398,7 @@ body,html{
 }
 
 @media screen and (max-width:768px){
-	.page_header_p,#page_main_about_me_h1,.page_main_blogs_h2,#page_main_blogs_h1{
+	.page_header_p,#page_main_about_me_h1,.page_main_blogs_h2,#page_main_blogs_h1,#page_main_contact_h1{
 		font-size: 18px;
 	}
 	#page_header_icon{
@@ -360,9 +430,25 @@ body,html{
 	.page_main_blogs_article_li:first-of-type{
 		display: flex;
 	}
+	#page_main_blogs_h1{
+		text-align: left;
+		padding-left: 10%;	
+	}
+	.page_main_contact_div{
+		flex-basis: 100%;
+	}
+	#contact_textarea{
+		width: 80%;
+		padding-left: 2%;
+	}
+	#contact_btn{
+		width: 80px;
+		height: 25px;
+		font-size: 12px;
+	}
 }
 @media screen and (min-width:768px){
-	.page_header_p,#page_main_about_me_h1,.page_main_blogs_h2,#page_main_blogs_h1{
+	.page_header_p,#page_main_about_me_h1,.page_main_blogs_h2,#page_main_blogs_h1,#page_main_contact_h1{
 		font-size: 25px;
 	}
 	#page_header_icon{
@@ -382,10 +468,17 @@ body,html{
 	.page_main_blogs_article_li:last-of-type{
 		display: none;
 	}
-
+	#contact_textarea{
+		height: calc(80%-80px);
+	}
+	#contact_btn{
+		width: 100px;
+		height: 30px;
+		font-size: 14px;
+	}
 }
 @media screen and (min-width:992px){
-   	.page_header_p,#page_main_about_me_h1,.page_main_blogs_h2,#page_main_blogs_h1{
+   	.page_header_p,#page_main_about_me_h1,.page_main_blogs_h2,#page_main_blogs_h1,#page_main_contact_h1{
 		font-size: 35px;
 	}
 	#page_header_icon{
@@ -405,9 +498,14 @@ body,html{
 	.page_main_blogs_article_li:last-of-type{
 		display: flex;
 	}
+	#contact_btn{
+		width: 120px;
+		height: 35px;
+		font-size: 16px;
+	}
 }
 @media screen and (min-width:1200px){
-   	.page_header_p,#page_main_about_me_h1,.page_main_blogs_h2,#page_main_blogs_h1{
+   	.page_header_p,#page_main_about_me_h1,.page_main_blogs_h2,#page_main_blogs_h1,#page_main_contact_h1{
 		font-size: 40px;
 	}
 	#page_header_icon{
@@ -423,5 +521,10 @@ body,html{
 	}
 	.page_nav_li{
 		height: 50%;
+	}
+	#contact_btn{
+		width: 140px;
+		height: 40px;
+		font-size: 18px;
 	}
 }
