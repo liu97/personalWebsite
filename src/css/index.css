@@ -434,6 +434,9 @@ body,html{
 		text-align: left;
 		padding-left: 10%;	
 	}
+	#page_main_contact_form{
+		flex-basis: 90%;
+	}
 	.page_main_contact_div{
 		flex-basis: 100%;
 	}
