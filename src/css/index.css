@@ -154,6 +154,7 @@ body,html{
 #page_main_about_me_img_p{
 	flex:1 1 250px;
 	margin-left: 5%;
+	overflow: hidden;
 }
 /*关于我的图片*/
 #page_main_about_me_img{
@@ -234,7 +235,7 @@ body,html{
 	left: 50%;	
 	margin-left:-55%;
 	width: 110%;
-	height: 80%;
+	height: 99%;
 	display: flex;
 }
 .page_main_blogs_article_li{
@@ -242,6 +243,14 @@ body,html{
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
+	border-radius: 5px;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	transition: all 0.5s;
+}
+.page_main_blogs_article_li:hover{
+	box-shadow: 1px 1px 5px #ccc,-1px -1px 5px #ccc;
+	background-color: rgba(250, 250, 250, 0.1);
 }
 .page_main_blogs_img{
 	width: 90%;
@@ -253,7 +262,7 @@ body,html{
 .page_main_blogs_li_article{
 	background-color: white;
 	width: 65%;
-	height: 55%;
+	height: 35%;
 	color: #333;
 	margin-top: -15%;
 	padding: 10% 5%;
@@ -280,11 +289,6 @@ body,html{
 }
 .blogs_a_more:hover a{
 	color: #fa5252;
-}
-/*评论页*/
-#page_main_comment{
-	background: url(../images/index/comment.png);
-	background-attachment: fixed;
 }
 /*联系页*/
 #page_main_contact{
@@ -445,7 +449,7 @@ body,html{
 		padding-left: 2%;
 	}
 	#contact_btn{
-		width: 80px;
+		width: 100px;
 		height: 25px;
 		font-size: 12px;
 	}
