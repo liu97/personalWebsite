@@ -64,7 +64,6 @@ body{
 	overflow: auto;
 	border-radius: 5px;
 	margin-top: 10px;
-	box-shadow: 2px 0px 5px rgba(0,0,0,0.1);
 }
 .category_header_aside_h2{
 	font-size: 16px;
@@ -203,12 +202,14 @@ body{
 	#category_main{
 		flex-basis: 100%;
 		margin-top: 40px;
+		position: absolute;
+		z-index: -1;
 	}
 	.category_main_article{
 		margin: 0;
 	}
 	.category_main_article_article{
-		width: calc(100% - 44px);
+		width: calc(90%);
 	}
 	.category_main_article_aside{
 		display: none;
@@ -217,12 +218,7 @@ body{
 		flex-basis: 100%;
 		display: none;
 		margin-top: 40px;
-		/*background-color: rgba(0, 0, 0, 0.8);
-		width: 250px;
-		height: 100%;
-		position: fixed;
-		z-index: 2;
-		overflow: auto;*/
+		background-color: white;
 	}
 	#category_bars{
 		display: block;
