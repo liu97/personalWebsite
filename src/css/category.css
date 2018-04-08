@@ -19,7 +19,7 @@ body{
 	position: fixed;
 	right: 0;
 	text-align: right;
-	line-height: 40px;
+	line-height: 60px;
 	padding-right: 20px;
 	background-color: #fa5252;
 	z-index: 2;
@@ -201,7 +201,7 @@ body{
 	}
 	#category_main{
 		flex-basis: 100%;
-		margin-top: 40px;
+		margin-top: 60px;
 		position: absolute;
 		z-index: -1;
 	}
@@ -217,8 +217,10 @@ body{
 	#category_header{
 		flex-basis: 100%;
 		display: none;
-		margin-top: 40px;
+		margin-top: 60px;
 		background-color: white;
+		border-bottom: 2px solid #fa5252;
+		z-index: 1;
 	}
 	#category_bars{
 		display: block;
