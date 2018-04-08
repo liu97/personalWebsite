@@ -8,12 +8,6 @@ body,html{
 .min_height_block{
 	min-height: 500px;
 }
-/*遮罩共同样式*/
-.over_mask{
-	width: 100%;
-	height: 100%;
-	background: rgba(0,0,0,0.3);
-}
 /*第一页*/
 #page_header{
 	width: 100%;
@@ -37,24 +31,7 @@ body,html{
 	height: 80%;
 	text-shadow: 1px 1px 1px #ccc;
 }
-/*头像*/
-#page_head_portrait{
-	display: block;
-	width: 100px;
-	height: 100px;
-	border: 5px solid white;
-	border-radius: 55px;
-	margin: 5% auto;
-	-webkit-transition: all 1s; /* Safari */
-    -moz-transition: all 1s;
-    transition: all 1s;
-    cursor: pointer;
-}
-#page_head_portrait:hover{
-	-webkit-transform: rotate(180deg);
-	-moz-transform:rotate(180deg);
-	transform: rotate(180deg);
-}
+
 /*第一页icon*/
 #page_header_icon{
 	width: 100px;
@@ -367,7 +344,7 @@ body,html{
 	 perspective: 800px;
 }
 .page_turn_mask{
-	-webkit-transform:rotateX(90deg); /* Safari and Chrome */
+	-webkit-transform:rotateX(90deg); 
 	-moz-transform:rotateX(90deg);
 	transform:rotateX(90deg);
 	-webkit-transform-origin:bottom;
