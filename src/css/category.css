@@ -50,6 +50,8 @@ body{
 	font-size: 14px;
 	color: white;
 	line-height: 30px;
+	width: 150px;
+	margin: 0 auto;
 	-webkit-transition:all 0.5s;
 	-moz-transition:all 0.5s;
 	transition:all 0.5s;
@@ -209,22 +211,37 @@ body{
 		margin: 0;
 	}
 	.category_main_article_article{
-		width: calc(90%);
+		width: 90%;
 	}
 	.category_main_article_aside{
 		display: none;
 	}
 	#category_header{
-		flex-basis: 100%;
+		width: 100%;
 		margin-top: 60px;
-		background-color: white;
-		border-bottom: 2px solid #fa5252;
 		z-index: 1;
 		position: fixed;
+		height: 70%;
 	}
 	#category_header_for_min_width{
 		display: none;
+		background-color: white;
+		width: 100%;
+		height: 100%;
 	}
+	#category_header_inner{
+		width: 1250%;
+		height: 100%;
+		overflow-x: hidden;
+		overflow-y: scroll;
+	}
+	#category_header_article,.category_header_aside{
+		width: 8%;
+		padding-right: 1px; /*解决点击下拉时出现白边*/
+	}
+	/*#category_header_for_min_width::-webkit-scrollbar {
+	    display: none;
+	}*/
 	#category_bars{
 		display: block;
 	}
