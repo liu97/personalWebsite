@@ -115,7 +115,7 @@ body{
 }
 .category_main_article{
 	position: relative;
-	margin: 10px 30px 0 30px;
+	margin: 0 30px 10px 30px;
 }
 .category_main_article_aside{
 	display: inline-block;
