@@ -4,7 +4,7 @@ $(function() {
 
 	//当导航bar出来后的点击事件
 	$("#category_bars").click(function(event) { 
-		$("#category_header").slideToggle("slow");
+		$("#category_header_for_min_width").slideToggle("slow");
 		return false;
 	});
 })

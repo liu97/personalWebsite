@@ -216,11 +216,14 @@ body{
 	}
 	#category_header{
 		flex-basis: 100%;
-		display: none;
 		margin-top: 60px;
 		background-color: white;
 		border-bottom: 2px solid #fa5252;
 		z-index: 1;
+		position: fixed;
+	}
+	#category_header_for_min_width{
+		display: none;
 	}
 	#category_bars{
 		display: block;
