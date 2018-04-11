@@ -238,6 +238,7 @@ body{
 	#category_header_article,.category_header_aside{
 		width: 8%;
 		padding-right: 1px; /*解决点击下拉时出现白边*/
+		border-bottom:2px solid #fa5252;
 	}
 	/*#category_header_for_min_width::-webkit-scrollbar {
 	    display: none;

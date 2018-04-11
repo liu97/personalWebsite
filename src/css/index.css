@@ -88,11 +88,7 @@ body,html{
 }
 .page_nav_li{
 	flex:1 1 auto;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	cursor: pointer;
-
 }
 .page_nav_li_active{
 	border: 2px solid white;
@@ -102,6 +98,12 @@ body,html{
 .page_nav_a{
 	font-size: 16px;
 	color: white;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 #page_nav_bars{
 	display: none;
