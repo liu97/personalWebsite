@@ -363,20 +363,14 @@ body,html{
 }
 @-webkit-keyframes page_turn{
     0%{-webkit-transform:rotateX(90deg);}
-    /*50%{-webkit-transform:translate(30px);opacity:1;}
-    70%{-webkit-transform:translate(35px);opacity:1;}*/
     100%{-webkit-transform:rotateX(0deg);}
 }
 @-moz-keyframes page_turn{
     0%{-moz-transform:rotateX(90deg);}
-    /*50%{-moz-transform:translate(30px);opacity:1;}
-    70%{-moz-transform:translate(35px);opacity:1;}*/
     100%{-moz-transform:rotateX(0deg);}
 }
 @keyframes page_turn{
     0%{transform:rotateX(90deg);}
-    /*50%{transform:translate(30px);opacity:1;}
-    70%{transform:translate(35px);opacity:1;}*/
     100%{transform:rotateX(0deg);}
 }
 
@@ -400,6 +394,7 @@ body,html{
 		display: none;
 		position: absolute;
 		top: 100%;
+		left: 0;
 		width: 100%;
 		border-top: 1px solid white;
 	}

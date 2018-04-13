@@ -5,7 +5,7 @@ function a_location(a, target, father) { //滑动锚点
 	else if(target != undefined){ //如果被点击目标不为空
 		if(father != undefined){  //如果要绑定多个元素，且该元素都在同一个father内
 			father.on('click', target, function(event) {
-				let clickTarget = $(event.target).attr('href') ? $(event.target) : $(event.target).find(a).eq(0);
+				var clickTarget = $(event.target).attr('href') ? $(event.target) : $(event.target).find(a).eq(0);
 				$('html, body').animate({
 				    scrollTop: $(clickTarget.attr('href') ).offset().top
 
@@ -38,9 +38,9 @@ function a_location(a, target, father) { //滑动锚点
 }
 function random_color(list){  //为集合元素添加随机颜色
 	list.each(function(index, el) {
-		let R = Math.floor(Math.random() * 255);
-        let G = Math.floor(Math.random() * 255);
-        let B = Math.floor(Math.random() * 255);
+		var R = Math.floor(Math.random() * 255);
+        var G = Math.floor(Math.random() * 255);
+        var B = Math.floor(Math.random() * 255);
         $(el).css({
         		'background-color': 'white',
         		'color': 'rgb(' + R + ',' + G + ',' + B + ')',
