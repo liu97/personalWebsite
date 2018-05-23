@@ -27,7 +27,7 @@
 	vertical-align: top;
 }
 .category_main_section_article_article{
-	margin: 0 50px 10px 30px;
+	margin: 0 2% 2% 2%;
 	border-bottom: 1px solid #ddd;
 	overflow: auto;
 }
@@ -37,7 +37,7 @@
 }
 .category_main_section_article_article_h2{
 	display: inline-block;
-	width: 80%;
+	width: 70%;
 }
 .category_main_section_article_article_h2 a{
 	color: #565656;
@@ -51,7 +51,7 @@
 }
 .article_time{
 	display: inline-block;
-	width:19%;
+	width:29%;
 	color: #aaa;
 	text-align: right;
 }
@@ -74,6 +74,9 @@
 	.category_main_section_year{
    		font-size: 18px;
    	}
+   	.category_main_section_article_article_h2 a{
+   		font-size: 14px;
+   	}
 }
 @media screen and (max-width:992px){
 	#category_main{
@@ -88,14 +91,29 @@
 	.category_main_section_year{
    		font-size: 22px;
    	}
+   	.category_main_section_article_article_h2 a{
+   		font-size: 16px;
+   	}
+   	.category_main_section_article_article_h2{
+   		width: 59%;
+   	}
+   	.article_time{
+   		width: 39%;
+   	}
 }
 @media screen and (min-width:992px){
    	.category_main_section_year{
    		font-size: 35px;
    	}
+   	.category_main_section_article_article_h2 a{
+   		font-size: 18px;
+   	}
 }
 @media screen and (min-width:1200px){
    	.category_main_section_year{
    		font-size: 40px;
+   	}
+   	.category_main_section_article_article_h2 a{
+   		font-size: 20px;
    	}
 }
