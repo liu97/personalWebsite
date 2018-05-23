@@ -38,6 +38,9 @@
 .category_main_section_article_article_h2{
 	display: inline-block;
 	width: 70%;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
 }
 .category_main_section_article_article_h2 a{
 	color: #565656;
@@ -54,6 +57,7 @@
 	width:29%;
 	color: #aaa;
 	text-align: right;
+	vertical-align: top;
 }
 .category_main_section_article_bottom{
 	color: #fa5252;
