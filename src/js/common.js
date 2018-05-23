@@ -38,9 +38,9 @@ function a_location(a, target, father) { //滑动锚点
 }
 function random_color(list){  //为集合元素添加随机颜色
 	list.each(function(index, el) {
-		var R = Math.floor(Math.random() * 255);
-        var G = Math.floor(Math.random() * 255);
-        var B = Math.floor(Math.random() * 255);
+		var R = Math.floor(Math.random() * 155);
+        var G = Math.floor(Math.random() * 155);
+        var B = Math.floor(Math.random() * 155);
         $(el).css({
         		'background-color': 'white',
         		'color': 'rgb(' + R + ',' + G + ',' + B + ')',
