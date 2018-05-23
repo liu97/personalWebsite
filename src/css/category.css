@@ -73,10 +73,17 @@
 @media screen and (max-width:768px){
 	.category_main_section_year{
    		font-size: 18px;
+   		margin: 0 2% 2% 2%;
    	}
    	.category_main_section_article_article_h2 a{
    		font-size: 14px;
    	}
+	.category_main_section_aside{
+		display: block;
+		width: 100%;
+		text-align: left;
+	}
+
 }
 @media screen and (max-width:992px){
 	#category_main{
@@ -87,6 +94,7 @@
 	}
 	.category_main_section{
 		margin: 0;
+		padding: 5px;
 	}
 	.category_main_section_year{
    		font-size: 22px;
