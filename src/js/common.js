@@ -61,3 +61,16 @@ function random_color(list){  //为集合元素添加随机颜色
         });
 	});
 }
+function bar_toggle(item) {  //显示隐藏导航栏
+	var width = $(this).width();        
+  	if(width>768){
+  		item.css({
+  			display: 'flex'
+   		});
+  	}
+  	else{
+  		item.css({
+  			display: 'none'
+   		});
+  	}
+}

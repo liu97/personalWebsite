@@ -38,16 +38,6 @@ $(window).scroll(function(event) {
 	/* Act on the event */
 });
 //判断桌面宽度大小是否大于768px
-$(window).resize(function() {  
-	var width = $(this).width();        
-  	if(width>768){
-  		$("#page_nav_ul").css({
-  			display: 'flex'
-   		});
-  	}
-  	else{
-  		$("#page_nav_ul").css({
-  			display: 'none'
-   		});
-  	}
+$(window).resize(function(){
+	bar_toggle($("#page_nav_ul"))
 }); 
