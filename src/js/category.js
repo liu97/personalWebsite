@@ -1,3 +1,3 @@
 $(function() {
-	random_color($(".article_tag"))
+	random_color($(".article_tag"));
 })

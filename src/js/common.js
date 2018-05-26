@@ -61,9 +61,9 @@ function random_color(list){  //为集合元素添加随机颜色
         });
 	});
 }
-function bar_toggle(item) {  //显示隐藏导航栏
+function bar_toggle(item,size) {  //显示隐藏导航栏
 	var width = $(this).width();        
-  	if(width>768){
+  	if(width>size){
   		item.css({
   			display: 'flex'
    		});
@@ -74,3 +74,15 @@ function bar_toggle(item) {  //显示隐藏导航栏
    		});
   	}
 }
+
+$(function(){ //为回到顶部的标签添加滑动效果
+	a_location($(".up_to"))
+})
+$(window).scroll(function(event) {
+	if($(document).scrollTop()>=$(window).height()){
+		$(".fix_up").css('display', 'block');
+	}
+	else{
+		$(".fix_up").css('display', 'none');
+	}
+})

@@ -1,6 +1,9 @@
 /*category页主要内容*/
 #category_main{
-	flex-basis: 80%;
+	width: 74%;
+	display: inline-block;
+	vertical-align: top;
+	/*flex: 1 0 auto;*/
 }
 .category_main_section{
 	position: relative;
@@ -93,8 +96,7 @@
 	#category_main{
 		width: 100%;
 		margin-top: 60px;
-		position: absolute;
-		z-index: -1;
+		position: relative;
 	}
 	.category_main_section{
 		margin: 0;

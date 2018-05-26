@@ -79,6 +79,42 @@
 	line-height: 100px;
 	color: white;
 }
+.article_footer{
+	position: absolute;
+	bottom: 0;
+}
+/*共用回到顶部*/
+.fix_up{
+	display: none;
+	position: fixed;
+	top: 80%;
+	right: 2%;
+	width: 60px;
+	height: 60px;
+	background: rgba(255,82,82,0.8);
+	z-index: 999;
+}
+.up_to{
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	color: white;
+	font-size: 30px;
+}
+.up_to i{
+	display: inline-block;
+	position: absolute;
+	top: 20%;
+	left: 35%;
+	-webkit-transition: all 0.5s; /* Safari */
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.up_to:hover i{
+	-webkit-top: 5%; /* Safari */
+    -moz-top: 5%;
+    top: 5%;
+}
 @media screen and (max-width:768px){
 	.btn_more{
 		width: 80px;
@@ -86,6 +122,13 @@
 	}
 	.a_more{
 		font-size: 12px;
+	}
+	.fix_up{
+		width: 30px;
+		height: 30px;
+	}
+	.up_to{
+		font-size: 16px;	
 	}
 }
 @media screen and (min-width:768px){
@@ -96,6 +139,13 @@
 	.a_more{
 		font-size: 14px;
 	}
+	.fix_up{
+		width: 40px;
+		height: 40px;
+	}
+	.up_to{
+		font-size: 20px;	
+	}
 }
 @media screen and (min-width:992px){
    	.btn_more{
@@ -105,6 +155,13 @@
     .a_more{
     	font-size: 16px;
     }
+    .fix_up{
+		width: 50px;
+		height: 50px;
+	}
+	.up_to{
+		font-size: 24px;	
+	}
 }
 @media screen and (min-width:1200px){
    	.btn_more{

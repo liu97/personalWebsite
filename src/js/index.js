@@ -39,5 +39,5 @@ $(window).scroll(function(event) {
 });
 //判断桌面宽度大小是否大于768px
 $(window).resize(function(){
-	bar_toggle($("#page_nav_ul"))
+	bar_toggle($("#page_nav_ul"),768)
 }); 
