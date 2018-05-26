@@ -181,6 +181,7 @@ body,html{
 /*博客页主要内容*/
 #page_main_blogs_article{
 	position: relative;
+	overflow: hidden;
 }
 /*博客h1*/
 #page_main_blogs_h1{
