@@ -42,7 +42,7 @@ body{
 }
 #blogs_header_article_photo{
 	width: 100%;
-
+	display: inline-block;
 }
 #blogs_header_article_some_nav{
 	padding-bottom: 10px;
