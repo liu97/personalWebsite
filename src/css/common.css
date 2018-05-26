@@ -80,8 +80,8 @@
 	color: white;
 }
 .article_footer{
-	position: absolute;
-	bottom: 0;
+	position: relative;
+	margin-top: -100px;
 }
 /*共用回到顶部*/
 .fix_up{

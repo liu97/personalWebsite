@@ -119,6 +119,7 @@ body{
 	width: 74%;
 	display: inline-block;
 	vertical-align: top;
+	padding-bottom: 100px;
 }
 .blogs_main_article{
 	position: relative;

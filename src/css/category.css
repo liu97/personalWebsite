@@ -3,6 +3,7 @@
 	width: 74%;
 	display: inline-block;
 	vertical-align: top;
+	padding-bottom: 100px;
 	/*flex: 1 0 auto;*/
 }
 .category_main_section{
