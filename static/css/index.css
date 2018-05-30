@@ -169,6 +169,7 @@ body,html{
 #page_main_blogs{
 	background: url(../images/index/blogs.png);
 	background-attachment: fixed;
+	overflow: hidden;
 }
 /*博客页遮罩*/
 #blogs_mask{
@@ -181,7 +182,6 @@ body,html{
 /*博客页主要内容*/
 #page_main_blogs_article{
 	position: relative;
-	overflow: hidden;
 }
 /*博客h1*/
 #page_main_blogs_h1{
@@ -462,9 +462,6 @@ body,html{
 		width: 100px;
 		height: 30px;
 		font-size: 14px;
-	}
-	.page_main_common_article{
-		width: 100%;
 	}
 	.page_main_common_article{
 		width: 80%;

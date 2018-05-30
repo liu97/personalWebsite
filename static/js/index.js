@@ -5,6 +5,13 @@ $(function () {
 		$("#page_nav_ul").slideToggle("slow");
 		return false;
 	});
+	$.ajax({
+		url: '/articles/aboutMe',
+		type: 'get',
+		success: function(data){
+			console.log(data);
+		}
+	})
 })
 $(window).scroll(function(event) {
 	//导航条定位的改变
