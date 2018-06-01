@@ -34,10 +34,10 @@ let operate_article = {
         article_models.insert_article(article);
         //将tags存入tags表
         let tags = article.tags.split(/,|，/);
-        tags.map(function(x){
-            return x.trim();
-        });
-        tag_models.insert_tag(tags);
+        tags.forEach(item=>{
+            tag_models.insert_tag(item.trim());
+        })
+        
         ctx.body = message;
         
     },
