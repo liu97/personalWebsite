@@ -30,13 +30,9 @@ let operate_article = {
         });
         article.article_path = `resources/article/${now_date}/${article.title}.md`;
         //将信息存入articles表
-        console.log(article)
         let result = article_models.insert_article(article);
         //将tags存入tags表
-        if(result.affectedRows == 0){
-            message = "error"
-        }
-        ctx.body = message;
+        ctx.body = result;
         
     },
     /**
@@ -69,6 +65,7 @@ let operate_article = {
      * @param {Object} ctx 
      */
     async get_article(ctx){
+        
         let articles = null;
         if ( Object.keys(ctx.params).length == 0 ){
             articles = await article_models.get_all_article();
@@ -80,6 +77,7 @@ let operate_article = {
         }
         else{
             articles = await article_models.get_article_by_id(ctx.params.id)
+            console.log(articles);
         }
         if(articles.length == 0){ //没有获取到文章
             ctx.redirect('/articles/');

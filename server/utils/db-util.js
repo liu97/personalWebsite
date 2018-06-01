@@ -12,7 +12,7 @@ const pool = mysql.createPool({
 let query = function( sql, values ) {
 
   return new Promise(( resolve, reject ) => {
-    pool.getConnection(function(err, connection) {
+    let qq = pool.getConnection(function(err, connection) {
       if (err) {
         resolve( err )
       } else {
@@ -30,8 +30,6 @@ let query = function( sql, values ) {
   })
 
 }
-
-
 
 
 module.exports = {
