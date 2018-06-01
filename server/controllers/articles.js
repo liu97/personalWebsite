@@ -1,4 +1,5 @@
 const article_models = require('../models/articles');
+const tag_models = require('../models/tags.js');
 const get_file = require('../utils/file');
 const config = require('../../config');
 const path = require('path');
@@ -30,9 +31,14 @@ let operate_article = {
         });
         article.article_path = `resources/article/${now_date}/${article.title}.md`;
         //将信息存入articles表
-        let result = article_models.insert_article(article);
+        article_models.insert_article(article);
         //将tags存入tags表
-        ctx.body = result;
+        let tags = article.tags.split(/,|，/);
+        tags.map(function(x){
+            return x.trim();
+        });
+        tag_models.insert_tag(tags);
+        ctx.body = message;
         
     },
     /**
