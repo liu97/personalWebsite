@@ -8,7 +8,9 @@ const config = {
     PASSWORD: '',
     PORT: '3306',
     HOST: '127.0.0.1'
-  }
+  },
+
+  root: __dirname
 }
 
 module.exports = config

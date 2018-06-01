@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>显示文章</title>
+    <link rel="stylesheet" href="./editor.md/css/editormd.preview.min.css">
+    <link rel="stylesheet" href="./editor.md/css/editormd.css">
+</head>
+<body>
+    <form action="/articles/1" method="post">
+        <div id="doc-content">
+                <textarea  ></textarea>
+                <textarea class="editormd-html-textarea" name="text" id="content"></textarea>
+            </div>
+    </form>
+        
+</body>
+<script src="./js/plugins/jquery-3.3.1.js"></script>
+<script src="./editor.md/lib/marked.min.js"></script>
+<script src="./editor.md/lib/prettify.min.js"></script>
+<script src="editor.md/editormd.min.js"></script>
+<script>
+   
+    var testEditor;
+    $(function () {
+    //     $.ajax({
+    //     url: '/articles/1',
+    //     method: 'get',
+    //     success: function(data){
+    //         $('#content').text(data);
+    //     },
+    //     error: function(err){
+    //         console.log(err);
+    //     }
+    // })
+        testEditor = editormd.markdownToHTML("doc-content", {//注意：这里是上面DIV的id
+            htmlDecode: "style,script,iframe",
+            emoji: true,
+            taskList: true,
+            codeFold: true,
+        })
+});
+</script>
+</html>

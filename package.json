@@ -4,6 +4,9 @@
   "description": "personalwebsite",
   "main": "index.js",
   "scripts": {
+    "init": "node ./init/index.js",
+    "start": "node ./server/app.js",
+    "end": "tskill node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,10 +23,12 @@
     "koa": "^2.5.1",
     "koa-bodyparser": "^4.2.1",
     "koa-logger": "^3.2.0",
+    "koa-multer": "^1.0.2",
     "koa-mysql-session": "^0.0.2",
     "koa-router": "^7.4.0",
     "koa-session-minimal": "^3.0.4",
     "koa-static": "^4.0.3",
+    "moment": "^2.22.1",
     "mysql": "^2.15.0"
   }
 }
