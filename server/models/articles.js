@@ -19,12 +19,19 @@ let article = {
         let result = await dbu.query(sql,[[[obj.title,obj.tags,obj.article_path,obj.praise,obj.upload_time,obj.last_modify_time,obj.type]]]);
         return result;
     },
-
+    /**
+     * 根据id删除文章
+     * @param {int} id 
+     */
     async delete_article(id){
         let sql = "delete from articles where article_id = ?;";
         let result = await dbu.query(sql,[id]);
         return result;
     },
+    /**
+     * 更新文章
+     * @param {Object} obj 
+     */
     async update_article(obj){
         // 一个搞了我两个小时的小bug，sql语句中where后变量只能直接写进(当时的心情留在这里，bug找出来了，sql预处理的问题)
         let sql = `update articles set title = ?, tags = ?, article_path = ?, praise = ?, upload_time = ?, last_modify_time = ?, type= ? where article_id = ?;`;
@@ -49,6 +56,9 @@ let article = {
         let result = await dbu.query(sql,[type]);
         return result;
     },
+    /**
+     * 获取所有文章
+     */
     async get_all_article(){
         let sql = "select * from articles";
         let result = await dbu.query(sql);

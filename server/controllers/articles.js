@@ -1,5 +1,6 @@
 const article_models = require('../models/articles');
-const tag_models = require('../models/tags.js');
+const tag_models = require('../models/tags');
+const to_models = require('../models/tag_to_article');
 const get_file = require('../utils/file');
 const config = require('../../config');
 const path = require('path');
@@ -8,6 +9,13 @@ const fs = require('fs');
 /**
  * 控制层操作
  */
+function tags_format(tags){
+    tags = Array.from(new Set( tags.replace(/\s|\n/g,'').split(/,|，/) )); //去空格回车、分割，,、去重
+    tags = tags.filter(function(x){  //去空串''
+        return x != '';
+    })
+    return tags;
+}
 let operate_article = {
     /**
      * 新增文章
@@ -30,13 +38,27 @@ let operate_article = {
             }
         });
         article.article_path = `resources/article/${now_date}/${article.title}.md`;
+        let tags = tags_format(article.tags)
         //将信息存入articles表
-        article_models.insert_article(article);
+        article.tags = tags.join(',');
+        let new_article = await article_models.insert_article(article);
         //将tags存入tags表
-        let tags = article.tags.split(/,|，/);
-        tags.forEach(item=>{
-            tag_models.insert_tag(item.trim());
-        })
+        for(let i = 0; i < tags.length; i++){
+            let item = tags[i];
+            let result = await tag_models.get_tag_by_name(item);
+            if(result.length == 0){
+                let tag = {tag_name : item, number : 1};
+                let new_tag = await tag_models.insert_tag(tag);
+                // 将tags与articles的关系存入tag_to_article表中
+                await to_models.insert_to(new_tag.insertId,new_article.insertId);
+            }
+            else{
+                result[0].number++;
+                await tag_models.upload_tag(result[0]);
+                // 将tags与articles的关系存入tag_to_article表中
+                await to_models.insert_to(result[0].tag_id,new_article.insertId);
+            }
+        }
         
         ctx.body = message;
         
@@ -48,12 +70,23 @@ let operate_article = {
     async delete_article(ctx){
         let message = "success";
         let article_id = ctx.params.id;
+        //改变对应标签个数
+        let tags = await to_models.get_tags_by_article_id(article_id);
+        for(let i = 0; i < tags.length; i++){
+            tags[i].number--;
+            await tag_models.upload_tag(tags[i]);
+        }
+        // 删除对应文章,因为设置了外键CASCADE，所以tag_to_article对应数据会自动删除 
         let result = await article_models.delete_article(article_id);
         if(result.affectedRows == 0){
             message = "error"
         }
         ctx.body = message;
     },
+    /**
+     * 更新文章
+     * @param {Object} ctx 
+     */
     async update_article(ctx){
         let message = "success";
         let article_id = ctx.params.id;
@@ -62,7 +95,7 @@ let operate_article = {
         Object.assign(article,ctx.request.body);
         let result = await article_models.update_article(article);
         if(result.affectedRows == 0){
-            message = "error"
+            message = "error";
         }
         ctx.body = message;
     },
@@ -83,7 +116,6 @@ let operate_article = {
         }
         else{
             articles = await article_models.get_article_by_id(ctx.params.id)
-            console.log(articles);
         }
         if(articles.length == 0){ //没有获取到文章
             ctx.redirect('/articles/');

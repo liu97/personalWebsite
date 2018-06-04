@@ -78,8 +78,8 @@
                     };
                     console.log(JSON.stringify(article_message))
                     $.ajax({
-                        url: '/articles/',
-                        method: 'post',
+                        url: '/articles/10',
+                        method: 'delete',
                         data: article_message,
                         success: function(data){
                             console.log(data);
