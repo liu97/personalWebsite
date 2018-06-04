@@ -43,26 +43,29 @@
  
 // console.log(time.getNowDatetime())
 
-var mysql = require('mysql');
-// 数据库信息
-var connection = mysql.createConnection({
- host  : '127.0.0.1',
- user  : 'root',
- password : '',
- database : 'blogs'
-});
-var values = [['js'],['tag']];
-var sql = "insert into tags set tag_name = ?;";
-// var sql = "insert into articles (title,tags,article_path,last_modify_time,type) values ?;"
-let query = connection.query(sql, values, function (err, rows, fields) {
- if(err){
-    console.log('INSERT ERROR - ', err.message);
-    return;
-   }
-   console.log("INSERT SUCCESS");
-});
-console.log(query.sql)
+// var mysql = require('mysql');
+// // 数据库信息
+// var connection = mysql.createConnection({
+//  host  : '127.0.0.1',
+//  user  : 'root',
+//  password : '',
+//  database : 'blogs'
+// });
+// var values = [['js'],['tag']];
+// var sql = "insert into tags set tag_name = ?;";
+// // var sql = "insert into articles (title,tags,article_path,last_modify_time,type) values ?;"
+// let query = connection.query(sql, values, function (err, rows, fields) {
+//  if(err){
+//     console.log('INSERT ERROR - ', err.message);
+//     return;
+//    }
+//    console.log("INSERT SUCCESS");
+// });
+// console.log(query.sql)
 
 // values   ? ? ? [1,2,3]
 //          ?s    [[[1,2,3]]]
 //          ?     [1] or 1
+
+const fs = require('fs');
+fs.mkdirSync('resources/test/11/2')

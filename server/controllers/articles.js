@@ -9,6 +9,10 @@ const fs = require('fs');
 /**
  * 控制层操作
  */
+
+ /**
+  * 格式化tags
+  */
 function tags_format(tags){
     tags = Array.from(new Set( tags.replace(/\s|\n/g,'').split(/,|，/) )); //去空格回车、分割，,、去重
     tags = tags.filter(function(x){  //去空串''
@@ -16,6 +20,22 @@ function tags_format(tags){
     })
     return tags;
 }
+/**
+ * 同步创建多级目录
+ * @param {String} dirname 
+ */
+function mkdirsSync(dirname) {  
+    //console.log(dirname);  
+    if (fs.existsSync(dirname)) {  
+        return true;  
+    } else {  
+        if (mkdirsSync(path.dirname(dirname))) {  
+            fs.mkdirSync(dirname);  
+            return true;  
+        }  
+    }  
+}  
+  
 let operate_article = {
     /**
      * 新增文章
@@ -28,9 +48,7 @@ let operate_article = {
         // 将文章内容写入存储
         let now_date = new Date().toLocaleDateString();
         let article_dir = path.join(config.root,`resources/article/${now_date}`);
-        if(!fs.existsSync(article_dir)){
-            fs.mkdirSync(article_dir);
-        }
+        mkdirsSync(article_dir);
         let article_path = path.join(article_dir,article.title+'.md');
         fs.writeFile(article_path,article.content,function(err){
             if (err) {
