@@ -3,7 +3,7 @@ const config = {
   port: 3000,
 
   database: {
-    DATABASE: 'blogs',
+    DATABASE: 'blog',
     USERNAME: 'root',
     PASSWORD: '',
     PORT: '3306',

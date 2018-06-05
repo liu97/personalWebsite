@@ -14,9 +14,9 @@ let article = {
      * @param {Object} obj 
      */
     async insert_article(obj){
-        let sql = "insert into articles (title,tags,article_path,praise,upload_time,last_modify_time,type) values ?;";
+        let sql = "insert into articles (title,tags,article_path,img_path,praise,upload_time,last_modify_time,type) values ?;";
         
-        let result = await dbu.query(sql,[[[obj.title,obj.tags,obj.article_path,obj.praise,obj.upload_time,obj.last_modify_time,obj.type]]]);
+        let result = await dbu.query(sql,[[[obj.title,obj.tags,obj.article_path,obj.img_path,obj.praise,obj.upload_time,obj.last_modify_time,obj.type]]]);
         return result;
     },
     /**
@@ -34,8 +34,8 @@ let article = {
      */
     async update_article(obj){
         // 一个搞了我两个小时的小bug，sql语句中where后变量只能直接写进(当时的心情留在这里，bug找出来了，sql预处理的问题)
-        let sql = `update articles set title = ?, tags = ?, article_path = ?, praise = ?, upload_time = ?, last_modify_time = ?, type= ? where article_id = ?;`;
-        let result = await dbu.query(sql,[obj.title,obj.tags,obj.article_path,obj.praise,obj.upload_time,obj.last_modify_time,obj.type,obj.article_id]);
+        let sql = `update articles set title = ?, tags = ?, article_path = ?, img_path = ?, praise = ?, upload_time = ?, last_modify_time = ?, type= ? where article_id = ?;`;
+        let result = await dbu.query(sql,[obj.title,obj.tags,obj.article_path,obj.img_path,obj.praise,obj.upload_time,obj.last_modify_time,obj.type,obj.article_id]);
         return result;
     },
     /**

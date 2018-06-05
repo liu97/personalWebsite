@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title>图片上传示例 - Editor.md examples</title>
-        <link rel="stylesheet" href="./editor.md/css/editormd.css" />
+        <link rel="stylesheet" href="./editor.md/css/editormd.min.css" />
     </head>
     <body>
         <div id="layout" style="height: 2000px;background: #f6f6f6;">
@@ -58,6 +58,7 @@
                     imageUpload : true,
                     imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
                     imageUploadURL : "/articles/uploadImg/",
+                    previewTheme : "dark"
                     
                     /*
                      上传的后台只需要返回一个 JSON 数据，结构如下：
@@ -74,7 +75,8 @@
                         title: $("#title").val(),
                         tags: $("#tags").val(),
                         content: $(".editormd-markdown-textarea")[0].innerText,
-                        type: "about_me"
+                        type: "about_me",
+                        praise: 999
                     };
                     console.log(JSON.stringify(article_message))
                     $.ajax({

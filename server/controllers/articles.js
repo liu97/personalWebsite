@@ -2,9 +2,9 @@ const article_models = require('../models/articles');
 const tag_models = require('../models/tags');
 const to_models = require('../models/tag_to_article');
 const get_file = require('../utils/file');
+const datetime = require('../utils/datetime');
 const config = require('../../config');
 const path = require('path');
-const datetime = require('../utils/datetime');
 const fs = require('fs');
 /**
  * 控制层操作
@@ -43,7 +43,7 @@ let operate_article = {
      */
     async insert_article(ctx){
         let message = "success";
-        let article = {title:null,tags:null,article_path:null,praise:0,upload_time:datetime.getNowDatetime(),last_modify_time:null,type:null};
+        let article = {title:null,tags:null,article_path:null,img_path:null,praise:0,upload_time:datetime.getNowDatetime(),last_modify_time:null,type:null};
         Object.assign(article,ctx.request.body);
         // 将文章内容写入存储
         let now_date = new Date().toLocaleDateString();
@@ -107,10 +107,33 @@ let operate_article = {
      */
     async update_article(ctx){
         let message = "success";
-        let article_id = ctx.params.id;
-        let article = await article_models.get_article_by_id(article_id);
+        let body = ctx.request.body;
+        let params_id = ctx.params.id;
+        let article = await article_models.get_article_by_id(params_id);
         article = article[0];
+        let article_tags = article.tags.split(',');
+        let body_tags = tags_format(body.tags);
+        // 删除被用户移除的标签
+        for(let i = 0; i < article_tags.length; i++){
+            if(body_tags.indexOf(article_tags[i]) == -1){
+                let result = await tag_models.get_tag_by_name(article_tags[i]);
+                result[0].number--;
+                await tag_models.upload_tag(result[0]);
+                await to_models.delete_to(result[0].tag_id,article.article_id);
+            }
+        }
+        // 添加用户新增的标签
+        for(let i = 0; i < body_tags.length; i++){
+            if(article_tags.indexOf(body_tags[i]) == -1){
+                let tag = {tag_name : body_tags[i], number : 1};
+                let new_tag = await tag_models.insert_tag(tag);
+                // 将tags与articles的关系存入tag_to_article表中
+                await to_models.insert_to(new_tag.insertId,article.article_id);
+            }
+        }
         Object.assign(article,ctx.request.body);
+        article.tags = body_tags.join(',');
+        article.last_modify_time = datetime.getNowDatetime();
         let result = await article_models.update_article(article);
         if(result.affectedRows == 0){
             message = "error";
@@ -136,12 +159,13 @@ let operate_article = {
             articles = await article_models.get_article_by_id(ctx.params.id)
         }
         if(articles.length == 0){ //没有获取到文章
-            ctx.redirect('/articles/');
+            // ctx.redirect('/blogs.html');
         }
         else{
             let datas = [];
             articles.forEach(article => {
-                datas.push( get_file(article.article_path) )
+                article.article_content = get_file(article.article_path)
+                datas.push(article)
             });
             ctx.body = datas;
         }
@@ -161,6 +185,7 @@ let operate_article = {
         }; 	   
         ctx.body = result
     },
+
     
 };
 

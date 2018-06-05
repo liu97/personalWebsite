@@ -426,8 +426,8 @@ body,html{
 		padding-left: 2%;
 	}
 	#contact_btn{
-		width: 100px;
-		height: 25px;
+		width: 140px;
+		height: 30px;
 		font-size: 12px;
 	}
 	.page_main_common_article{
@@ -459,8 +459,8 @@ body,html{
 		height: calc(80%-80px);
 	}
 	#contact_btn{
-		width: 100px;
-		height: 30px;
+		width: 160px;
+		height: 35px;
 		font-size: 14px;
 	}
 	.page_main_common_article{
@@ -489,7 +489,7 @@ body,html{
 		display: flex;
 	}
 	#contact_btn{
-		width: 120px;
+		width: 180px;
 		height: 35px;
 		font-size: 16px;
 	}
@@ -513,7 +513,7 @@ body,html{
 		height: 50%;
 	}
 	#contact_btn{
-		width: 140px;
+		width: 200px;
 		height: 40px;
 		font-size: 18px;
 	}

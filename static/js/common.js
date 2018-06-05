@@ -74,9 +74,31 @@ function bar_toggle(item,size) {  //显示隐藏导航栏
    		});
   	}
 }
+//获取路径询问键值对
+function get_request() {
+    var url = location.search; //获取url中"?"符后的字串
+    var theRequest = new Object();
+    if (url.indexOf("?") != -1) {
+        var str = url.substr(1);
+        strs = str.split("&");
+        for (var i = 0; i < strs.length; i++) {
+            theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+        }
+    }
+    return theRequest;
+}
 
-$(function(){ //为回到顶部的标签添加滑动效果
-	a_location($(".up_to"))
+$(function(){ 
+	//为回到顶部的标签添加滑动效果
+	a_location($(".up_to"));
+	// 为tag标签设置随机颜色
+	random_color($('.blogs_header_aside_li_a')); 
+
+	//当导航bar出来后的点击事件
+	$("#blogs_bars").click(function(event) { 
+		$("#blogs_header_for_min_width").slideToggle("slow");
+		return false;
+	});
 })
 $(window).scroll(function(event) {
 	if($(document).scrollTop()>=$(window).height()){

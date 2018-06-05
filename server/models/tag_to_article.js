@@ -1,6 +1,7 @@
 const dbu = require('../utils/db-util');
 
 let tag_to_article = {
+    
     async insert_to(tag_id, article_id){
         let sql = "insert into tag_to_article set tag_id = ?,article_id = ?;";
         let result = await dbu.query(sql,[tag_id,article_id]);
