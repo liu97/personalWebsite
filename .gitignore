@@ -1,4 +1,5 @@
 node_modules/
 resources/
+static/upload_images/
 .vscode/
 npm-debug.log
