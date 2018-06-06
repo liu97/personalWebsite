@@ -67,5 +67,65 @@
 //          ?s    [[[1,2,3]]]
 //          ?     [1] or 1
 
+// const fs = require('fs');
+// fs.mkdirSync('resources/test/11/2')
+// const os = require('os');
+// const path = require('path');
+// const Koa = require('koa');
+// const fs = require('fs');
+// const koaBody = require('koa-bodyparser');
+
+// const app = new Koa();
+
+// const main = async function(ctx) {
+//   const tmpdir = os.tmpdir();
+//   const filePaths = [];
+//   const files = ctx.request.body.files || {};
+
+//   for (let key in files) {
+//     const file = files[key];
+//     const filePath = path.join(tmpdir, file.name);
+//     const reader = fs.createReadStream(file.path);
+//     const writer = fs.createWriteStream(filePath);
+//     reader.pipe(writer);
+//     filePaths.push(filePath);
+//   }
+
+//   ctx.body = filePaths;
+// };
+
+// app.use(koaBody({ multipart: true }));
+// app.use(main);
+// app.listen(3000);
+
+var Koa = require('koa');
+var Router = require('koa-router');
 const fs = require('fs');
-fs.mkdirSync('resources/test/11/2')
+const koaBody = require('koa-body');
+const koaStatic = require('koa-static');
+const path = require('path');
+//const multiparty = require('multiparty');
+//const multer = require('koa-multer');
+var app = new Koa();
+var router = new Router();
+//const upload=multer({desk: './uploads/' });
+// 配置静态资源加载中间件
+app.use(koaStatic(
+    path.join(__dirname , './static')
+  ))
+  
+
+router
+    .post(`/upload`, koaBody({multipart:true}),
+    (ctx) => {
+        // console.log('----- hello ----');
+        console.log(ctx.request.body);
+        // console.error('---------------');
+        // const writeStream = fs.createWriteStream('./111.jpg');
+        // ctx.request.body.files.my_file.pipe(writeStream);
+        console.log(ctx.request.body);
+    });
+app.use(router.routes());
+app.use(router.allowedMethods());
+
+app.listen(3456);

@@ -74,19 +74,6 @@ function bar_toggle(item,size) {  //显示隐藏导航栏
    		});
   	}
 }
-//获取路径询问键值对
-function get_request() {
-    var url = location.search; //获取url中"?"符后的字串
-    var theRequest = new Object();
-    if (url.indexOf("?") != -1) {
-        var str = url.substr(1);
-        strs = str.split("&");
-        for (var i = 0; i < strs.length; i++) {
-            theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
-        }
-    }
-    return theRequest;
-}
 
 $(function(){ 
 	//为回到顶部的标签添加滑动效果
@@ -108,3 +95,62 @@ $(window).scroll(function(event) {
 		$(".fix_up").css('display', 'none');
 	}
 })
+//获取路径询问键值对
+function get_request() {
+    var url = location.search; //获取url中"?"符后的字串
+    var theRequest = new Object();
+    if (url.indexOf("?") != -1) {
+        var str = url.substr(1);
+        strs = str.split("&");
+        for (var i = 0; i < strs.length; i++) {
+            theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+        }
+    }
+    return theRequest;
+}
+
+/**
+ * 
+ * @param {Object} $form
+ * @param {function} success 
+ * @param {Function} fail 
+ */
+function ajax_form($form,success,fail){
+	$form.submit(function (event) {
+		event.preventDefault();
+		var form = $(this);
+		if (!form.hasClass('fupload')) {
+		  //普通表单
+		  $.ajax({
+			type: form.attr('method'),
+			url: form.attr('action'),
+			data: form.serialize()
+		  }).success(function () {
+			//成功提交
+			success();
+		  }).fail(function (jqXHR, textStatus, errorThrown) {
+			//错误信息
+			fail();
+		  });
+		}
+		else {
+		  // mulitipart form,如文件上传类
+		  var formData = new FormData(this);
+		  $.ajax({
+			type: form.attr('method'),
+			url: form.attr('action'),
+			data: formData,
+			mimeType: "multipart/form-data",
+			contentType: false,
+			cache: false,
+			processData: false
+		  }).success(function () {
+			//成功提交
+			success();
+		  }).fail(function (jqXHR, textStatus, errorThrown) {
+			//错误信息
+			fail();
+		  });
+		};
+	  });
+}

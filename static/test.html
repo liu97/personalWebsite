@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="./editor.md/css/editormd.min.css" />
     </head>
     <body>
+    <form action="/articles/1" method="put" class="fupload" id="up">
         <div id="layout" style="height: 2000px;background: #f6f6f6;">
             <header>
                 <h1>图片上传示例</h1>
@@ -33,17 +34,18 @@
 ```</textarea>
                 <textarea class="editormd-html-textarea" name="text"></textarea>
             </div>
-            <input type="text" placeholder="title" id="title">
-            <input type="text" placeholder="tags,多个tag以,隔开" id="tags">
-            <button id="submit">提交</button>
+            <input type="text" placeholder="title" id="title" name="title">
+            <input type="text" placeholder="tags,多个tag以,隔开" id="tags" name="tags">
+            <input type="file" name="article_cover" id="article_cover">
+            <input type="submit">
+        </form>
+           
         </div>        
         <script src="js/plugins/jquery-3.3.1.js"></script>
         <script src="./editor.md/editormd.min.js"></script>
+        <script src="./js/common.js"></script>
         <script type="text/javascript">
-            $(function() {
-                let article_message = {
-
-                };                
+            $(function() {             
                 var testEditor = editormd("test-editormd", {
                     width: "90%",
                     height: 640,
@@ -70,27 +72,7 @@
                      */
                 });
                 console.log($(".editormd-markdown-textarea")[0].innerText );
-                $("#submit").click(function(){
-                    article_message = {
-                        title: $("#title").val(),
-                        tags: $("#tags").val(),
-                        content: $(".editormd-markdown-textarea")[0].innerText,
-                        type: "about_me",
-                        praise: 999
-                    };
-                    console.log(JSON.stringify(article_message))
-                    $.ajax({
-                        url: '/articles/',
-                        method: 'post',
-                        data: article_message,
-                        success: function(data){
-                            console.log(data);
-                        },
-                        error: function(err){
-                            console.log(err);
-                        }
-                    })
-                })
+                ajax_form($("#up"),function(data){console.log(data)},function(err){console.log(err)})
             });
         </script>
     </body>

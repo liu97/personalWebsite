@@ -42,15 +42,21 @@ let operate_article = {
      * @param {Object} ctx 
      */
     async insert_article(ctx){
+
+        console.log(ctx.req.file.path)
+        console.log(ctx.req.body['test-editormd-markdown-doc'])
         let message = "success";
-        let article = {title:null,tags:null,article_path:null,img_path:null,praise:0,upload_time:datetime.getNowDatetime(),last_modify_time:null,type:null};
-        Object.assign(article,ctx.request.body);
+        let cover_path = ctx.req.file.path;
+        cover_path = cover_path.split('static\\');
+        let img_path = cover_path[cover_path.length-1];
+        let article = {title:null,tags:null,article_path:null,img_path:img_path,praise:0,upload_time:datetime.getNowDatetime(),last_modify_time:null,type:null};
+        Object.assign(article,ctx.req.body);
         // 将文章内容写入存储
         let now_date = new Date().toLocaleDateString();
         let article_dir = path.join(config.root,`resources/article/${now_date}`);
         mkdirsSync(article_dir);
         let article_path = path.join(article_dir,article.title+'.md');
-        fs.writeFile(article_path,article.content,function(err){
+        fs.writeFile(article_path,article['test-editormd-markdown-doc'],function(err){
             if (err) {
                 return console.error(err);
             }
@@ -107,7 +113,8 @@ let operate_article = {
      */
     async update_article(ctx){
         let message = "success";
-        let body = ctx.request.body;
+        let body = ctx.req.body;
+        console.log(body)
         let params_id = ctx.params.id;
         let article = await article_models.get_article_by_id(params_id);
         article = article[0];
@@ -131,7 +138,13 @@ let operate_article = {
                 await to_models.insert_to(new_tag.insertId,article.article_id);
             }
         }
-        Object.assign(article,ctx.request.body);
+        Object.assign(article,ctx.req.body);
+        //修改文章
+        fs.writeFile(path.join(config.root,article.article_path),article['test-editormd-markdown-doc'],function(err){
+            if (err) {
+                return console.error(err);
+            }
+        });
         article.tags = body_tags.join(',');
         article.last_modify_time = datetime.getNowDatetime();
         let result = await article_models.update_article(article);
@@ -177,7 +190,7 @@ let operate_article = {
      */
     async upload_img(ctx){ 
         let file_path = ctx.req.file.path;
-        file_path = file_path.split('static\\');
+        file_path = file_path.split(/static[\\\/]/);
         let file_url = file_path[file_path.length-1];
         let result = { success: 1,
             message: "上传成功",
