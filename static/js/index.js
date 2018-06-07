@@ -6,12 +6,14 @@ $(function () {
 		return false;
 	});
 	$.ajax({
-		url: '/articles/aboutMe',
+		url: '/articles/1',
 		type: 'get',
 		success: function(data){
 			console.log(data);
 		}
 	})
+
+	ajax_form($("#page_main_contact_form"),function(data){alert("发送成功")},function(err){"发送失败"});
 })
 $(window).scroll(function(event) {
 	//导航条定位的改变

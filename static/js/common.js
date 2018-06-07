@@ -122,34 +122,26 @@ function ajax_form($form,success,fail){
 		if (!form.hasClass('fupload')) {
 		  //普通表单
 		  $.ajax({
-			type: form.attr('method'),
-			url: form.attr('action'),
-			data: form.serialize()
-		  }).success(function () {
-			//成功提交
-			success();
-		  }).fail(function (jqXHR, textStatus, errorThrown) {
-			//错误信息
-			fail();
+				type: form.attr('method'),
+				url: form.attr('action'),
+				data: form.serialize(),
+				success: success,
+				err: fail
 		  });
 		}
 		else {
 		  // mulitipart form,如文件上传类
 		  var formData = new FormData(this);
 		  $.ajax({
-			type: form.attr('method'),
-			url: form.attr('action'),
-			data: formData,
-			mimeType: "multipart/form-data",
-			contentType: false,
-			cache: false,
-			processData: false
-		  }).success(function () {
-			//成功提交
-			success();
-		  }).fail(function (jqXHR, textStatus, errorThrown) {
-			//错误信息
-			fail();
+				type: form.attr('method'),
+				url: form.attr('action'),
+				data: formData,
+				mimeType: "multipart/form-data",
+				contentType: false,
+				cache: false,
+				processData: false,
+				success: success,
+				err: fail
 		  });
 		};
 	  });

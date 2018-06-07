@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2018-06-05 17:38:46
+Date: 2018-06-07 09:20:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -66,14 +66,17 @@ CREATE TABLE `contacts` (
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `message` varchar(255) DEFAULT NULL,
-  `time` datetime DEFAULT NULL,
+  `time` varchar(255) DEFAULT NULL,
   `saw` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`contact_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of contacts
 -- ----------------------------
+INSERT INTO `contacts` VALUES ('1', '刘传富', '1139472029@qq.com', 'hahh', '2018/06/07/08/20/10', '否');
+INSERT INTO `contacts` VALUES ('63', '华东交通大学国际学院', '429240967@qq.com', '你好！', '2018/06/07/08/16/01', '否');
+INSERT INTO `contacts` VALUES ('64', '1', '2', '3', '2018/06/07/09/10/04', '否');
 
 -- ----------------------------
 -- Table structure for tags

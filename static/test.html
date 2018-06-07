@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="./editor.md/css/editormd.min.css" />
     </head>
     <body>
-    <form action="/articles/1" method="put" class="fupload" id="up">
+    <form action="/articles" method="post" class="fupload" id="up">
         <div id="layout" style="height: 2000px;background: #f6f6f6;">
             <header>
                 <h1>图片上传示例</h1>
@@ -37,6 +37,9 @@
             <input type="text" placeholder="title" id="title" name="title">
             <input type="text" placeholder="tags,多个tag以,隔开" id="tags" name="tags">
             <input type="file" name="article_cover" id="article_cover">
+            <select name="type" id="type">
+                <option value="about_me">about_me</option>
+            </select>
             <input type="submit">
         </form>
            

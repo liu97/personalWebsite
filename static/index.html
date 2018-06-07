@@ -108,15 +108,15 @@
 			<div class="over_mask page_turn_mask" id="blogs_mask">
 				<article class="page_main_common_article" id="page_main_contact_article">
 					<h1 id="page_main_contact_h1">联系我</h1>
-					<form action="#" method="post" id="page_main_contact_form">
+					<form action="/apis/contacts" method="post" id="page_main_contact_form">
 						<div id="page_main_contact_name_div" class="page_main_contact_div">
-							<input type="text" id="contact_name" class="contact_input" name="contact_name" placeholder="name">
+							<input type="text" id="contact_name" class="contact_input" name="name" placeholder="name">
 						</div>
 						<div id="page_main_contact_email_div" class="page_main_contact_div">
-							<input type="text" id="contact_email" class="contact_input" name="contact_email" placeholder="email">
+							<input type="text" id="contact_email" class="contact_input" name="email" placeholder="email">
 						</div>
-						<textarea name="contact_textarea" id="contact_textarea"   placeholder="message"></textarea>
-						<button type="submit" id="contact_btn">send</button>
+						<textarea name="message" id="contact_textarea"   placeholder="message"></textarea>
+						<input type="submit" id="contact_btn" value="send"></input>
 					</form>
 				</article>
 			</div>

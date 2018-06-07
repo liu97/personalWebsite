@@ -159,9 +159,11 @@ let operate_article = {
      */
     async get_article(ctx){
         
-        let articles = null;
-        if ( Object.keys(ctx.params).length == 0 ){
-            articles = await article_models.get_all_article();
+        let articles = [];
+        if ( Object.keys(ctx.params).length != 0 ){
+            if(ctx.params.id != undefined){
+                articles = await article_models.get_article_by_id(ctx.params.id)
+            }
         }
         else if( Object.keys(ctx.query).length != 0 ){
             if(ctx.query.type){
@@ -169,7 +171,7 @@ let operate_article = {
             }
         }
         else{
-            articles = await article_models.get_article_by_id(ctx.params.id)
+            articles = await article_models.get_all_article();
         }
         if(articles.length == 0){ //没有获取到文章
             // ctx.redirect('/blogs.html');
