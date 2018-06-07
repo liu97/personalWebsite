@@ -108,6 +108,12 @@ function get_request() {
     }
     return theRequest;
 }
+// 过滤markdown标识符
+function filter_markdown(content){ 
+	var reg = /[\\\`\*\_\[\]\#\+\-\!\>]|\([^\(\)]*\)/g;
+	content = content.replace(reg,'');
+	return content;
+}
 
 /**
  * 

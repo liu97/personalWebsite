@@ -1,19 +1,61 @@
+function message_init(){ //从后台获取初始信息
+	$.ajax({
+		url: '/home',
+		type: 'get',
+		success: function(data){
+			if(data.status == "success"){
+				init_about_me( (data.about_me)[0] );
+				init_new_blog( data.new_article )
+			}
+			else{
+				console.log("get /home 404");
+			}
+		},
+		err: function(err){
+			console.log(err)
+		}
+	});
+	
+}
+function init_about_me(data){  // 初始化关于我板块
+	var img = $("#page_main_about_me_img");
+	var h1 = $("#page_main_about_me_h1");
+	var p = $("#page_main_about_me_article_p");
+	var a = $("#page_main_about_me_article .a_more");
+	img.attr('src', data.img_path);
+	h1.text(data.title);
+	p.text( filter_markdown(data.article_content).slice(0,100) +'...' );
+	a.attr('href', "article.html?id="+data.article_id);
+}
+function init_new_blog(data){  //初始化最新博客板块
+	console.log(data);
+	var li = $(".page_main_blogs_article_li");
+	li.each(function(index,item){
+		$(item).find('.page_main_blogs_img').attr('src',data[index].img_path);
+		$(item).find(".page_main_blogs_h2").text(data[index].title);
+		$(item).find(".page_main_blogs_p").text( filter_markdown(data[index].article_content).slice(0,100) +'...' );
+		$(item).find(".a_more").attr('href', "article.html?id="+data[index].article_id);
+	})
+}
 $(function () {
 	a_location($("#page_header_icon")); //锚点定位
 	a_location($(".page_nav_a"), $(".page_nav_li"), $("#page_nav_ul")); //锚点定位
+
 	$("#page_nav_bars").click(function(event) { //当导航bar出来后的点击事件
 		$("#page_nav_ul").slideToggle("slow");
 		return false;
 	});
-	$.ajax({
-		url: '/articles/1',
-		type: 'get',
-		success: function(data){
-			console.log(data);
-		}
-	})
+	
+	message_init();
 
-	ajax_form($("#page_main_contact_form"),function(data){alert("发送成功")},function(err){"发送失败"});
+	ajax_form($("#page_main_contact_form"),
+		function(data){
+			$("#page_main_contact_form")[0].reset();
+			alert("发送成功");
+		},
+		function(err){
+			alert("发送失败");
+		});
 })
 $(window).scroll(function(event) {
 	//导航条定位的改变

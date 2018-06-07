@@ -221,7 +221,7 @@ body,html{
 	display: flex;
 }
 .page_main_blogs_article_li{
-	flex: 1 1 auto;
+	width: 33%;
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
@@ -239,6 +239,7 @@ body,html{
 	height: 50%;
 	position: relative;
 	z-index: 1;
+	margin-top: 1%;
 }
 /*博客文字内容*/
 .page_main_blogs_li_article{
@@ -254,6 +255,9 @@ body,html{
 .page_main_blogs_h2{
 	font-weight: bold;
 	border-bottom: 2px solid #eee;
+	-webkit-box-orient: vertical;
+    -webkit-line-clamp: 0;
+	overflow: hidden;
 }
 .page_main_blogs_p{
 	margin: 5% 0;
@@ -410,6 +414,7 @@ body,html{
 	}
 	.page_main_blogs_article_li:first-of-type{
 		display: flex;
+		width: 100%;
 	}
 	#page_main_blogs_h1{
 		text-align: left;
@@ -436,7 +441,7 @@ body,html{
 }
 @media screen and (min-width:768px){
 	.page_header_p,#page_main_about_me_h1,.page_main_blogs_h2,#page_main_blogs_h1,#page_main_contact_h1{
-		font-size: 25px;
+		font-size: 22px;
 	}
 	#page_header_icon{
 		font-size: 50px;
@@ -451,6 +456,9 @@ body,html{
 	}
 	.page_nav_li{
 		height: 40%;
+	}
+	.page_main_blogs_article_li{
+		width: 50%;
 	}
 	.page_main_blogs_article_li:last-of-type{
 		display: none;
@@ -469,7 +477,7 @@ body,html{
 }
 @media screen and (min-width:992px){
    	.page_header_p,#page_main_about_me_h1,.page_main_blogs_h2,#page_main_blogs_h1,#page_main_contact_h1{
-		font-size: 35px;
+		font-size: 26px;
 	}
 	#page_header_icon{
 		font-size: 70px;
@@ -485,6 +493,9 @@ body,html{
 	.page_nav_li{
 		height: 45%;
 	}
+	.page_main_blogs_article_li{
+		width: 33%;
+	}
 	.page_main_blogs_article_li:last-of-type{
 		display: flex;
 	}
@@ -496,7 +507,7 @@ body,html{
 }
 @media screen and (min-width:1200px){
    	.page_header_p,#page_main_about_me_h1,.page_main_blogs_h2,#page_main_blogs_h1,#page_main_contact_h1{
-		font-size: 40px;
+		font-size: 30px;
 	}
 	#page_header_icon{
 		font-size: 80px;

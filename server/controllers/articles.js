@@ -24,12 +24,12 @@ function tags_format(tags){
  * 同步创建多级目录
  * @param {String} dirname 
  */
-function mkdirsSync(dirname) {  
+async function mkdirsSync(dirname) {  
     //console.log(dirname);  
     if (fs.existsSync(dirname)) {  
         return true;  
     } else {  
-        if (mkdirsSync(path.dirname(dirname))) {  
+        if (await mkdirsSync(path.dirname(dirname))) {  
             fs.mkdirSync(dirname);  
             return true;  
         }  
@@ -43,8 +43,6 @@ let operate_article = {
      */
     async insert_article(ctx){
 
-        console.log(ctx.req.file.path)
-        console.log(ctx.req.body['test-editormd-markdown-doc'])
         let message = "success";
         let cover_path = ctx.req.file.path;
         cover_path = cover_path.split('static\\');
@@ -54,7 +52,7 @@ let operate_article = {
         // 将文章内容写入存储
         let now_date = new Date().toLocaleDateString();
         let article_dir = path.join(config.root,`resources/article/${now_date}`);
-        mkdirsSync(article_dir);
+        await mkdirsSync(article_dir);
         let article_path = path.join(article_dir,article.title+'.md');
         fs.writeFile(article_path,article['test-editormd-markdown-doc'],function(err){
             if (err) {
@@ -177,12 +175,11 @@ let operate_article = {
             // ctx.redirect('/blogs.html');
         }
         else{
-            let datas = [];
-            articles.forEach(article => {
-                article.article_content = get_file(article.article_path)
-                datas.push(article)
-            });
-            ctx.body = datas;
+            for(let i = 0; i < articles.length; i++){
+                let article = articles[i];
+                article.article_content = await get_file(article.article_path)
+            }
+            ctx.body = articles;
         }
        
     },

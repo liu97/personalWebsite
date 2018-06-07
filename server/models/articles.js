@@ -57,6 +57,21 @@ let article = {
         return result;
     },
     /**
+     * 根据limit查询文章
+     * @param {int} start 
+     * @param {int} length 
+     */
+    async get_article_by_limit(start,length){
+        let sql = "select * from articles limit ?, ?;";
+        let result = await dbu.query(sql,[start,length]);
+        return result;
+    },
+    async get_article_by_desc(length){
+        let sql = "select * from articles order by article_id desc limit ?;";
+        let result = await dbu.query(sql,[length]);
+        return result;
+    },
+    /**
      * 获取所有文章
      */
     async get_all_article(){

@@ -6,7 +6,7 @@ const config = require('../../config')
  * @param  {string} filePath 文件相对根目录的路径
  * @return {string} 
  */
-function file ( filePath ) {
+async function file ( filePath ) {
     let absolute_path = path.join(config.root,filePath);
     //不要通过stat判断是否为文件，因为stat是异步的
     let content = fs.readFileSync(absolute_path, 'utf-8');
