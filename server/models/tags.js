@@ -22,7 +22,7 @@ let tag = {
         return result;
     },
     async get_all_tags(){
-        let sql = "select * from tags;";
+        let sql = "select * from tags where number != 0;";
         let result = await dbu.query(sql,[]);
         return result;
     }

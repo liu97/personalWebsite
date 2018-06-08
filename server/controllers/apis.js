@@ -9,12 +9,16 @@ let operate_api = {
      * @param {Object} ctx 
      */
     async like(ctx){
+        let data = {status:"error"}
         let article_id = ctx.request.body.article_id;
         let article = await article_model.get_article_by_id(article_id);
         article = article[0];
         article.praise++;
         let result = await article_model.update_article(article); 
-        ctx.body = result;
+        if(result.affectedRows == 1){
+            data.status = "success"
+        }
+        ctx.body = data;
     },
     /**
      * 发消息联系我

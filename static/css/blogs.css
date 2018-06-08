@@ -121,6 +121,7 @@ body{
 	padding-bottom: 100px;
 }
 .blogs_main_article{
+	display: none;
 	position: relative;
 	margin: 0 30px 10px 30px;
 }

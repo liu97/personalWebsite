@@ -96,8 +96,6 @@ function filter_markdown(content){
 $(function(){ 
 	//为回到顶部的标签添加滑动效果
 	a_location($(".up_to"));
-	// 为tag标签设置随机颜色
-	random_color($('.blogs_header_aside_li_a')); 
 
 	//当导航bar出来后的点击事件
 	$("#blogs_bars").click(function(event) { 
