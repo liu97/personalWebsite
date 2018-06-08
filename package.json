@@ -29,6 +29,7 @@
     "koa-session-minimal": "^3.0.4",
     "koa-static": "^4.0.3",
     "moment": "^2.22.1",
-    "mysql": "^2.15.0"
+    "mysql": "^2.15.0",
+    "node-xss": "^0.0.1"
   }
 }

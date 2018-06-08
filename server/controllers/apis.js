@@ -1,7 +1,7 @@
 const contact_model = require('../models/contacts');
 const article_model = require('../models/articles');
 const datetime = require('../utils/datetime');
-
+const xss = require('node-xss').clean;
 
 let operate_api = {
     /**
@@ -21,7 +21,7 @@ let operate_api = {
      * @param {Object} ctx 
      */
     async contact_me(ctx){
-        let body_contact = ctx.request.body;
+        let body_contact = xss(ctx.request.body);
         let contact = {name:null,email:null,message:null,time:datetime.getNowDatetime(),saw:'否'};
         Object.assign(contact,body_contact);
         let result = await contact_model.insert_contacts(contact)

@@ -74,27 +74,6 @@ function bar_toggle(item,size) {  //显示隐藏导航栏
    		});
   	}
 }
-
-$(function(){ 
-	//为回到顶部的标签添加滑动效果
-	a_location($(".up_to"));
-	// 为tag标签设置随机颜色
-	random_color($('.blogs_header_aside_li_a')); 
-
-	//当导航bar出来后的点击事件
-	$("#blogs_bars").click(function(event) { 
-		$("#blogs_header_for_min_width").slideToggle("slow");
-		return false;
-	});
-})
-$(window).scroll(function(event) {
-	if($(document).scrollTop()>=$(window).height()){
-		$(".fix_up").css('display', 'block');
-	}
-	else{
-		$(".fix_up").css('display', 'none');
-	}
-})
 //获取路径询问键值对
 function get_request() {
     var url = location.search; //获取url中"?"符后的字串
@@ -114,6 +93,30 @@ function filter_markdown(content){
 	content = content.replace(reg,'');
 	return content;
 }
+$(function(){ 
+	//为回到顶部的标签添加滑动效果
+	a_location($(".up_to"));
+	// 为tag标签设置随机颜色
+	random_color($('.blogs_header_aside_li_a')); 
+
+	//当导航bar出来后的点击事件
+	$("#blogs_bars").click(function(event) { 
+		$("#blogs_header_for_min_width").slideToggle("slow");
+		return false;
+	});
+	//提示框动画结束监听
+	$(".prompt_box").eq(0).on('animationend webkitAnimationEnd oAnimationEnd', function () {
+		$(this).removeClass('action_prompt');
+	});
+})
+$(window).scroll(function(event) {
+	if($(document).scrollTop()>=$(window).height()){
+		$(".fix_up").css('display', 'block');
+	}
+	else{
+		$(".fix_up").css('display', 'none');
+	}
+})
 
 /**
  * 

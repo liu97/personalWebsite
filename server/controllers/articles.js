@@ -53,7 +53,7 @@ let operate_article = {
         let now_date = new Date().toLocaleDateString();
         let article_dir = path.join(config.root,`resources/article/${now_date}`);
         await mkdirsSync(article_dir);
-        let article_path = path.join(article_dir,article.title+'.md');
+        let article_path = path.join(article_dir,`${article.title}${new Date().getTime()}.md`);
         fs.writeFile(article_path,article['test-editormd-markdown-doc'],function(err){
             if (err) {
                 return console.error(err);

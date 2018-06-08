@@ -51,10 +51,12 @@ $(function () {
 	ajax_form($("#page_main_contact_form"),
 		function(data){
 			$("#page_main_contact_form")[0].reset();
-			alert("发送成功");
+			$(".prompt_main").eq(0).text("发送成功")
+			$(".prompt_box").eq(0).addClass('action_prompt');
 		},
 		function(err){
-			alert("发送失败");
+			$(".prompt_main").eq(0).text("发送失败")
+			$(".prompt_box").eq(0).addClass('action_prompt');
 		});
 })
 $(window).scroll(function(event) {

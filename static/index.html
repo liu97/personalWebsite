@@ -103,12 +103,12 @@
 					<h1 id="page_main_contact_h1">联系我</h1>
 					<form action="/apis/contacts" method="post" id="page_main_contact_form">
 						<div id="page_main_contact_name_div" class="page_main_contact_div">
-							<input type="text" id="contact_name" class="contact_input" name="name" placeholder="name">
+							<input type="text" id="contact_name" class="contact_input" name="name" placeholder="姓名(必填)" required>
 						</div>
 						<div id="page_main_contact_email_div" class="page_main_contact_div">
-							<input type="text" id="contact_email" class="contact_input" name="email" placeholder="email">
+							<input type="email" id="contact_email" class="contact_input" name="email" placeholder="邮箱(必填，不公开)" required>
 						</div>
-						<textarea name="message" id="contact_textarea"   placeholder="message"></textarea>
+						<textarea name="message" id="contact_textarea"   placeholder="您想对我说的..." ></textarea>
 						<input type="submit" id="contact_btn" value="send"></input>
 					</form>
 				</article>
@@ -121,6 +121,10 @@
 			<i class="fa fa-angle-double-up"></i>
 		</a>
 	</div>
+	<div class="prompt_box">
+        <header class="prompt_header">提示</header>
+        <div class="prompt_main"></div>
+    </div>
 	<script src="./js/plugins/jquery-3.3.1.js"></script>
 	<script src="./js/common.js"></script>
 	<script src="./js/index.js"></script>

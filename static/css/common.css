@@ -115,6 +115,52 @@
     -moz-top: 5%;
     top: 5%;
 }
+/*默认提示框样式*/
+.prompt_box{
+	height: 15%;
+	position: fixed;
+	top: -15%;
+	z-index: 101;
+	border-radius: 10px;
+	box-shadow: 0 0 0.25em 0em rgba(0,0,0,0.25);
+	background: #fff;
+	color: #fa5252;
+}
+.prompt_header{
+	font-weight: bold;
+	line-height: 20px;
+	padding: 5px;
+	border-bottom: 1px solid #fa5252;
+}
+.prompt_main{
+	padding: 5px;
+	text-align: center;
+	width: 100%;
+	height: calc(100% - 30px);
+	line-height: 50px;
+	color: black;
+}
+@keyframes prompt
+{
+	from {
+		top: -15%;
+	}
+	to {top: 1%;}
+}
+
+@-webkit-keyframes prompt /* Safari and Chrome */
+{
+	from {
+		top: -15%;
+	}
+	to {top: 1%;}
+}
+.action_prompt{
+	animation:prompt 1s ease 2 alternate;
+
+	/* Safari 和 Chrome */
+	-webkit-animation: prompt 1s ease 2 alternate;
+}
 @media screen and (max-width:768px){
 	.btn_more{
 		width: 80px;
@@ -129,6 +175,16 @@
 	}
 	.up_to{
 		font-size: 16px;	
+	}
+	.prompt_box{
+		width: 40%;
+		left: 30%;
+	}
+	.prompt_header{
+		font-size: 16px;
+	}
+	.prompt_main{
+		font-size: 14px;
 	}
 }
 @media screen and (min-width:768px){
@@ -146,6 +202,16 @@
 	.up_to{
 		font-size: 20px;	
 	}
+	.prompt_box{
+		width: 30%;
+		left: 35%;
+	}
+	.prompt_header{
+		font-size: 16px;
+	}
+	.prompt_main{
+		font-size: 14px;
+	}
 }
 @media screen and (min-width:992px){
    	.btn_more{
@@ -161,6 +227,16 @@
 	}
 	.up_to{
 		font-size: 24px;	
+	}
+	.prompt_box{
+		width: 20%;
+		left: 40%;
+	}
+	.prompt_header{
+		font-size: 18px;
+	}
+	.prompt_main{
+		font-size: 16px;
 	}
 }
 @media screen and (min-width:1200px){
