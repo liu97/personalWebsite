@@ -156,7 +156,7 @@ let operate_article = {
      * @param {Object} ctx 
      */
     async get_article(ctx){
-        
+        console.log()
         let articles = [];
         if ( Object.keys(ctx.params).length != 0 ){
             if(ctx.params.id != undefined){
@@ -166,6 +166,9 @@ let operate_article = {
         else if( Object.keys(ctx.query).length != 0 ){
             if(ctx.query.type){
                 articles = await article_models.get_article_by_type(ctx.query.type);
+            }
+            else if(ctx.query.start){
+                articles = await article_models.get_article_by_limit(parseInt(ctx.query.start), parseInt(ctx.query.lengths));
             }
         }
         else{

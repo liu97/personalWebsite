@@ -66,6 +66,10 @@ let article = {
         let result = await dbu.query(sql,[start,length]);
         return result;
     },
+    /**
+     * 获取最新length个文章
+     * @param {int} length 
+     */
     async get_article_by_desc(length){
         let sql = "select * from articles order by article_id desc limit ?;";
         let result = await dbu.query(sql,[length]);
@@ -76,6 +80,11 @@ let article = {
      */
     async get_all_article(){
         let sql = "select * from articles";
+        let result = await dbu.query(sql);
+        return result;
+    },
+    async get_article_count(){
+        let sql = "select count(*) as count from articles;";
         let result = await dbu.query(sql);
         return result;
     }

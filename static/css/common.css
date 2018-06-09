@@ -140,6 +140,42 @@
 	line-height: 50px;
 	color: black;
 }
+/*分页默认样式*/
+.main_footer{
+	width: 90%;
+	text-align: center;
+}
+.paging_div{
+	display: inline-block;
+	height: 30px;
+	margin: auto 0;
+}
+.paging_a{
+	display: inline-block;
+	width: 68px;
+	height: 34px;
+	border: 1px solid #fa5252;
+	line-height: 34px;
+	margin: 20px 5px;
+	background: #fff;
+	color: #fa5252;
+	font-size: 14px;
+	-webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	transition: all 0.2s;
+}
+.paging_a:hover{
+	background: #fa5252;
+	color: #fff;
+}
+.paging_main .paging_a{
+	width: 34px;
+	height: 34px;
+}
+.paging_a_active{
+	background: #fa5252;
+	color: #fff;
+}
 @keyframes prompt
 {
 	from {

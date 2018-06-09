@@ -10,13 +10,15 @@ let blogs = {
     async get_blogs(ctx){
         let datas = {status: "err"}
         let tags = await tag_model.get_all_tags();
-        let articles = await article_model.get_article_by_limit(0,5);
+        let articles = await article_model.get_article_by_limit(parseInt(ctx.query.start), parseInt(ctx.query.lengths));
+        let article_count = await article_model.get_article_count();
+        article_count = article_count[0].count;
         for(let i = 0; i < articles.length; i++){
             let article = articles[i];
             article.article_content = await get_file(article.article_path)
         }
         if(tags.length != 0 && articles.length != 0){
-            datas = {tags, articles};
+            datas = {tags, articles, article_count};
             datas.status = "success";
         }
         ctx.body = datas;

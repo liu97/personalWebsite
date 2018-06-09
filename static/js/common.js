@@ -153,3 +153,36 @@ function ajax_form($form,success,fail){
 		};
 	  });
 }
+/**
+ * 
+ * @param {Object} page_obj 分页信息对象 
+ * @param {String} page 不翻页的判断页数
+ * @param {String} add 翻到add页
+ * @param {int} number 分页按钮个数
+ * @param {Function} callback 回调函数
+ */
+function judge(page_obj, page, add, number, callback){
+	if(page_obj.page == page){
+		return;
+	}
+	else{
+		page_obj.page = parseInt(add);
+		//改变页数按钮
+		if(page_obj.page > number/2 && page_obj.page < Math.ceil(page_obj.count/page_obj.lengths)-number/2){
+			var new_as = '';
+			for(var i = 1; i <= number; i++){
+				var n = Math.floor(number/2 - number + i) + page_obj.page;
+				new_as += '<a href="#" class="paging_a turn_a">'+n+'</a>';
+			}
+		}
+		$('.paging_main').eq(0).html(new_as);
+		$('.turn_a').removeClass('paging_a_active');
+		for(var i = 0; i < number; i++){
+			if($('.turn_a').eq(i).text() == page_obj.page){
+				$('.turn_a').eq(i).addClass('paging_a_active');
+			}
+		}
+		//调用回调函数
+		callback();
+	}
+}

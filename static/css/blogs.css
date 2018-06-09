@@ -118,10 +118,10 @@ body{
 	width: 74%;
 	display: inline-block;
 	vertical-align: top;
-	padding-bottom: 100px;
+	padding-bottom: 150px;
 }
 .blogs_main_article{
-	display: none;
+	visibility: hidden;
 	position: relative;
 	margin: 0 30px 10px 30px;
 }
@@ -203,6 +203,7 @@ body{
 	text-indent: 2em;
 	color: #565656;
 }
+
 @media screen and (max-width:768px){
 	
 }
