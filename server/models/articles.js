@@ -66,6 +66,14 @@ let article = {
         let result = await dbu.query(sql,[start,length]);
         return result;
     },
+    async get_article_by_tag_limit(tag_name, start, length){
+        let sql = `select articles.* 
+                from articles,tag_to_article,tags 
+                where ? = tags.tag_name and tags.tag_id = tag_to_article.tag_id and tag_to_article.article_id = articles.article_id 
+                limit ?, ?;`;
+        let result = await dbu.query(sql,[tag_name,start,length]);
+        return result;
+    },
     /**
      * 获取最新length个文章
      * @param {int} length 
@@ -86,6 +94,13 @@ let article = {
     async get_article_count(){
         let sql = "select count(*) as count from articles;";
         let result = await dbu.query(sql);
+        return result;
+    },
+    async get_article_count_by_tag(tag_name){
+        let sql = `select count(*) as count 
+        from articles,tag_to_article,tags 
+        where ? = tags.tag_name and tags.tag_id = tag_to_article.tag_id and tag_to_article.article_id = articles.article_id;`;
+        let result = await dbu.query(sql,[tag_name]);
         return result;
     }
     

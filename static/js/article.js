@@ -13,7 +13,7 @@ $(function(){
         },
         error: function(err){
             console.log(err);
-            location.href = "/blogs.html";
+            location.href = "./blogs.html";
         }
     })
 })

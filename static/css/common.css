@@ -144,6 +144,7 @@
 .main_footer{
 	width: 90%;
 	text-align: center;
+	font-size: 0;
 }
 .paging_div{
 	display: inline-block;
@@ -221,6 +222,17 @@
 	}
 	.prompt_main{
 		font-size: 14px;
+	}
+	.paging_a{
+		width: 38px;
+		height: 24px;
+		line-height: 24px;
+		font-size: 12px;
+		margin: 20px 1px;
+	}
+	.paging_main .paging_a{
+		width: 24px;
+		height: 24px;
 	}
 }
 @media screen and (min-width:768px){

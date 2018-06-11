@@ -8,10 +8,19 @@ let blogs = {
      * @param {Object} ctx 
      */
     async get_blogs(ctx){
-        let datas = {status: "err"}
+        let datas = {status: "err"};
         let tags = await tag_model.get_all_tags();
-        let articles = await article_model.get_article_by_limit(parseInt(ctx.query.start), parseInt(ctx.query.lengths));
-        let article_count = await article_model.get_article_count();
+        let articles;
+        let article_count;
+        if(ctx.query.tag != undefined){
+            articles = await article_model.get_article_by_tag_limit(unescape(ctx.query.tag), parseInt(ctx.query.start), parseInt(ctx.query.lengths));
+            article_count = await article_model.get_article_count_by_tag(unescape(ctx.query.tag));
+        }
+        else{
+            articles = await article_model.get_article_by_limit(parseInt(ctx.query.start), parseInt(ctx.query.lengths));
+            article_count= await article_model.get_article_count();
+        }
+         
         article_count = article_count[0].count;
         for(let i = 0; i < articles.length; i++){
             let article = articles[i];

@@ -23,7 +23,7 @@ function blogs_init(){
 				tags_init(data.tags);
 				articles_init(data.articles);
 				article_paging.count = data.article_count;
-				paging_init();
+				paging_init(article_paging);
 			}
 			else{
 				console.log("error");
@@ -33,19 +33,6 @@ function blogs_init(){
 			console.log(err);
 		}
 	})
-}
-/**
- * 初始化标签
- * @param {Object} data 
- */
-function tags_init(data){
-	var lis = '';
-	for(var i = 0; i < data.length; i++){
-		lis += '<li class="blogs_header_aside_li"><a href="./category.html?id='+data[i].tag_id+'" class="blogs_header_aside_li_a"><i class="fa fa-tag"></i> '+data[i].tag_name+'</a></li>'
-	}
-	$("#blogs_header_aside_ul").html(lis);
-	// 为tag标签设置随机颜色
-	random_color($('.blogs_header_aside_li_a'));
 }
 /**
  * 格式化文章
@@ -71,9 +58,9 @@ function articles_init(data){
 			as.eq(i).attr('href','./article.html?id='+data[i].article_id);
 			imgs.eq(i).attr('src',data[i].img_path)
 			ps.eq(i).text(filter_markdown(data[i].article_content).slice(0,200) +'...');
-			days.eq(i).text(data[i].upload_time.split('/')[2]);
-			months.eq(i).text(data[i].upload_time.split('/')[1]);
-			years.eq(i).text(data[i].upload_time.split('/')[0]);
+			days.eq(i).text(data[i].upload_time.split(/\/|\\/)[2]);
+			months.eq(i).text(data[i].upload_time.split(/\/|\\/)[1]);
+			years.eq(i).text(data[i].upload_time.split(/\/|\\/)[0]);
 			likes.eq(i).text(data[i].praise);
 			likes.eq(i).css('color', '#999');
 			likes.eq(i).off('click');
@@ -120,41 +107,7 @@ function like_article(obj){
 		}
 	})
 }
-/**
- * 分页初始化
- */
-function paging_init(){
-	//添加页数按钮
-	var number = article_paging.count >= 3 ? 3 : article_paging.count;
-	var as = '';
-	for(var i = 1; i <= number; i++){
-		as += '<a href="#" class="paging_a turn_a">'+i+'</a>';
-	}
-	$('.paging_main').eq(0).html(as);
-	$('.turn_a').eq(0).addClass('paging_a_active');
 
-	$("#first").click(function(){
-		judge(article_paging, 1, 1, number, page_turn)
-		return false;
-	});
-	$("#previous").click(function(){
-		judge(article_paging, 1, article_paging.page-1, number, page_turn);
-		return false;
-	});
-	$("#next").click(function(){
-		judge(article_paging, Math.ceil(article_paging.count/article_paging.lengths), article_paging.page+1, number, page_turn);
-		return false;
-	});
-	$("#last").click(function(){
-		judge(article_paging, Math.ceil(article_paging.count/article_paging.lengths), Math.ceil(article_paging.count/article_paging.lengths), number, page_turn);
-		return false;
-	});
-	$('.paging_main').on('click', '.turn_a' ,function(){
-		judge(article_paging, $(this).text(), $(this).text(), number, page_turn);
-		return false;
-	})
-	
-}
 /**
  * 点击翻页
  */
