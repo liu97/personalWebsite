@@ -22,7 +22,7 @@ function articles_init(data){
 		else{
 			titles.eq(i).text(data[i].title);
 			titles.eq(i).attr('href','./article?id='+data[i].article_id);
-			times.eq(i).text(data[i].upload_time.slice(0,10).replace(/\/|\\/g,'-'));
+			times.eq(i).text(' '+data[i].upload_time.slice(0,10).replace(/\/|\\/g,'-'));
 			var tags = data[i].tags.split(',');
 			var as = '';
 			for( var j = 0; j < tags.length; j++){

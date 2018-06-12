@@ -7,6 +7,7 @@ body{
 	display: inline-block;
 	vertical-align: top;
 	padding-bottom: 150px;
+	font-size: 0;
 }
 .category_main_section{
 	position: relative;
@@ -56,12 +57,17 @@ body{
 	text-align: right;
 	vertical-align: top;
 	line-height: 70px;
+	font-size: 13px;
 }
 .category_main_section_article_bottom{
 	color: #fa5252;
 	font-size: 18px;
 	line-height: 50px;
 	float: right;
+}
+.category_main_section_article_bottom a{
+	display: inline-block;
+	margin-left: 2px;
 }
 .article_tag{
 	padding:5px 10px;
