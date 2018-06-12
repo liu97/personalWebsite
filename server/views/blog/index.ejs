@@ -59,7 +59,7 @@
 					<article id="page_main_about_me_article">
 						<h1 id="page_main_about_me_h1"><%=about_me[0].title%></h1>
 						<p id="page_main_about_me_article_p"><%=about_me[0].article_content%></p>
-						<button class="btn_more"><a href="/articles?id=<%=about_me[0].article_id%>" class="a_more">read more</a></button>
+						<button class="btn_more"><a href="/article?id=<%=about_me[0].article_id%>" class="a_more">read more</a></button>
 					</article>
 				</article>
 			</div>
@@ -75,7 +75,7 @@
 								<article class="page_main_blogs_li_article">
 									<h2 class="page_main_blogs_h2"><%=item.title%></h2>
 									<p class="page_main_blogs_p"><%=item.article_content%></p>
-									<button class="btn_more blogs_a_more" ><a href="/articles?id=<%=item.article_id%>" class="a_more">read more</a></button>
+									<button class="btn_more blogs_a_more" ><a href="/article?id=<%=item.article_id%>" class="a_more">read more</a></button>
 								</article>
 							</li>
 						<% }) %>
