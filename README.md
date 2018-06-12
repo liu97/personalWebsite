@@ -26,8 +26,9 @@ const config = {
 }
 module.exports = config
 ```
-## 启动
+### 3、脚本建表
 > npm ./init/index.js
+## 启动
 
 > npm run start
 
