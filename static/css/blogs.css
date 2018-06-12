@@ -93,9 +93,6 @@ body{
 	border-radius: 3px;
 	box-shadow: 0px 0px 5px #999;
 	font-size: 14px;
-	-webkit-transition:all 0.5s;
-	-moz-transition:all 0.5s;
-	transition:all 0.5s;
 }
 .blogs_header_friend_chain_li a{
 	display: block;
@@ -120,7 +117,6 @@ body{
 	padding-bottom: 150px;
 }
 .blogs_main_article{
-	visibility: hidden;
 	position: relative;
 	margin: 0 30px 10px 30px;
 }

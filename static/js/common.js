@@ -87,12 +87,13 @@ function get_request() {
     }
     return theRequest;
 }
-// 过滤markdown标识符
+//去除文章的markdown语法
 function filter_markdown(content){ 
 	var reg = /[\\\`\*\_\[\]\#\+\-\!\>]|\([^\(\)]*\)/g;
 	content = content.replace(reg,'');
 	return content;
 }
+
 $(function(){ 
 	//为回到顶部的标签添加滑动效果
 	a_location($(".up_to"));
@@ -106,6 +107,12 @@ $(function(){
 	$(".prompt_box").eq(0).on('animationend webkitAnimationEnd oAnimationEnd', function () {
 		$(this).removeClass('action_prompt');
 	});
+	//头部导航如果点击本页，不刷新
+	$("#blogs_header").on('click', '.header_nav', function(){
+		if($(this).attr('href') == location.pathname && location.search == ''){
+			return false;
+		}
+	})
 })
 $(window).scroll(function(event) {
 	if($(document).scrollTop()>=$(window).height()){
@@ -158,28 +165,30 @@ function ajax_form($form,success,fail){
  * @param {Object} page_obj 分页信息对象 
  * @param {String} page 不翻页的判断页数
  * @param {String} add 翻到add页
- * @param {int} number 分页按钮个数
  * @param {Function} callback 回调函数
  */
-function judge(page_obj, page, add, number, callback){
+function judge(page_obj, page, add, callback){
 	if(page_obj.page == page){
 		return;
 	}
 	else{
 		page_obj.page = parseInt(add);
 		//改变页数按钮
-		if(page_obj.page > number/2 && page_obj.page < Math.ceil(page_obj.count/page_obj.lengths)-number/2){
-			var new_as = '';
-			for(var i = 1; i <= number; i++){
-				var n = Math.floor(number/2 - number + i) + page_obj.page;
-				new_as += '<a href="#" class="paging_a turn_a">'+n+'</a>';
+		$('.turn_a').removeClass('paging_a_active');
+		if(page_obj.page > page_obj.number/2 && page_obj.page < Math.ceil(page_obj.count/page_obj.lengths)-page_obj.number/2){
+			for(var i = 1; i <= page_obj.number; i++){
+				var n = Math.floor(page_obj.number/2 - page_obj.number + i) + page_obj.page;
+				$('.turn_a').eq(i-1).text(n);
+				if(n == add){
+					$('.turn_a').eq(i-1).addClass('paging_a_active');
+				}
 			}
 		}
-		$('.paging_main').eq(0).html(new_as);
-		$('.turn_a').removeClass('paging_a_active');
-		for(var i = 0; i < number; i++){
-			if($('.turn_a').eq(i).text() == page_obj.page){
-				$('.turn_a').eq(i).addClass('paging_a_active');
+		else{
+			for(var i = 0; i < page_obj.number; i++){
+				if($('.turn_a').eq(i).text() == add){
+					$('.turn_a').eq(i).addClass('paging_a_active');
+				}
 			}
 		}
 		//调用回调函数
@@ -190,48 +199,28 @@ function judge(page_obj, page, add, number, callback){
  * 分页初始化
  */
 function paging_init(page_obj){
-	//添加页数按钮
-	var pa = Math.ceil(page_obj.count/page_obj.lengths);
-	var number = pa >= 3 ? 3 : pa;
-	var as = '';
-	for(var i = 1; i <= number; i++){
-		as += '<a href="#" class="paging_a turn_a">'+i+'</a>';
-	}
-	$('.paging_main').eq(0).html(as);
+
 	$('.turn_a').eq(0).addClass('paging_a_active');
 
 	$("#first").click(function(){
-		judge(page_obj, 1, 1, number, page_turn);
+		judge(page_obj, 1, 1, page_turn);
 		return false;
 	});
 	$("#previous").click(function(){
-		judge(page_obj, 1, page_obj.page-1, number, page_turn);
+		judge(page_obj, 1, page_obj.page-1, page_turn);
 		return false;
 	});
 	$("#next").click(function(){
-		judge(page_obj, Math.ceil(page_obj.count/page_obj.lengths), page_obj.page+1, number, page_turn);
+		judge(page_obj, Math.ceil(page_obj.count/page_obj.lengths), page_obj.page+1, page_turn);
 		return false;
 	});
 	$("#last").click(function(){
-		judge(page_obj, Math.ceil(page_obj.count/page_obj.lengths), Math.ceil(page_obj.count/page_obj.lengths), number, page_turn);
+		judge(page_obj, Math.ceil(page_obj.count/page_obj.lengths), Math.ceil(page_obj.count/page_obj.lengths), page_turn);
 		return false;
 	});
 	$('.paging_main').on('click', '.turn_a' ,function(){
-		judge(page_obj, $(this).text(), $(this).text(), number, page_turn);
+		judge(page_obj, $(this).text(), $(this).text(), page_turn);
 		return false;
 	})
 	
-}
-/**
- * 初始化标签
- * @param {Object} data 
- */
-function tags_init(data){
-	var lis = '';
-	for(var i = 0; i < data.length; i++){
-		lis += '<li class="blogs_header_aside_li"><a href="./category.html?tag='+data[i].tag_name+'" class="blogs_header_aside_li_a"><i class="fa fa-tag"></i> '+data[i].tag_name+'</a></li>'
-	}
-	$("#blogs_header_aside_ul").html(lis);
-	// 为tag标签设置随机颜色
-	random_color($('.blogs_header_aside_li_a'));
 }

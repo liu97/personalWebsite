@@ -1,9 +1,9 @@
 var request_data;
 $(function(){
+    random_color($('.blogs_header_aside_li_a'));
     var requests = get_request();
     var request_id = requests['id'] ? requests['id'] : 0
     var article_url = '/articles/' + request_id;
-    console.log(article_url)
     $.ajax({
         url: article_url,
         method: 'get',
@@ -13,7 +13,7 @@ $(function(){
         },
         error: function(err){
             console.log(err);
-            location.href = "./blogs.html";
+            location.href = "/blogs";
         }
     })
 })

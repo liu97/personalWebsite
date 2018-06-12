@@ -1,39 +1,10 @@
-var article_paging = {
-	page: 1,
-	lengths: 5,
-	count: 0
-}
 $(window).resize(function(){
 	bar_toggle($("#blogs_header_for_min_width"),992);
 }); 
 $(function(){
-	//blogs页信息初始化
-	blogs_init();  
+	random_color($('.blogs_header_aside_li_a'));
+	paging_init(article_paging);
 })
-/**
- * 初始化blogs页面
- */
-function blogs_init(){
-	start = (article_paging.page - 1) * article_paging.lengths;
-	$.ajax({
-		url: '/blogs?start='+start+'&lengths='+article_paging.lengths,
-		method: 'get',
-		success: function(data){
-			if(data.status == "success"){
-				tags_init(data.tags);
-				articles_init(data.articles);
-				article_paging.count = data.article_count;
-				paging_init(article_paging);
-			}
-			else{
-				console.log("error");
-			}
-		},
-		error: function(err){
-			console.log(err);
-		}
-	})
-}
 /**
  * 格式化文章
  * @param {Object} data 
@@ -47,7 +18,7 @@ function articles_init(data){
 	var days = $(".blogs_main_article_aside_i");
 	var months = $(".blogs_main_article_aside_span1");
 	var years = $(".blogs_main_article_aside_span2");
-	var likes = $(".blogs_main_article_aside_div_i")
+	var likes = $(".blogs_main_article_aside_div_i");
 	for(var i = 0; i < articles.length; i++){
 		if(data[i] == undefined){
 			articles.eq(i).css('display', 'none');
@@ -57,28 +28,19 @@ function articles_init(data){
 			h2as.eq(i).attr('href','./article.html?id='+data[i].article_id);
 			as.eq(i).attr('href','./article.html?id='+data[i].article_id);
 			imgs.eq(i).attr('src',data[i].img_path)
-			ps.eq(i).text(filter_markdown(data[i].article_content).slice(0,200) +'...');
+			ps.eq(i).text( filter_markdown(data[i].article_content).slice(0,100)+'...' );
 			days.eq(i).text(data[i].upload_time.split(/\/|\\/)[2]);
 			months.eq(i).text(data[i].upload_time.split(/\/|\\/)[1]);
 			years.eq(i).text(data[i].upload_time.split(/\/|\\/)[0]);
 			likes.eq(i).text(data[i].praise);
 			likes.eq(i).css('color', '#999');
 			likes.eq(i).off('click');
-			(function(index){
-				likes.eq(index).click(function(e){
-					like_article({
-						article_id:data[index].article_id,
-						like: $(this),
-						$event: e
-					});
-				})
-			})(i);
 			articles.eq(i).css({
 				'display': 'block',
-				'visibility': 'visible' 
 			});
 		}
 	}
+	set_like(data);
 }
 /**
  * 给文章点赞
@@ -111,7 +73,7 @@ function like_article(obj){
 /**
  * 点击翻页
  */
-function page_turn(start, lengths){
+function page_turn(){
 	var start = (article_paging.page - 1) * article_paging.lengths;
 	var lengths = article_paging.lengths;
 	$.ajax({

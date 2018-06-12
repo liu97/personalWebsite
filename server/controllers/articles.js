@@ -51,15 +51,16 @@ let operate_article = {
         Object.assign(article,ctx.req.body);
         // 将文章内容写入存储
         let now_date = new Date().toLocaleDateString();
+        let now_second_date = new Date().getTime();
         let article_dir = path.join(config.root,`resources/article/${now_date}`);
         await mkdirsSync(article_dir);
-        let article_path = path.join(article_dir,`${article.title}${new Date().getTime()}.md`);
+        let article_path = path.join(article_dir,`${article.title}${now_second_date}.md`);
         fs.writeFile(article_path,article['test-editormd-markdown-doc'],function(err){
             if (err) {
                 return console.error(err);
             }
         });
-        article.article_path = `resources/article/${now_date}/${article.title}.md`;
+        article.article_path = `resources/article/${now_date}/${article.title}${now_second_date}.md`;
         let tags = tags_format(article.tags)
         //将信息存入articles表
         article.tags = tags.join(',');

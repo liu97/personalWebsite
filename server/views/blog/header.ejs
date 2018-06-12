@@ -1,0 +1,39 @@
+<header id="blogs_header">
+    <div id="blogs_header_for_min_width">
+        <div id="blogs_header_inner">
+            <article id="blogs_header_article">
+                <div id="blogs_header_article_photo">
+                    <a href="/home" id="blogs_header_article_a" class="header_nav">
+                        <img src="./images/index/head_portrait.jpg" alt="主页" class="head_portrait">
+                        <i class="fa fa-home"></i> 博客主页
+                    </a>
+                </div>
+                <div id="blogs_header_article_some_nav">
+                    <a href="/blogs" class="header_nav"><i class="fa fa-leaf"></i> 所有文章</a>
+                    <a href="/category" class="header_nav"><i class="fa fa-file-o"></i> 归档</a>
+                </div>
+            </article>
+            <aside class="blogs_header_aside">
+                <h2 class="blogs_header_aside_h2">文章标签</h2>
+                <ul id="blogs_header_aside_ul">
+                    <% tags.forEach(function(item, index){ %>
+                        <li class="blogs_header_aside_li">
+                            <a href="./category?tag=<%=item.tag_name%>" class="blogs_header_aside_li_a">
+                                <i class="fa fa-tag"></i><%=item.tag_name%>
+                            </a>
+                        </li>
+                    <% }); %>
+                </ul>
+            </aside>
+            <aside class="blogs_header_aside">
+                <h2 class="blogs_header_aside_h2">友情链接</h2>
+                <ul id="blogs_header_friend_chain">
+                    <li class="blogs_header_friend_chain_li"><a href="http://www.liaoxuefeng.com/" target="_blank">“廖雪峰</a></li>
+                    <li class="blogs_header_friend_chain_li"><a href="http://www.ruanyifeng.com/blog/" target="_blank">“阮一峰</a></li>
+                    <li class="blogs_header_friend_chain_li"><a href="https://www.w3cplus.com/" target="_blank">“大漠</a></li>
+                    <li class="blogs_header_friend_chain_li"><a href="http://www.zhangxinxu.com/" target="_blank">“张鑫旭</a></li>
+                </ul>
+            </aside>
+        </div>
+    </div>
+</header>

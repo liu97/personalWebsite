@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="liu97,刘传富,blog,博客,个人网站">
+	<meta name="author" content="刘传富">
+	<meta name="description" content="刘传富的个人网站">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+	<title>category | liu97</title>
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./font/css/font-awesome.min.css">
+	<link rel="stylesheet" href="./css/common.css">
+	<link rel="stylesheet" href="./css/blogs.css">
+	<link rel="stylesheet" href="./css/category.css">
+</head>
+<body>
+	<div id="body_warpper">
+        <%- include('./fix_down_nav',{}) %>
+        <%- include('./header',{tags}) %>
+		<main id="category_main">
+			<section class="category_main_section">
+                <% articles.forEach(function(item, index){ %>
+                    <article class="category_main_section_article">
+                        <article class="category_main_section_article_article">
+                            <div class="category_main_section_article_top">
+                                <h2 class="category_main_section_article_article_h2"><a href="/article?id=<%=item.article_id%>" class="article_title"><%=item.title%></a></h2>
+                                <time class="article_time">
+                                    <i class="fa fa-calendar article_time_i"> <%- item.upload_time.slice(0,10).replace(/\/|\\/g,'-') %></i>
+                                </time>
+                            </div>
+                            <div class="category_main_section_article_bottom">
+                                <% var tags = item.tags.split(','); %>
+                                <% for( var j = 0; j < tags.length; j++){ %>
+				                    <a href="./category?tag=<%=tags[j]%>"><i class="fa fa-tag article_tag"><%=tags[j]%></i></a>
+			                    <% }; %>
+                            </div>
+                        </article>
+                    </article>
+                <% }); %>
+			</section>
+			<footer class="main_footer">
+				<div class="paging_previous paging_div">
+					<a href="#" class="paging_a" id="first">首页</a>
+					<a href="#" class="paging_a" id="previous">上一页</a>		
+				</div>
+				<div class="paging_main paging_div">
+					<% for(var i = 1; i <= article_paging.number; i++){ %>
+						<a href="#" class="paging_a turn_a"><%= i %></a>
+					<% }; %>
+				</div>
+				<div class="paging_next paging_div">
+					<a href="#" class="paging_a" id="next">下一页</a>
+					<a href="#" class="paging_a" id="last">尾页</a>
+				</div>			
+			</footer>
+		</main>
+		<%- include('./fix_up',{id:'blogs_main'}) %>
+	</div>
+	<footer class="common_footer article_footer">Design by 刘传富</footer>
+</body>
+<script src="./js/plugins/jquery-3.3.1.js"></script>
+<script src="./js/common.js"></script>
+<script>
+	var article_paging = <%- JSON.stringify(article_paging) %>
+</script>
+<script src="./js/category.js"></script>
+</html>

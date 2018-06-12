@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="liu97,刘传富,blog,博客,个人网站">
+	<meta name="author" content="刘传富">
+	<meta name="description" content="刘传富的个人网站">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+	<title>category | liu97</title>
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./editor.md/css/editormd.min.css">
+	<link rel="stylesheet" href="./font/css/font-awesome.min.css">
+	<link rel="stylesheet" href="./css/common.css">
+	<link rel="stylesheet" href="./css/blogs.css">
+	<link rel="stylesheet" href="./css/article.css">
+</head>
+<body>
+	<div id="body_warpper">
+        <%- include('./fix_down_nav',{}) %>
+        <%- include('./header',{tags}) %>
+		<main id="article_main">
+			<section id="article_main_section">
+				<article>
+					<header id="article_header">
+						<h1 id="article_h1"></h1>
+						<time id="article_time">
+							<i class="fa fa-calendar" id="article_calendar"></i>
+						</time>    
+					</header>
+					<div id="content_warpper">
+						<div id="article_content" class="editormd-preview-theme-dark">
+							<textarea id="content" style="display: none;">
+								
+							</textarea>
+						</div>
+					</div>
+				</article>
+			</section>
+		</main>
+		<%- include('./fix_up',{id:'blogs_main'}) %>
+	</div>
+	<footer class="common_footer article_footer">Design by 刘传富</footer>
+</body>
+<script src="./js/plugins/jquery-3.3.1.js"></script>
+<script src="./editor.md/lib/marked.min.js"></script>
+<script src="./editor.md/lib/prettify.min.js"></script>
+<script src="./editor.md/lib/raphael.min.js"></script>
+<script src="./editor.md/lib/underscore.min.js"></script>
+<script src="./editor.md/lib/sequence-diagram.min.js"></script>
+<script src="./editor.md/lib/flowchart.min.js"></script>
+<script src="./editor.md/lib/jquery.flowchart.min.js"></script>
+<script src="editor.md/editormd.min.js"></script>
+<script src="./js/common.js"></script>
+<script src="./js/article.js"></script>
+</html>

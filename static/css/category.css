@@ -13,42 +13,31 @@ body{
 	background: white;
 	margin:0 30px;
 	box-shadow: 0 0 0.25em 0em rgba(0,0,0,0.25);
-}
-.category_main_section_aside{
+	overflow: hidden;
 	display: inline-block;
-	width: 15%;
-	height: 100%;
-	text-align: center;
-}
-.category_main_section_year{
-	font-weight: bold;
-	font-size: 25px;
-	color: #565656;
-	margin-top: 10px;
-	display: block;
+	width: calc(100% - 60px);
 }
 .category_main_section_article{
 	display: inline-block;
-	width: 84%;
+	width: 100%;
 	vertical-align: top;
-	visibility: hidden;
 }
 .category_main_section_article_article{
 	margin: 0 2% 2% 2%;
 	border-bottom: 1px solid #ddd;
 	overflow: auto;
-	/* visibility: hidden; */
 }
 .category_main_section_article_top{
 	width: 100%;
-	line-height: 40px;
 }
 .category_main_section_article_article_h2{
 	display: inline-block;
-	width: 70%;
+	width: 67%;
+	line-height: 70px;
 	overflow: hidden;
 	text-overflow:ellipsis;
 	white-space: nowrap;
+	margin-left: 3%;
 }
 .category_main_section_article_article_h2 a{
 	color: #565656;
@@ -66,6 +55,7 @@ body{
 	color: #aaa;
 	text-align: right;
 	vertical-align: top;
+	line-height: 70px;
 }
 .category_main_section_article_bottom{
 	color: #fa5252;
@@ -83,18 +73,9 @@ body{
 	transition:all 0.5s;
 }
 @media screen and (max-width:768px){
-	.category_main_section_year{
-   		font-size: 16px;
-   		margin: 0 2% 2% 2%;
-   	}
    	.category_main_section_article_article_h2 a{
    		font-size: 14px;
    	}
-	.category_main_section_aside{
-		display: block;
-		width: 100%;
-		text-align: left;
-	}
 
 }
 @media screen and (max-width:992px){
@@ -107,9 +88,6 @@ body{
 		margin: 0;
 		padding: 5px;
 	}
-	.category_main_section_year{
-   		font-size: 18px;
-	}
 	.category_main_section_article{
 		width: 100%;
 	}   
@@ -117,24 +95,18 @@ body{
    		font-size: 16px;
    	}
    	.category_main_section_article_article_h2{
-   		width: 59%;
+   		width: 56%;
    	}
    	.article_time{
    		width: 39%;
    	}
 }
 @media screen and (min-width:992px){
-   	.category_main_section_year{
-   		font-size: 20px;
-   	}
    	.category_main_section_article_article_h2 a{
    		font-size: 18px;
    	}
 }
 @media screen and (min-width:1200px){
-   	.category_main_section_year{
-   		font-size: 25px;
-   	}
    	.category_main_section_article_article_h2 a{
    		font-size: 20px;
    	}

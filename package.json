@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/liu97/personalWebsite#readme",
   "dependencies": {
+    "ejs": "^2.6.1",
     "koa": "^2.5.1",
     "koa-bodyparser": "^4.2.1",
     "koa-logger": "^3.2.0",
@@ -28,6 +29,7 @@
     "koa-router": "^7.4.0",
     "koa-session-minimal": "^3.0.4",
     "koa-static": "^4.0.3",
+    "koa-views": "^6.1.4",
     "moment": "^2.22.1",
     "mysql": "^2.15.0",
     "node-xss": "^0.0.1"

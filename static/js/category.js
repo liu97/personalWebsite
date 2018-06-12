@@ -1,49 +1,11 @@
-var category_paging = {
-	page: 1,
-	lengths: 10,
-	count: 0
-}
 $(window).resize(function(){
 	bar_toggle($("#blogs_header_for_min_width"),992);
 }); 
 $(function() {
-	//category页初始化
-	category_init();
+	random_color($('.blogs_header_aside_li_a'));
+	random_color($('.article_tag'));
+	paging_init(article_paging);
 })
-/**
- * category页初始化
- */
-function category_init(){
-	var requests = get_request();
-	var url = '';
-	var start = (category_paging.page - 1) * category_paging.lengths;
-	if(requests['tag']){
-		url = '/blogs?tag='+requests['tag']+'&start='+start+'&lengths='+category_paging.lengths
-	}
-	else{
-		url = '/blogs?start='+start+'&lengths='+category_paging.lengths
-	}
-	$.ajax({
-		url: url,
-		method: 'get',
-		success: function(data){
-			if(data.status == "success"){
-				tags_init(data.tags);
-				articles_init(data.articles);
-				category_paging.count = data.article_count;
-				paging_init(category_paging);
-				console.log(data);
-			}
-			else{
-				console.log("error");
-				location.href = './category.html';
-			}
-		},
-		error: function(err){
-			console.log(err);
-		}
-	})
-}
 /**
  * 格式化文章
  * @param {Object} data 
@@ -59,7 +21,7 @@ function articles_init(data){
 		}
 		else{
 			titles.eq(i).text(data[i].title);
-			titles.eq(i).attr('href','./article.html?id='+data[i].article_id);
+			titles.eq(i).attr('href','./article?id='+data[i].article_id);
 			times.eq(i).text(data[i].upload_time.slice(0,10).replace(/\/|\\/g,'-'));
 			var tags = data[i].tags.split(',');
 			var as = '';
@@ -70,22 +32,22 @@ function articles_init(data){
 
 			articles.eq(i).css({
 				'display': 'block',
-				'visibility': 'visible' 
 			});
 		}
 	}
-	random_color($(".article_tag"));
+	random_color($('.article_tag'));
 }
 /**
  * 点击翻页
  */
-function page_turn(start, lengths){
-	var start = (category_paging.page - 1) * category_paging.lengths;
-	var lengths = category_paging.lengths;
+function page_turn(){
+	var start = (article_paging.page - 1) * article_paging.lengths;
+	var lengths = article_paging.lengths;
 	$.ajax({
 		url: '/articles?start='+start+'&lengths='+lengths,
 		method: 'get',
 		success: function(data){
+			console.log(data)
 			articles_init(data);
 		},
 		err: function(err){
