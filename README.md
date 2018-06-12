@@ -28,5 +28,6 @@ module.exports = config
 ```
 ## 启动
 > npm ./init/index.js
+
 > npm run start
 
