@@ -29,8 +29,9 @@
     var testEditor;
     $(function () {
         $.ajax({
-            url: '/articles/5',
+            url: '/articles/',
             method: 'delete',
+            data: {id:18},
             success: function(data){
                 $('#content').val(data);
                 testEditor = editormd.markdownToHTML("doc-content", {//注意：这里是上面DIV的id

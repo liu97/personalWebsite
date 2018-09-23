@@ -91,8 +91,19 @@ let operate_article = {
      * @param {Object} ctx 
      */
     async delete_article(ctx){
-        let message = "success";
-        let article_id = ctx.params.id;
+        console.log(ctx.params)
+        let message = {info: "error", msg: "参数错误"};
+        let article_id;
+        if(ctx.params.id){
+            article_id = ctx.params.id;
+        }
+        else if(ctx.query.id)
+        {
+            article_id = ctx.query.id;
+        }
+        else{
+            ctx.body = message;
+        }
         //改变对应标签个数
         let tags = await to_models.get_tags_by_article_id(article_id);
         for(let i = 0; i < tags.length; i++){
@@ -101,10 +112,7 @@ let operate_article = {
         }
         // 删除对应文章,因为设置了外键CASCADE，所以tag_to_article对应数据会自动删除 
         let result = await article_models.delete_article(article_id);
-        if(result.affectedRows == 0){
-            message = "error"
-        }
-        ctx.body = message;
+        ctx.body = {...message, info:"success", 'msg': '删除成功'};
     },
     /**
      * 更新文章
@@ -113,7 +121,6 @@ let operate_article = {
     async update_article(ctx){
         let message = "success";
         let body = ctx.req.body;
-        console.log(body)
         let params_id = ctx.params.id;
         let article = await article_models.get_article_by_id(params_id);
         article = article[0];
@@ -157,15 +164,17 @@ let operate_article = {
      * @param {Object} ctx 
      */
     async get_article(ctx){
-        console.log()
+        console.log(ctx.query)
+        let message = "error";
         let articles = [];
-        if ( Object.keys(ctx.params).length != 0 ){
-            if(ctx.params.id != undefined){
-                articles = await article_models.get_article_by_id(ctx.params.id)
-            }
+        if ( Object.keys(ctx.params).length != 0 && ctx.params.id != undefined ){
+            articles = await article_models.get_article_by_id(ctx.params.id)
         }
         else if( Object.keys(ctx.query).length != 0 ){
-            if(ctx.query.type){
+            if(ctx.query.id){
+                articles = await article_models.get_article_by_id(ctx.query.id);
+            }
+            else if(ctx.query.type){
                 articles = await article_models.get_article_by_type(ctx.query.type);
             }
             else if(ctx.query.start){
@@ -173,10 +182,10 @@ let operate_article = {
             }
         }
         else{
-            articles = await article_models.get_all_article();
+            articles = message;
         }
         if(articles.length == 0){ //没有获取到文章
-            // ctx.redirect('/blogs.html');
+            ctx.body = message;
         }
         else{
             for(let i = 0; i < articles.length; i++){

@@ -16,10 +16,11 @@ const checkStatus = (response) => {
 }
 
 const send = (url, options, cb, method = 'post') => {
-	const searchStr = obj2String(options);
+	// const searchStr = obj2String(options);
+	method = method.toLowerCase();
 	let initObj = {}
-	if (method == 'get') { // 如果是GET请求，拼接url
-		url += '?' + searchStr
+	if (method == 'get' || method == 'delete' || method == 'put') { // 如果是GET请求，拼接url
+		url += '/' + Object.values(options)[0];
 		initObj = {
 		  	method: method,
 		  	credentials: 'include'
@@ -54,7 +55,7 @@ const send = (url, options, cb, method = 'post') => {
 const requestPosts = (postTitle) => createAction(postTitle+"Request");	
 const receivePosts = (postTitle) => createAction(postTitle+"Receive");
 
-export const createSimpleAjaxAction = (url, postTitle, hadInitial) => {
+export const createSimpleAjaxAction = (url, postTitle, method="post", hadInitial) => {
 	return (postMessage) =>{
 		if(!isObject(postMessage)){
 			 postMessage = {};
@@ -64,7 +65,7 @@ export const createSimpleAjaxAction = (url, postTitle, hadInitial) => {
 		}
 		return (dispatch, getState) => {
 			dispatch(requestPosts(postTitle)());
-			send( url, postMessage, json => dispatch(receivePosts(postTitle)(json)) );
+			send( url, postMessage, json => dispatch(receivePosts(postTitle)(json)), method );
 		}
 	}
 };

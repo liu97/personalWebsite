@@ -3,6 +3,6 @@ import { createSimpleAjaxAction } from '../util/ajax'
 
 export const test = createAction('test');
 
-export const fetchPost = createSimpleAjaxAction('./api/articles', 'fetchArticleList', true);
+export const fetchPost = createSimpleAjaxAction('./api/articles', 'fetchArticleList', 'delete');
 
 

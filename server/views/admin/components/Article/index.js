@@ -22,7 +22,7 @@ class Article extends Component{
 	}
 	onclick= ()=>{
 		this.props.dispatch(test());
-		this.props.dispatch(fetchPost({fuzzle_name: 'liu'}));
+		this.props.dispatch(fetchPost({id: '18'}));
 	}
 	render(){
 		return (
