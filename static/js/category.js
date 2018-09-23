@@ -26,7 +26,7 @@ function articles_init(data){
 			var tags = data[i].tags.split(',');
 			var as = '';
 			for( var j = 0; j < tags.length; j++){
-				as += '<a href="./category.html?tag='+tags[j]+'"><i class="fa fa-tag article_tag">'+tags[j]+'</i></a>';
+				as += '<a href="./category?tag='+tags[j]+'"><i class="fa fa-tag article_tag">'+tags[j]+'</i></a>';
 			}
 			$('.category_main_section_article_bottom').eq(i).html(as);
 

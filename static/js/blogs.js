@@ -25,8 +25,8 @@ function articles_init(data){
 		}
 		else{
 			h2as.eq(i).text(data[i].title);
-			h2as.eq(i).attr('href','./article.html?id='+data[i].article_id);
-			as.eq(i).attr('href','./article.html?id='+data[i].article_id);
+			h2as.eq(i).attr('href','./article?id='+data[i].article_id);
+			as.eq(i).attr('href','./article?id='+data[i].article_id);
 			imgs.eq(i).attr('src',data[i].img_path)
 			ps.eq(i).text( filter_markdown(data[i].article_content).slice(0,100)+'...' );
 			days.eq(i).text(data[i].upload_time.split(/\/|\\/)[2]);
