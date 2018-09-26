@@ -4,6 +4,7 @@ $(window).resize(function(){
 $(function(){
 	random_color($('.blogs_header_aside_li_a'));
 	paging_init(article_paging);
+	console.log(article_paging)
 })
 /**
  * 格式化文章
@@ -74,13 +75,13 @@ function like_article(obj){
  * 点击翻页
  */
 function page_turn(){
-	var start = (article_paging.page - 1) * article_paging.lengths;
-	var lengths = article_paging.lengths;
+	var start = (article_paging.page - 1) * article_paging.pageSize;
+	var pageSize = article_paging.pageSize;
 	$.ajax({
-		url: '/articles?start='+start+'&lengths='+lengths,
+		url: '/articles?start='+start+'&pageSize='+pageSize,
 		method: 'get',
 		success: function(data){
-			articles_init(data);
+			articles_init(data.info.list);
 		},
 		err: function(err){
 			console.log(err)

@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import {
 	reducerResult,
 	getArticleResult
-} from './test'
+} from './article'
 
 const rootReducer = combineReducers({
 	reducerResult,

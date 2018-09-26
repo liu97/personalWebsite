@@ -2,18 +2,18 @@ var request_data;
 $(function(){
     random_color($('.blogs_header_aside_li_a'));
     var requests = get_request();
-    var request_id = requests['id'] ? requests['id'] : 0
+    var request_id = requests['id'] ? requests['id'] : 0;
     var article_url = '/articles/' + request_id;
     $.ajax({
         url: article_url,
         method: 'get',
         success: function(data){
-            request_data = data[0];
+            request_data = data.info.list[0];
             format_article();
         },
         error: function(err){
+            alert("该文章走丢了")
             console.log(err);
-            location.href = "/blogs";
         }
     })
 })

@@ -29,6 +29,11 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
+        query: {
+            plugins: [                                             
+                ["import", {libraryName: "antd", style: "css"}]   //需要配置的地方
+            ]                                                    
+        }
       },
       {
         test: /\.css$/,
@@ -39,12 +44,13 @@ module.exports = {
         use:["style-loader","css-loader","postcss-loader","less-loader"],
       },
       {
-        test: /\.json/,
-        loader: 'json-loader'
-      },
-      {
         test: /.(gif|jpg|png$)/,
-        loader: 'file?name=images/[name]-[hash:8].[ext]'
+        use: [{
+          loader: 'file-loader',
+          query: {
+            name: 'images/[name]-[hash:8].[ext]'
+          }
+        }]
       },
     ],
   },
@@ -53,10 +59,13 @@ module.exports = {
     extensions: ['.js','.jsx','.less','.css'],
     alias: {
       components: path.join(appPath, 'components'),
+      pages: path.join(appPath, 'pages'),
       actions: path.join(appPath, 'actions'),
       reducers: path.join(appPath, 'reducers'),
       containers: path.join(appPath, 'containers'),
+      constants: path.join(appPath, 'constants'),
       routes: path.join(appPath, 'routes'),
+      utils: path.join(appPath, 'utils'),
     }    
   },
   // devServer 則是 webpack-dev-server 設定

@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import { createAction, handleActions } from 'redux-actions';
-import { isObject, obj2String } from '../util/object';
-import config from '../util/config'
+import { isObject, obj2String } from 'utils/object';
+import config from 'utils/config'
 
 const checkStatus = (response) => {
 	if(response.status===401){
@@ -16,11 +16,16 @@ const checkStatus = (response) => {
 }
 
 const send = (url, options, cb, method = 'post') => {
-	// const searchStr = obj2String(options);
 	method = method.toLowerCase();
 	let initObj = {}
 	if (method == 'get' || method == 'delete' || method == 'put') { // 如果是GET请求，拼接url
-		url += '/' + Object.values(options)[0];
+		if(Object.keys(options).indexOf('id') != -1){
+			url += '/' + options['id'];
+		}
+		else{
+			const searchStr = obj2String(options);
+			url += '?' + searchStr;
+		}
 		initObj = {
 		  	method: method,
 		  	credentials: 'include'
@@ -32,7 +37,6 @@ const send = (url, options, cb, method = 'post') => {
 		  	credentials: 'include',
 		  	headers: new Headers({
 		    	'Accept': 'application/json',
-		    	// 'Authorization': 'sadsasdasdasd',
 		    	'Content-Type': 'application/json',
 		  	}),
 		  	body: window.JSON.stringify(options),

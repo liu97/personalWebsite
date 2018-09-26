@@ -1,6 +1,8 @@
 import App from 'containers/App'
-import Home from 'components/Home'
-import Article from 'components/Article'
+import Home from 'pages/Home'
+import Article from 'pages/Article/List'
+import Detail from 'pages/Article/Detail'
+import Edit from 'pages/Article/Edit'
 
 const routes = [
   { component: App,
@@ -9,9 +11,19 @@ const routes = [
         exact: true,
         component: Home
       },
-      { path: '/article',
-        component: Article
+      {
+        path: '/article/list',
+        component: Article,
+      },
+      {
+        path: '/article/detail',
+        component: Detail
+      },
+      {
+        path: '/article/edit',
+        component: Edit
       }
+
     ]
   }
 ]

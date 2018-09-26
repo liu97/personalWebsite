@@ -41,14 +41,13 @@ function articles_init(data){
  * 点击翻页
  */
 function page_turn(){
-	var start = (article_paging.page - 1) * article_paging.lengths;
-	var lengths = article_paging.lengths;
+	var start = (article_paging.page - 1) * article_paging.pageSize;
+	var pageSize = article_paging.pageSize;
 	$.ajax({
-		url: '/articles?start='+start+'&lengths='+lengths,
+		url: '/articles?start='+start+'&pageSize='+pageSize,
 		method: 'get',
 		success: function(data){
-			console.log(data)
-			articles_init(data);
+			articles_init(data.info.list);
 		},
 		err: function(err){
 			console.log(err)

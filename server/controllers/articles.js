@@ -43,11 +43,12 @@ let operate_article = {
      */
     async insert_article(ctx){
 
-        let message = "success";
+        let response_data = {status: "success"};
         let cover_path = ctx.req.file.path;
-        cover_path = cover_path.split('static\\');
+        cover_path = cover_path.split(/static[\\\/]/);
         let img_path = cover_path[cover_path.length-1];
-        let article = {title:null,tags:null,article_path:null,img_path:img_path,praise:0,upload_time:datetime.getNowDatetime(),last_modify_time:null,type:null};
+        let now_time = datetime.getNowDatetime();
+        let article = {title:null,tags:null,article_path:null,img_path:img_path,praise:0,upload_time: now_time,last_modify_time:now_time,type:null};
         Object.assign(article,ctx.req.body);
         // 将文章内容写入存储
         let now_date = new Date().toLocaleDateString();
@@ -83,7 +84,7 @@ let operate_article = {
             }
         }
         
-        ctx.body = message;
+        ctx.body = response_data;
         
     },
     /**
@@ -94,10 +95,10 @@ let operate_article = {
         console.log(ctx.params)
         let message = {info: "error", msg: "参数错误"};
         let article_id;
-        if(ctx.params.id){
+        if(ctx.params.id != undefined){
             article_id = ctx.params.id;
         }
-        else if(ctx.query.id)
+        else if(ctx.query.id != undefined)
         {
             article_id = ctx.query.id;
         }
@@ -119,10 +120,17 @@ let operate_article = {
      * @param {Object} ctx 
      */
     async update_article(ctx){
-        let message = "success";
+        let message = {status: "error"};
+        let condition = {}
         let body = ctx.req.body;
-        let params_id = ctx.params.id;
-        let article = await article_models.get_article_by_id(params_id);
+        if(ctx.params.id != undefined){
+            condition.article_id = ctx.params.id;
+        }
+        else if(ctx.query.id != undefined)
+        {
+            condition.article_id = ctx.query.article_id;
+        }
+        let article = await article_models.get_article(condition);
         article = article[0];
         let article_tags = article.tags.split(',');
         let body_tags = tags_format(body.tags);
@@ -164,35 +172,28 @@ let operate_article = {
      * @param {Object} ctx 
      */
     async get_article(ctx){
-        console.log(ctx.query)
-        let message = "error";
+        let response_data = {status: "error", info: {list:[],count:0}};
         let articles = [];
-        if ( Object.keys(ctx.params).length != 0 && ctx.params.id != undefined ){
-            articles = await article_models.get_article_by_id(ctx.params.id)
+        let count = 0;
+        let condition = {};
+        if (ctx.params.id != undefined ){
+            condition = {article_id: ctx.params.id};
         }
         else if( Object.keys(ctx.query).length != 0 ){
-            if(ctx.query.id){
-                articles = await article_models.get_article_by_id(ctx.query.id);
-            }
-            else if(ctx.query.type){
-                articles = await article_models.get_article_by_type(ctx.query.type);
-            }
-            else if(ctx.query.start){
-                articles = await article_models.get_article_by_limit(parseInt(ctx.query.start), parseInt(ctx.query.lengths));
-            }
+            condition = ctx.query;
         }
-        else{
-            articles = message;
-        }
+        articles = await article_models.get_article(condition);
+        count = await article_models.get_article_count(condition);
         if(articles.length == 0){ //没有获取到文章
-            ctx.body = message;
+            ctx.body = response_data;
         }
         else{
             for(let i = 0; i < articles.length; i++){
                 let article = articles[i];
                 article.article_content = await get_file(article.article_path)
             }
-            ctx.body = articles;
+            response_data = {...response_data, status: "success", info:{list:articles, ...count}}
+            ctx.body = response_data;
         }
        
     },

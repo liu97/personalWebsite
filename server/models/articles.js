@@ -34,8 +34,68 @@ let article = {
      */
     async update_article(obj){
         // 一个搞了我两个小时的小bug，sql语句中where后变量只能直接写进(当时的心情留在这里，bug找出来了，sql预处理的问题)
-        let sql = `update articles set title = ?, tags = ?, article_path = ?, img_path = ?, praise = ?, upload_time = ?, last_modify_time = ?, type= ? where article_id = ?;`;
-        let result = await dbu.query(sql,[obj.title,obj.tags,obj.article_path,obj.img_path,obj.praise,obj.upload_time,obj.last_modify_time,obj.type,obj.article_id]);
+        if(Object.keys(condition).length == 0){
+            return {affectedRows: 0};
+        }
+        let sql = "update articles";
+        let addition = ['article_id'];
+        let i = 0;
+        for(let item of Object.keys(obj)){
+            if(addition.indexOf(item) != -1){
+                continue;
+            }
+            if(i == 0){
+                sql = `${sql} set ${item} = '${obj[item]}'`;
+            }
+            else{
+                sql = `${sql}, ${item} = '${obj[item]}'`;
+            }
+            i++;
+        }
+        if(condition['article_id'] != undefined)
+        {
+            sql = `${sql} where article_id = '${obj[article_id]}'`;
+        }
+        let result = await dbu.query(sql);
+        return result;
+    },
+    async get_article(condition){
+        if(Object.keys(condition).length == 0){
+            return [];
+        }
+        let addition = ['start', 'pageSize', 'desc', 'fuzzy_title'];
+        let sql = "select * from articles";
+        let i = 0;
+        for(let item of Object.keys(condition)){
+            if(addition.indexOf(item) != -1){
+                continue;
+            }
+            if(i == 0){
+                sql = `${sql} where ${item} = '${condition[item]}'`;
+            }
+            else{
+                sql = `${sql} and ${item} = '${condition[item]}'`;
+            }
+            i++;
+        }
+        if(condition['fuzzy_title'] != undefined)
+        {
+            if(i==0){
+                sql = `${sql} where title like '%${condition['fuzzy_title']}%'`;
+            }
+            else{
+                sql = `${sql} and title like '%${condition['fuzzy_title']}%'`;
+            }
+        }
+        if(condition['desc'] != undefined)
+        {
+            sql = `${sql} order by article_id desc`;
+        }
+        if(condition['start'] != undefined && condition['pageSize'] != undefined){
+            sql = `${sql} limit ${condition['start']},${condition['pageSize']}`;
+        }
+        let result = await dbu.query(sql);
+        
         return result;
     },
     /**
@@ -91,10 +151,33 @@ let article = {
         let result = await dbu.query(sql);
         return result;
     },
-    async get_article_count(){
-        let sql = "select count(*) as count from articles;";
+    async get_article_count(condition = {}){
+        let addition = ['start', 'pageSize', 'desc', 'fuzzy_title'];
+        let sql = "select count(*) as count from articles";
+        let i = 0;
+        for(let item of Object.keys(condition)){
+            if(addition.indexOf(item) != -1){
+                continue;
+            }
+            if(i == 0){
+                sql = `${sql} where ${item} = '${condition[item]}'`;
+            }
+            else{
+                sql = `${sql} and ${item} = '${condition[item]}'`;
+            }
+            i++;
+        }
+        if(condition['fuzzy_title'] != undefined)
+        {
+            if(i==0){
+                sql = `${sql} where title like '%${condition['fuzzy_title']}%'`;
+            }
+            else{
+                sql = `${sql} and title like '%${condition['fuzzy_title']}%'`;
+            }
+        }
         let result = await dbu.query(sql);
-        return result;
+        return result[0]&&result[0];
     },
     async get_article_count_by_tag(tag_name){
         let sql = `select count(*) as count 

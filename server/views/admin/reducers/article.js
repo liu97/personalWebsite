@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { createSimpleAjaxReduce } from '../util/ajax';
+import { createSimpleAjaxReduce } from 'utils/ajax';
 
 export const reducerResult = handleActions(
   {

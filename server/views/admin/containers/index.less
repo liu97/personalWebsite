@@ -1,7 +1,20 @@
 html,body{
 	width: 100%;
 	height: 100%;
-	.box{
-		overflow: auto;
+	background: #eee;
+	.app{
+		background: #eee;
+		height: 100%;
+		width: 100%;
+		.right{
+			position: absolute;
+			top: 60px;
+			left: 170px;
+			width: calc(100% - 170px);
+			min-height: calc(100% - 60px);
+			background: #fff;
+			border-radius: 5px;
+			overflow: auto;
+		}
 	}
 }

@@ -14,13 +14,12 @@ export default class App extends Component {
   
   render() {
     return (
-      <div>
+      <div className="app">
         <Header />
-        <div className="box">
-          <Left />
+        <Left />
+        <div className="right">
           {renderRoutes(this.props.route.routes)}
         </div>
-        <Footer />
       </div>
     )
   }

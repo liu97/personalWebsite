@@ -1,14 +1,14 @@
 // import 'index.less';
 import React, { Component } from 'react';
 
-class Home extends Component{
+class AboutMe extends Component{
 	render(){
 		return (
 			<div className={''}>
-				{"这是home"}
+				{"edit"}
 			</div>
 		)
 	}
 }
 
-export default Home
+export default AboutMe

@@ -5,19 +5,19 @@ const get_file = require('../utils/file');
 
 let blogs = {
     /**
-     * 获取blogs页初始数据
+     * 获取article页初始数据
      * @param {Object} ctx 
      */
     async get_article(ctx){
-        let datas = {status: "err"};
+        let message = {msg: "error"};
         
         let tags = await tag_model.get_all_tags();
         if(tags.length != 0){
-            datas = {tags};
-            await ctx.render(`blog/article`, datas);
+            message = {tags};
+            await ctx.render(`blog/article`, message);
         }
         else{
-            ctx.body = datas;
+            ctx.body = message;
         }
         
     }

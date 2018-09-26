@@ -175,7 +175,8 @@ function judge(page_obj, page, add, callback){
 		page_obj.page = parseInt(add);
 		//改变页数按钮
 		$('.turn_a').removeClass('paging_a_active');
-		if(page_obj.page > page_obj.number/2 && page_obj.page < Math.ceil(page_obj.count/page_obj.lengths)-page_obj.number/2){
+		debugger
+		if(page_obj.page > page_obj.number/2 && page_obj.page < Math.ceil(page_obj.count/page_obj.pageSize)-page_obj.number/2){
 			for(var i = 1; i <= page_obj.number; i++){
 				var n = Math.floor(page_obj.number/2 - page_obj.number + i) + page_obj.page;
 				$('.turn_a').eq(i-1).text(n);
@@ -199,7 +200,6 @@ function judge(page_obj, page, add, callback){
  * 分页初始化
  */
 function paging_init(page_obj){
-
 	$('.turn_a').eq(0).addClass('paging_a_active');
 
 	$("#first").click(function(){
@@ -211,11 +211,11 @@ function paging_init(page_obj){
 		return false;
 	});
 	$("#next").click(function(){
-		judge(page_obj, Math.ceil(page_obj.count/page_obj.lengths), page_obj.page+1, page_turn);
+		judge(page_obj, Math.ceil(page_obj.count/page_obj.pageSize), page_obj.page+1, page_turn);
 		return false;
 	});
 	$("#last").click(function(){
-		judge(page_obj, Math.ceil(page_obj.count/page_obj.lengths), Math.ceil(page_obj.count/page_obj.lengths), page_turn);
+		judge(page_obj, Math.ceil(page_obj.count/page_obj.pageSize), Math.ceil(page_obj.count/page_obj.pageSize), page_turn);
 		return false;
 	});
 	$('.paging_main').on('click', '.turn_a' ,function(){

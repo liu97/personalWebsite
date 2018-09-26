@@ -7,11 +7,11 @@ let home = {
     async get_home(ctx){
         let data = {status: "err"};
 
-        let about_me = await article_model.get_article_by_type('about_me');
+        let about_me = await article_model.get_article({type: 'about_me'});
         about_me[0].article_content = await get_file(about_me[0].article_path);
         about_me[0].article_content = await filter_markdown(about_me[0].article_content);
         about_me[0].article_content = about_me[0].article_content.slice(0,100)+'...';
-        let new_article = await article_model.get_article_by_desc(3);
+        let new_article = await article_model.get_article({desc: 3, start: 0, pageSize: 3});
         for(let i = 0; i < new_article.length; i++){
             let article = new_article[i];
             article.article_content = await get_file(article.article_path)
