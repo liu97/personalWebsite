@@ -2,12 +2,14 @@ import { combineReducers } from 'redux';
 
 import {
 	reducerResult,
-	getArticleResult
+	getArticleResult,
+	getArticleMessageResult,
 } from './article'
 
 const rootReducer = combineReducers({
 	reducerResult,
-	getArticleResult
+	getArticleResult,
+	getArticleMessageResult,
 })
 
 export default rootReducer;

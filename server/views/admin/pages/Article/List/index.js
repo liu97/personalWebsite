@@ -2,8 +2,7 @@ import './index.less';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { test, fetchList } from 'actions/article';
-import { Switch } from 'antd';
+import { test, fetchArticleList } from 'actions/article';
 import Table from 'containers/Table/Common';
 import {COLUMNS, QUERY} from 'constants/article';
 
@@ -19,8 +18,7 @@ class Article extends Table{
 		super(props);
 		this.columnsConfig = COLUMNS;
 		this.queryConfig = QUERY;
-		this.fetchList = fetchList
-		this.onclick = this.onclick.bind(this);
+		this.fetchList = fetchArticleList
 	}
 	componentWillReceiveProps(newProps){
 		let { reducerResult, getArticleResult } = newProps;
@@ -35,8 +33,8 @@ class Article extends Table{
 			    	col.render = (text, record, index) => {
 			      	return (
 			        	<div className="table-opt">
-				            <Link to={`/article/detail?id=${record.article_id}`} >查看 </Link>
-				            <Link to={`/article/edit?id=${record.article_id}`} >编辑 </Link>
+				            <Link to={`/article/detail?article_id=${record.article_id}`} >查看 </Link>
+				            <Link to={`/article/edit?article_id=${record.article_id}`} >编辑 </Link>
 				            <a href="javascript:void(0);">删除</a>
 			        	</div>
 			      	)}
@@ -45,10 +43,10 @@ class Article extends Table{
 			}
 		})
 	}
-	onclick= ()=>{
-		this.props.dispatch(test());
-		this.props.dispatch(fetchList({id: '18'}));
-	}
+	// onclick= ()=>{
+	// 	this.props.dispatch(test());
+	// 	this.props.dispatch(fetchList({id: '18'}));
+	// }
 	// render(){
 	// 	return (
 	// 		<div className={'article-container'}>

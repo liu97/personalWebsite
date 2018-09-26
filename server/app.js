@@ -1,5 +1,6 @@
 const path = require('path')
 const Koa = require('koa')
+var cors = require('koa2-cors')
 const views = require('koa-views')
 const koaStatic = require('koa-static')
 const bodyParser = require('koa-bodyparser')

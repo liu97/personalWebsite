@@ -175,7 +175,6 @@ function judge(page_obj, page, add, callback){
 		page_obj.page = parseInt(add);
 		//改变页数按钮
 		$('.turn_a').removeClass('paging_a_active');
-		debugger
 		if(page_obj.page > page_obj.number/2 && page_obj.page < Math.ceil(page_obj.count/page_obj.pageSize)-page_obj.number/2){
 			for(var i = 1; i <= page_obj.number; i++){
 				var n = Math.floor(page_obj.number/2 - page_obj.number + i) + page_obj.page;

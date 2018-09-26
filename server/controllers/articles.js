@@ -56,7 +56,8 @@ let operate_article = {
         let article_dir = path.join(config.root,`resources/article/${now_date}`);
         await mkdirsSync(article_dir);
         let article_path = path.join(article_dir,`${article.title}${now_second_date}.md`);
-        fs.writeFile(article_path,article['test-editormd-markdown-doc'],function(err){
+        console.log(article)
+        fs.writeFile(article_path,article['text'],function(err){
             if (err) {
                 return console.error(err);
             }

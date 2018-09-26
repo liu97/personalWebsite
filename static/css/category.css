@@ -93,6 +93,7 @@ body{
 	.category_main_section{
 		margin: 0;
 		padding: 5px;
+		width: 100%;
 	}
 	.category_main_section_article{
 		width: 100%;

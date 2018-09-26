@@ -10,5 +10,7 @@ export const reducerResult = handleActions(
   { counter: 0 }
 );
 
-export const getArticleResult = createSimpleAjaxReduce("fetchArticleList")
+export const getArticleResult = createSimpleAjaxReduce("fetchArticleList");
+
+export const getArticleMessageResult = createSimpleAjaxReduce("fetchArticleMessage");
 

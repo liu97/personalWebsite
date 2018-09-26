@@ -184,7 +184,7 @@ let article = {
         from articles,tag_to_article,tags 
         where ? = tags.tag_name and tags.tag_id = tag_to_article.tag_id and tag_to_article.article_id = articles.article_id;`;
         let result = await dbu.query(sql,[tag_name]);
-        return result;
+        return result[0]&&result[0];
     }
     
 };
