@@ -30,39 +30,36 @@ let article = {
     },
     /**
      * 更新文章
-     * @param {Object} obj 
+     * @param {Object} condition 
      */
-    async update_article(obj){
+    async update_article(condition){
         // 一个搞了我两个小时的小bug，sql语句中where后变量只能直接写进(当时的心情留在这里，bug找出来了，sql预处理的问题)
         if(Object.keys(condition).length == 0){
             return {affectedRows: 0};
         }
         let sql = "update articles";
-        let addition = ['article_id'];
+        let addition = ['article_id','text'];
         let i = 0;
-        for(let item of Object.keys(obj)){
+        for(let item of Object.keys(condition)){
             if(addition.indexOf(item) != -1){
                 continue;
             }
             if(i == 0){
-                sql = `${sql} set ${item} = '${obj[item]}'`;
+                sql = `${sql} set ${item} = '${condition[item]}'`;
             }
             else{
-                sql = `${sql}, ${item} = '${obj[item]}'`;
+                sql = `${sql}, ${item} = '${condition[item]}'`;
             }
             i++;
         }
         if(condition['article_id'] != undefined)
         {
-            sql = `${sql} where article_id = '${obj[article_id]}'`;
+            sql = `${sql} where article_id = '${condition['article_id']}'`;
         }
         let result = await dbu.query(sql);
         return result;
     },
     async get_article(condition){
-        if(Object.keys(condition).length == 0){
-            return [];
-        }
         let addition = ['start', 'pageSize', 'desc', 'fuzzy_title'];
         let sql = "select * from articles";
         let i = 0;

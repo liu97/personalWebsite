@@ -43,13 +43,13 @@ let operate_article = {
      */
     async insert_article(ctx){
 
-        let response_data = {status: "success"};
-        let cover_path = ctx.req.file.path;
-        cover_path = cover_path.split(/static[\\\/]/);
-        let img_path = cover_path[cover_path.length-1];
+        let response_data = {status: "error", info: {list:[],count:0}};
+        // let cover_path = ctx.req.file.path;
+        // cover_path = cover_path.split(/static[\\\/]/);
+        // let img_path = cover_path[cover_path.length-1];
         let now_time = datetime.getNowDatetime();
-        let article = {title:null,tags:null,article_path:null,img_path:img_path,praise:0,upload_time: now_time,last_modify_time:now_time,type:null};
-        Object.assign(article,ctx.req.body);
+        let article = {title:null,tags:null,article_path:null,img_path:null,praise:0,upload_time: now_time,last_modify_time:now_time,type:null};
+        Object.assign(article,ctx.request.body);
         // 将文章内容写入存储
         let now_date = new Date().toLocaleDateString();
         let now_second_date = new Date().getTime();
@@ -93,18 +93,17 @@ let operate_article = {
      * @param {Object} ctx 
      */
     async delete_article(ctx){
-        console.log(ctx.params)
-        let message = {info: "error", msg: "参数错误"};
+        let response_data = {status: "error", info: {list:[],count:0}};
         let article_id;
         if(ctx.params.id != undefined){
             article_id = ctx.params.id;
         }
-        else if(ctx.query.id != undefined)
+        else if(ctx.query.article_id != undefined)
         {
-            article_id = ctx.query.id;
+            article_id = ctx.query.article_id;
         }
         else{
-            ctx.body = message;
+            ctx.body = response_data;
         }
         //改变对应标签个数
         let tags = await to_models.get_tags_by_article_id(article_id);
@@ -114,22 +113,23 @@ let operate_article = {
         }
         // 删除对应文章,因为设置了外键CASCADE，所以tag_to_article对应数据会自动删除 
         let result = await article_models.delete_article(article_id);
-        ctx.body = {...message, info:"success", 'msg': '删除成功'};
+        ctx.body = {...response_data, info: {list:[],count:1}, 'msg': '删除成功'};
     },
     /**
      * 更新文章
      * @param {Object} ctx 
      */
     async update_article(ctx){
-        let message = {status: "error"};
+        let response_data = {status: "error", info: {list:[],count:0}};
         let condition = {}
-        let body = ctx.req.body;
+        let body = ctx.request.body;
+        console.log(body)
         if(ctx.params.id != undefined){
             condition.article_id = ctx.params.id;
         }
-        else if(ctx.query.id != undefined)
+        else if(body.article_id != undefined)
         {
-            condition.article_id = ctx.query.article_id;
+            condition.article_id = body.article_id;
         }
         let article = await article_models.get_article(condition);
         article = article[0];
@@ -153,9 +153,9 @@ let operate_article = {
                 await to_models.insert_to(new_tag.insertId,article.article_id);
             }
         }
-        Object.assign(article,ctx.req.body);
+        Object.assign(article,body);
         //修改文章
-        fs.writeFile(path.join(config.root,article.article_path),article['test-editormd-markdown-doc'],function(err){
+        fs.writeFile(path.join(config.root,article.article_path),article['text'],function(err){
             if (err) {
                 return console.error(err);
             }
@@ -163,10 +163,10 @@ let operate_article = {
         article.tags = body_tags.join(',');
         article.last_modify_time = datetime.getNowDatetime();
         let result = await article_models.update_article(article);
-        if(result.affectedRows == 0){
-            message = "error";
+        if(result.affectedRows != 0){
+            response_data = {...response_data, status: "success", info: {list: [], count: result.affectedRows}};
         }
-        ctx.body = message;
+        ctx.body = response_data;
     },
     /**
      * 获取文章
@@ -203,9 +203,10 @@ let operate_article = {
      * @param {Object} ctx 
      */
     async upload_img(ctx){ 
-        let file_path = ctx.req.file.path;
+        let file_path = ctx.req.file.path.replace(/\\/g, '/');
         file_path = file_path.split(/static[\\\/]/);
         let file_url = file_path[file_path.length-1];
+        console.log(file_url);
         let result = { success: 1,
             message: "上传成功",
             url: file_url

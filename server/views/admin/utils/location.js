@@ -33,5 +33,8 @@ export const getGivenSearch = (props, param = []) => {
             }
         }
     }
+    if( typeof(param) == "string"){
+        return theRequest[param];
+    }
     return theRequest;
 }

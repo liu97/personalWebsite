@@ -9,7 +9,8 @@ const apis = require('./apis');
 const home = require('./home');
 const blogs = require('./blogs');
 const category = require('./category');
-const article = require('./article')
+const article = require('./article');
+const contacts = require('./contacts');
 // const error = require('./error')
 router.get('/', async(ctx)=>{
     ctx.redirect('/home');
@@ -20,7 +21,7 @@ router.use('/home', home.routes(), home.allowedMethods())
 router.use('/blogs', blogs.routes(), blogs.allowedMethods())
 router.use('/category', category.routes(), blogs.allowedMethods())
 router.use('/article', article.routes(), article.allowedMethods())
-// router.use('/admin', admin.routes(), admin.allowedMethods())
+router.use('/contacts', contacts.routes(), contacts.allowedMethods())
 // router.use('/error', error.routes(), error.allowedMethods())
 
 module.exports = router

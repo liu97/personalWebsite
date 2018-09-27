@@ -22,6 +22,7 @@ class ArticleDetail extends Component{
 		super(props);
 		this.mditor = {};
 		this.proxyURL = getProxyURL();
+		this.search = getGivenSearch(this.props,['article_id']);
 	}
 	componentDidMount(){
 		this.setMessage();
@@ -33,22 +34,23 @@ class ArticleDetail extends Component{
 			this.mditor.height = "99%";
 	    }
 	}
-	setMessage(){
-
-		const search = getGivenSearch(this.props,['article_id']);
-		this.props.dispatch(fetchArticleMessage(search));
+	setMessage = () => {
+		this.props.dispatch(fetchArticleMessage(this.search));
 		//设置外部editor
 		const ele_textarea = document.getElementById('md_editor');
 		const mditor =  Mditor.fromTextarea(ele_textarea);
 		mditor.height = "600px";
 		this.mditor = mditor;
 	}
+	goBack = () => {
+		this.props.history.goBack();
+	}
 	render(){
 		const ArticleMessageResult = this.props.ArticleMessageResult;
 		const article = ArticleMessageResult.info.list && ArticleMessageResult.info.list[0];
 		return (
 			<Spin spinning={ArticleMessageResult.isLoading}>
-				<div className={'detail'}>
+				<div className={'article-detail'}>
 					<div className={'detail-editor'}>
 						<textarea id="md_editor"></textarea>
 					</div>
@@ -78,6 +80,10 @@ class ArticleDetail extends Component{
 							<Col span={16} className={"col"}>{article && article.praise}</Col>
 						</Row>
 						<Row>
+							<Col span={8} className={"col-key col"}>类型：</Col>
+							<Col span={16} className={"col"}>{article && article.type}</Col>
+						</Row>
+						<Row>
 							<Col span={8} className={"col-key col"}>封面：</Col>
 							<Col span={16} className={"col"}>
 								<Popover placement="left" content={<img className={"cover"} src={article && `api/${article.img_path}`}></img>}>
@@ -86,11 +92,18 @@ class ArticleDetail extends Component{
 							</Col>
 						</Row>
 						<Row>
-							<Col span={24} className={"col-btn"}>
+							<Col span={6}></Col>
+							<Col span={6} className={"col-btn"}>
 								<Button type="primary">
-									<Link to={`/article/list`}>返回</Link>
+									<Link to={`/article/edit?article_id=${this.search.article_id}`}>编辑</Link>
 								</Button>
 							</Col>
+							<Col span={6} className={"col-btn"}>
+								<Button onClick={this.goBack}>
+									返回
+								</Button>
+							</Col>
+							<Col span={6}></Col>
 						</Row>
 					</div>
 				</div>

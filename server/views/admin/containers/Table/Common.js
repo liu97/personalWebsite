@@ -77,7 +77,9 @@ export default class TableAdd extends Component {
     _clear = () => { 
         
     }
-
+    addButtonTool = () => {
+        
+    }
     _handleAdd = () => {
         let actions = this.props.actions;
         actions.push(this.addPagePath)
@@ -107,25 +109,28 @@ export default class TableAdd extends Component {
     render() {
         const {listResult} = this.props
         return (
-            <Spin spinning={listResult.isLoading}>
-                <SearchTable
-                    onSubmit={this._handleSubmit}
-                    search={this.getValueQuery()}
-                    cacheSearch={this.cacheSearch}
-                    columns={this.columnsConfig}
-                    searchList={this.queryConfig}
-                    tableData={listResult.info.list}
-                    currentPage={this.currentPage}
-                    totalCount={listResult.info.count}
-                    clear={this._clear}
-                    scroll={{
-                     y: 500
-                    }}
-                    loading={false}
-                    hasResetBtn={true}
-                    hasDownloadBtn={false}
-                />
-            </Spin>
+            <div className={this.conPrefix}>
+                <Spin spinning={listResult.isLoading}>
+                    { this.addButtonTool() }
+                    <SearchTable
+                        onSubmit={this._handleSubmit}
+                        search={this.getValueQuery()}
+                        cacheSearch={this.cacheSearch}
+                        columns={this.columnsConfig}
+                        searchList={this.queryConfig}
+                        tableData={listResult.info.list}
+                        currentPage={this.currentPage}
+                        totalCount={listResult.info.count}
+                        clear={this._clear}
+                        scroll={{
+                        y: 400
+                        }}
+                        loading={false}
+                        hasResetBtn={true}
+                        hasDownloadBtn={false}
+                    />
+                </Spin>
+            </div>
         )
     }
 }

@@ -1,8 +1,10 @@
-import App from 'containers/App'
-import Home from 'pages/Home'
-import Article from 'pages/Article/List'
-import Detail from 'pages/Article/Detail'
-import Edit from 'pages/Article/Edit'
+import App from 'containers/App';
+import Home from 'pages/Home';
+import ArticleList from 'pages/Article/List';
+import ArticleAdd from 'pages/Article/Add';
+import ArticleDetail from 'pages/Article/Detail';
+import ArticleEdit from 'pages/Article/Edit';
+import MessageList from 'pages/Message/List';
 
 const routes = [
   { component: App,
@@ -12,18 +14,25 @@ const routes = [
         component: Home
       },
       {
+        path: '/article/add',
+        component: ArticleAdd,
+      },
+      {
         path: '/article/list',
-        component: Article,
+        component: ArticleList,
       },
       {
         path: '/article/detail',
-        component: Detail
+        component: ArticleDetail
       },
       {
         path: '/article/edit',
-        component: Edit
-      }
-
+        component: ArticleEdit
+      },
+      {
+        path: '/message/list',
+        component: MessageList,
+      },
     ]
   }
 ]

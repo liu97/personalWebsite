@@ -2,15 +2,17 @@ import './index.less';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { test, fetchArticleList } from 'actions/article';
+import { fetchArticleList, deleteArticleMessage } from 'actions/article';
 import Table from 'containers/Table/Common';
 import {COLUMNS, QUERY} from 'constants/article';
+import { Button, Icon, Tooltip  } from 'antd';
 
 
 @connect(
   (state, props) => ({
     reducerResult: state.reducerResult,
-    listResult: state.getArticleResult
+	listResult: state.getArticleResult,
+	deleteResult: state.deleteArticleResult,
   })
 )
 class Article extends Table{
@@ -18,13 +20,19 @@ class Article extends Table{
 		super(props);
 		this.columnsConfig = COLUMNS;
 		this.queryConfig = QUERY;
-		this.fetchList = fetchArticleList
+		this.fetchList = fetchArticleList;
+		this.conPrefix = "article-container";
 	}
 	componentWillReceiveProps(newProps){
-		let { reducerResult, getArticleResult } = newProps;
-		if(reducerResult !== this.props.reducerResult &&reducerResult && reducerResult.loading === false && !reducerResult.hasError) {
-	
+		let { deleteResult } = newProps;
+		if(deleteResult !== this.props.deleteResult &&deleteResult && deleteResult.isLoading === false) {
+			if(deleteResult.info.count != 0){
+				this.triggerSubmit();
+			}
 	    }
+	}
+	deleteArticle = (article_id) =>{
+		this.props.dispatch(deleteArticleMessage({article_id}));
 	}
 	addCustomCloumns() {
 		COLUMNS.forEach((col) => {
@@ -35,7 +43,7 @@ class Article extends Table{
 			        	<div className="table-opt">
 				            <Link to={`/article/detail?article_id=${record.article_id}`} >查看 </Link>
 				            <Link to={`/article/edit?article_id=${record.article_id}`} >编辑 </Link>
-				            <a href="javascript:void(0);">删除</a>
+				            <a href="javascript:void(0);" onClick={this.deleteArticle.bind(this,record.article_id)}>删除</a>
 			        	</div>
 			      	)}
 			    	break;
@@ -43,20 +51,17 @@ class Article extends Table{
 			}
 		})
 	}
-	// onclick= ()=>{
-	// 	this.props.dispatch(test());
-	// 	this.props.dispatch(fetchList({id: '18'}));
-	// }
-	// render(){
-	// 	return (
-	// 		<div className={'article-container'}>
-	// 			<button onClick={this.onclick}>添加</button>
-	// 			{this.props.getArticleResult&&this.props.getArticleResult.info&&this.props.getArticleResult.info.article}
-	// 			{this.props.reducerResult&&this.props.reducerResult.counter}
-	// 			<Switch />
-	// 		</div>
-	// 	)
-	// }
+	addButtonTool = () => {
+		return (
+			<div className={"add-article"}>
+				<Tooltip title="点这添加新文章" placement="left">
+					<Button type="primary" className={"add-btn"}>
+						<Link to={`/article/add`}><Icon type="file-add" theme="outlined" /> 报告，我有新文章要写</Link>
+					</Button>
+				</Tooltip>
+			</div>
+		)
+	}
 }
 
 export default Article

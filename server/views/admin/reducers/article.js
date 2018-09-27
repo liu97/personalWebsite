@@ -14,3 +14,10 @@ export const getArticleResult = createSimpleAjaxReduce("fetchArticleList");
 
 export const getArticleMessageResult = createSimpleAjaxReduce("fetchArticleMessage");
 
+export const getPutArticleResult = createSimpleAjaxReduce("putArticleMessage");
+
+export const deleteArticleResult = createSimpleAjaxReduce("deleteArticleMessage");
+
+export const postArticleResult = createSimpleAjaxReduce("postArticleMessage");
+
+

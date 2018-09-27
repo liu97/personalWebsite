@@ -28,7 +28,7 @@ class Left extends Component{
 						{
 							title: "消息管理",
 							className: "list",
-							to: '/message',
+							to: '/message/list',
 							addition: '/message'
 						}
 					]

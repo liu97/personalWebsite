@@ -15,21 +15,16 @@ let operate_contact = {
      * @param {Object} ctx 
      */
     async get_contact(ctx){
-        let contacts = [];
-        if(Object.keys(ctx.params).length != 0){
-            if(ctx.params.id != undefined){
-                contacts = await contact_model.get_contact_by_id(ctx.params.id)
-            }
+        let response_data = {status: "error", info: {list:[],count:0}};
+        let condition = {};
+        if(ctx.params.id != undefined){
+            condition.contact_id = ctx.params.id;
         }
-        else if(Object.keys(ctx.query).length != 0){
-            if(ctx.query.saw != undefined){
-                contacts = await contact_model.get_contact_by_saw(ctx.query.saw);
-            }
+        else if(ctx.query.contact_id != undefined){
+            condition = ctx.query;
         }
-        else{
-            contacts = await contact_model.get_all_contact();
-        }
-        ctx.body = contacts;
+        response_data = await contact_model.get_contact(condition);
+        ctx.body = response_data;
     },
     /**
      * 已查看联系我

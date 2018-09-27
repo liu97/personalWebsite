@@ -18,7 +18,7 @@ const checkStatus = (response) => {
 const send = (url, options, cb, method = 'post') => {
 	method = method.toLowerCase();
 	let initObj = {}
-	if (method == 'get' || method == 'delete' || method == 'put') { // 如果是GET请求，拼接url
+	if (method == 'get' || method == 'delete') { // 如果是GET请求，拼接url
 		if(Object.keys(options).indexOf('id') != -1){
 			url += '/' + options['id'];
 		}
