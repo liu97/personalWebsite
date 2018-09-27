@@ -5,6 +5,7 @@ import ArticleAdd from 'pages/Article/Add';
 import ArticleDetail from 'pages/Article/Detail';
 import ArticleEdit from 'pages/Article/Edit';
 import MessageList from 'pages/Message/List';
+import MessageDetail from 'pages/Message/Detail';
 
 const routes = [
   { component: App,
@@ -32,6 +33,10 @@ const routes = [
       {
         path: '/message/list',
         component: MessageList,
+      },
+      {
+        path: '/message/detail',
+        component: MessageDetail,
       },
     ]
   }

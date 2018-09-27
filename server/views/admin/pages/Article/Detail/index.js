@@ -51,6 +51,7 @@ class ArticleDetail extends Component{
 		return (
 			<Spin spinning={ArticleMessageResult.isLoading}>
 				<div className={'article-detail'}>
+					<div className={'article-header'}>文章管理 / 查看文章</div>
 					<div className={'detail-editor'}>
 						<textarea id="md_editor"></textarea>
 					</div>

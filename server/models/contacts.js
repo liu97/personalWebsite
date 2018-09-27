@@ -23,13 +23,35 @@ const contacts = {
      * 更新联系我
      * @param {Object} obj 
      */
-    async update_contacts(obj){
-        let sql ="update contacts set name = ?, email = ?, message = ?, time = ?, saw = ?;"
-        let result = await dbu.query(sql,[obj.name,obj.email,obj.message,obj.time,obj.saw]);
+    async update_contact(condition){
+        if(Object.keys(condition).length == 0){
+            return {affectedRows: 0};
+        }
+        let sql = "update contacts";
+        let addition = ['contact_id'];
+        let i = 0;
+        for(let item of Object.keys(condition)){
+            if(addition.indexOf(item) != -1){
+                continue;
+            }
+            if(i == 0){
+                sql = `${sql} set ${item} = '${condition[item]}'`;
+            }
+            else{
+                sql = `${sql}, ${item} = '${condition[item]}'`;
+            }
+            i++;
+        }
+        if(condition['contact_id'] != undefined)
+        {
+            sql = `${sql} where contact_id = '${condition['contact_id']}'`;
+        }
+        console.log(sql)
+        let result = await dbu.query(sql);
         return result;
     },
     /**
-     * 
+     * 获取contacts
      * @param {Object} condition 
      */
     async get_contact(condition){
@@ -58,6 +80,26 @@ const contacts = {
         let result = await dbu.query(sql);
         
         return result;
+    },
+    async get_contact_count(condition){
+        let addition = ['start', 'pageSize', 'desc'];
+        let sql = "select count(*) as count from contacts";
+        let i = 0;
+        for(let item of Object.keys(condition)){
+            if(addition.indexOf(item) != -1){
+                continue;
+            }
+            if(i == 0){
+                sql = `${sql} where ${item} = '${condition[item]}'`;
+            }
+            else{
+                sql = `${sql} and ${item} = '${condition[item]}'`;
+            }
+            i++;
+        }
+        let result = await dbu.query(sql);
+        
+        return result[0]&&result[0];
     },
     /**
      * 根据id查询联系我

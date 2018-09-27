@@ -6,6 +6,7 @@ export const test = createAction('test');
 // 获取article列表
 export const fetchArticleList = createSimpleAjaxAction('./api/articles', 'fetchArticleList', 'get');
 
+// 删除单个article
 export const deleteArticleMessage = createSimpleAjaxAction('./api/articles', 'deleteArticleMessage', 'delete');
 
 // 获取单个article信息

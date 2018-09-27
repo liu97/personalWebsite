@@ -85,6 +85,9 @@ let operate_article = {
             }
         }
         
+        if(new_article.affectedRows != 0){
+            response_data = {...response_data, status: "success", info: {list: [], count: new_article.affectedRows}};
+        }
         ctx.body = response_data;
         
     },
@@ -130,6 +133,9 @@ let operate_article = {
         else if(body.article_id != undefined)
         {
             condition.article_id = body.article_id;
+        }
+        else{
+            ctx.body = response_data;
         }
         let article = await article_models.get_article(condition);
         article = article[0];

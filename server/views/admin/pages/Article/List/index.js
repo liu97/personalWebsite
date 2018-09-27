@@ -21,6 +21,8 @@ class Article extends Table{
 		this.columnsConfig = COLUMNS;
 		this.queryConfig = QUERY;
 		this.fetchList = fetchArticleList;
+		this.hasReset = true;
+		this.hasDownload = false;
 		this.conPrefix = "article-container";
 	}
 	componentWillReceiveProps(newProps){

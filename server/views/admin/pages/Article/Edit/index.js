@@ -65,6 +65,7 @@ class ArticleEdit extends Component{
 		return (
 			<Spin spinning={ArticleMessageResult.isLoading}>
 				<div className={'article-edit'}>
+					<div className={'article-header'}>文章管理 / 修改文章</div>
 					<div className={'edit-editor'}>
 						<textarea id="md_editor"></textarea>
 					</div>

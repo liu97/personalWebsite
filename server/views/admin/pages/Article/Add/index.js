@@ -10,7 +10,7 @@ import { getGivenSearch } from 'utils/location';
 import { getProxyURL } from 'utils/config';
 @connect(
 	(state, props) => ({
-		getPutArticleResult: state.getPutArticleResult
+		postArticleResult: state.postArticleResult
 	})
 )
 class ArticleAdd extends Component{
@@ -23,11 +23,11 @@ class ArticleAdd extends Component{
 		this.setMessage();
 	}
 	componentWillReceiveProps(newProps){
-		let { getPutArticleResult } = newProps;
+		let { postArticleResult } = newProps;
 		const props = this.props;
-		if(getPutArticleResult !== this.props.getPutArticleResult && getPutArticleResult && getPutArticleResult.isLoading === false){
-			if(getPutArticleResult.info.count != 0){
-				message.info("修改成功",0.5);
+		if(postArticleResult !== this.props.postArticleResult && postArticleResult && postArticleResult.isLoading === false){
+			if(postArticleResult.info.count != 0){
+				message.info("提交成功",0.5);
 				setTimeout(function(){
 					props.history.push('/article/list');
 				},600);
@@ -51,6 +51,7 @@ class ArticleAdd extends Component{
 	render(){
 		return (
 			<div className={'article-add'}>
+				<div className={'article-header'}>文章管理 / 新增文章</div>
 				<div className={'add-editor'}>
 					<textarea id="md_editor"></textarea>
 				</div>

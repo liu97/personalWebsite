@@ -68,7 +68,7 @@ export default class TableAdd extends Component {
         this.filterParams && this.filterParams(this.query);
 
         this.props.dispatch(this.fetchList({
-            ...query,
+            ...this.query,
             start: (currentPage-1)*pageSize,
             pageSize: pageSize
         }))
@@ -107,7 +107,7 @@ export default class TableAdd extends Component {
     }
 
     render() {
-        const {listResult} = this.props
+        const {listResult} = this.props;
         return (
             <div className={this.conPrefix}>
                 <Spin spinning={listResult.isLoading}>
@@ -126,8 +126,9 @@ export default class TableAdd extends Component {
                         y: 400
                         }}
                         loading={false}
-                        hasResetBtn={true}
-                        hasDownloadBtn={false}
+                        hasResetBtn={this.hasReset}
+                        hasDownloadBtn={this.hasDownload}
+                        hideQuery={this.hideQuery}
                     />
                 </Spin>
             </div>

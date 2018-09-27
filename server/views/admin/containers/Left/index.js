@@ -20,12 +20,6 @@ class Left extends Component{
 							addition: '/article'
 						},
 						{
-							title: "标签管理",
-							className: "list",
-							to: '/tag',
-							addition: '/tag'
-						},
-						{
 							title: "消息管理",
 							className: "list",
 							to: '/message/list',

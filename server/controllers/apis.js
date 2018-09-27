@@ -26,7 +26,7 @@ let operate_api = {
      */
     async contact_me(ctx){
         let body_contact = xss(ctx.request.body);
-        let contact = {name:null,email:null,message:null,time:datetime.getNowDatetime(),saw:'否'};
+        let contact = {name:null,email:null,message:null,time:datetime.getNowDatetime(),saw:'no'};
         Object.assign(contact,body_contact);
         let result = await contact_model.insert_contacts(contact)
         ctx.body = result;
