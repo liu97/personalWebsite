@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken');
+
 const contact_model = require('../models/contacts');
 const article_model = require('../models/articles');
 const datetime = require('../utils/datetime');
@@ -30,6 +32,27 @@ let operate_api = {
         Object.assign(contact,body_contact);
         let result = await contact_model.insert_contacts(contact)
         ctx.body = result;
+    },
+
+    async login(ctx){
+        console.log(ctx.query.body)
+        const user = ctx.request.body
+        if(user && user.name) {
+            let userToken = {
+                name: user.name
+            }
+            const token = jwt.sign(userToken, secret, {expiresIn: '1h'})  //token签名 有效期为1小时
+            ctx.body = {
+                message: '获取token成功',
+                code: 1,
+                token
+            }
+        } else {
+            ctx.body = {
+                message: '参数错误',
+                code: -1
+            }
+        }
     },
     
 }

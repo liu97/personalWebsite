@@ -8,6 +8,12 @@ const koaLogger = require('koa-logger')
 const session = require('koa-session-minimal')
 const MysqlStore = require('koa-mysql-session')
 
+const jwt = require('jsonwebtoken')
+const jwtKoa = require('koa-jwt')
+const util = require('util')
+const verify = util.promisify(jwt.verify) // 解密
+const secret = 'jwt login'
+
 const config = require('./../config')
 const routers = require('./routers/index')
 
@@ -43,6 +49,9 @@ app.use(views(path.join(__dirname, './views'), {
   extension: 'ejs'
 }))
 
+// app.use(jwtKoa({secret}).unless({
+//         path: [/^\/apis\/login/, /^\/front/, /^\//] //数组中的路径不需要通过jwt验证
+// }))
 // 初始化路由中间件
 app.use(routers.routes()).use(routers.allowedMethods())
 

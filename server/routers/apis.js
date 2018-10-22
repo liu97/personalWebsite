@@ -5,6 +5,8 @@ const router = require('koa-router')()
 const apisController = require('./../controllers/apis')
 
 const routers = router.post('/contacts', apisController.contact_me)
-                      .post('/articles/like', apisController.like)                      
+                      .get('/login', apisController.login)
+                      .post('/articles/like', apisController.like)
+                                            
  
 module.exports = routers
