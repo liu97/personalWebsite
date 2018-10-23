@@ -1,9 +1,13 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const xss = require('node-xss').clean;
 
 const contact_model = require('../models/contacts');
 const article_model = require('../models/articles');
+const user_model = require('../models/users');
 const datetime = require('../utils/datetime');
-const xss = require('node-xss').clean;
+const config = require('../../config');
+
 
 let operate_api = {
     /**
@@ -35,22 +39,35 @@ let operate_api = {
     },
 
     async login(ctx){
-        console.log(ctx.query.body)
-        const user = ctx.request.body
-        if(user && user.name) {
-            let userToken = {
-                name: user.name
+        const data = ctx.request.body
+        const user = await user_model.get_user({user_name: data.name})  // 查询用户
+        // 判断用户是否存在
+        if (user) {
+        // 判断前端传递的用户密码是否与数据库密码一致
+            if (bcrypt.compareSync(data.password, user.password)) {
+                // 用户token
+                const userToken = {
+                    name: user.user_name,
+                    id: user.user_id
+                }
+                const token = jwt.sign(userToken, config.secret, {expiresIn: '1h'})  // 签发token
+                ctx.body = {
+                    message: '成功',
+                    token,
+                    code: 1
+                }
+            } 
+            else {
+                ctx.body = {
+                    code: -1,
+                    message: '用户名或密码错误'
+                }
             }
-            const token = jwt.sign(userToken, secret, {expiresIn: '1h'})  //token签名 有效期为1小时
+        } 
+        else {
             ctx.body = {
-                message: '获取token成功',
-                code: 1,
-                token
-            }
-        } else {
-            ctx.body = {
-                message: '参数错误',
-                code: -1
+                code: -1,
+                message: '用户名不存在'
             }
         }
     },

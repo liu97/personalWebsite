@@ -27,8 +27,7 @@ let blogs = {
         else{
             condition = {start: 0, pageSize: parseInt(pageSize)};
             articles = await article_model.get_article(condition);
-            console.log(articles.pageSize)
-            for(let i = 0; i < articles.pageSize; i++){
+            for(let i = 0; i < articles.length; i++){
                 let article = articles[i];
                 article.article_content = await get_file(article.article_path)
                 article.article_content = await filter_markdown(article.article_content);

@@ -1,6 +1,5 @@
 const path = require('path')
 const Koa = require('koa')
-var cors = require('koa2-cors')
 const views = require('koa-views')
 const koaStatic = require('koa-static')
 const bodyParser = require('koa-bodyparser')
@@ -8,11 +7,10 @@ const koaLogger = require('koa-logger')
 const session = require('koa-session-minimal')
 const MysqlStore = require('koa-mysql-session')
 
-const jwt = require('jsonwebtoken')
-const jwtKoa = require('koa-jwt')
+const jwt = require('jsonwebtoken') // 用于签发、解析`token`
+const jwtKoa = require('koa-jwt') // 用于路由权限控制
 const util = require('util')
 const verify = util.promisify(jwt.verify) // 解密
-const secret = 'jwt login'
 
 const config = require('./../config')
 const routers = require('./routers/index')
@@ -20,18 +18,18 @@ const routers = require('./routers/index')
 const app = new Koa()
 
 // session存储配置
-const sessionMysqlConfig= {
-  user: config.database.USERNAME,
-  password: config.database.PASSWORD,
-  database: config.database.DATABASE,
-  host: config.database.HOST,
-}
+// const sessionMysqlConfig= {
+//   user: config.database.USERNAME,
+//   password: config.database.PASSWORD,
+//   database: config.database.DATABASE,
+//   host: config.database.HOST,
+// }
 
 // 配置session中间件
-app.use(session({
-  key: 'USER_SID',
-  store: new MysqlStore(sessionMysqlConfig)
-}))
+// app.use(session({
+//   key: 'USER_SID',
+//   store: new MysqlStore(sessionMysqlConfig)
+// }))
 
 // 配置控制台日志中间件
 app.use(koaLogger())
@@ -49,9 +47,9 @@ app.use(views(path.join(__dirname, './views'), {
   extension: 'ejs'
 }))
 
-// app.use(jwtKoa({secret}).unless({
-//         path: [/^\/apis\/login/, /^\/front/, /^\//] //数组中的路径不需要通过jwt验证
-// }))
+app.use(jwtKoa({secret:config.secret}).unless({
+        path: [/^((?!\/admin).)*$/] //数组中的路径不需要通过jwt验证
+}))
 // 初始化路由中间件
 app.use(routers.routes()).use(routers.allowedMethods())
 

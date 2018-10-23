@@ -10,6 +10,8 @@ const config = {
     HOST: '127.0.0.1'
   },
 
+  secret: 'jwtlogin',
+
   root: __dirname
 }
 

@@ -92,7 +92,6 @@ let article = {
             sql = `${sql} limit ${condition['start']},${condition['pageSize']}`;
         }
         let result = await dbu.query(sql);
-        
         return result;
     },
     /**

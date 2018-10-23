@@ -7,11 +7,6 @@ import { Row, Col, Spin, Popover,Button } from 'antd';
 import { fetchArticleMessage } from 'actions/article/';
 import { getGivenSearch } from 'utils/location';
 import { getProxyURL } from 'utils/config';
-// import ReactMarkdown from 'react-markdown';
-// import {MarkdownEditor} from 'react-markdown-editor';
-// import marked from 'marked';
-import mditor from 'mditor';
-// import { markdown } from 'markdown';
 @connect(
 	(state, props) => ({
 		ArticleMessageResult: state.getArticleMessageResult
