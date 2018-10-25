@@ -39,16 +39,16 @@ let operate_api = {
     },
 
     async login(ctx){
-        const data = ctx.request.body
-        const user = await user_model.get_user({user_name: data.name})  // 查询用户
+        const data = ctx.request.body;
+        const user = await user_model.get_user({user_name: data.userName});  // 查询用户
         // 判断用户是否存在
-        if (user) {
-        // 判断前端传递的用户密码是否与数据库密码一致
-            if (bcrypt.compareSync(data.password, user.password)) {
+        if (user[0]) {
+            // 判断前端传递的用户密码是否与数据库密码一致
+            if (bcrypt.compareSync(data.password, user[0].user_password)) {
                 // 用户token
                 const userToken = {
-                    name: user.user_name,
-                    id: user.user_id
+                    name: user[0].user_name,
+                    id: user[0].user_id
                 }
                 const token = jwt.sign(userToken, config.secret, {expiresIn: '1h'})  // 签发token
                 ctx.body = {

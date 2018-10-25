@@ -1,3 +1,4 @@
+import Login from 'pages/Login';
 import App from 'containers/App';
 import Home from 'pages/Home';
 import ArticleList from 'pages/Article/List';
@@ -8,34 +9,48 @@ import MessageList from 'pages/Message/List';
 import MessageDetail from 'pages/Message/Detail';
 
 const routes = [
-  { component: App,
+  {
+    path: '/',
+    component: Login,
+    exact: true,
+    requiresAuth: false,
+  },
+  {
+    path: '/login',
+    component: Login,
+    requiresAuth: false,
+  },
+  { 
+    path: '/admin',
+    component: App,
     routes: [
-      { path: '/',
+      { path: '/admin/',
         exact: true,
-        component: Home
+        component: Home,
+        requiresAuth: true,
       },
       {
-        path: '/article/add',
+        path: '/admin/article/add',
         component: ArticleAdd,
       },
       {
-        path: '/article/list',
+        path: '/admin/article/list',
         component: ArticleList,
       },
       {
-        path: '/article/detail',
+        path: '/admin/article/detail',
         component: ArticleDetail
       },
       {
-        path: '/article/edit',
+        path: '/admin/article/edit',
         component: ArticleEdit
       },
       {
-        path: '/message/list',
+        path: '/admin/message/list',
         component: MessageList,
       },
       {
-        path: '/message/detail',
+        path: '/admin/message/detail',
         component: MessageDetail,
       },
     ]

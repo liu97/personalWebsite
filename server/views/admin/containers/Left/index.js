@@ -10,19 +10,19 @@ class Left extends Component{
 						{
 							title: "博客管理系统",
 							className: "welcome-page",
-							to: '/',
+							to: '/admin/',
 							addition: '/home'
 						},
 						{
 							title: "文章管理",
 							className: "list",
-							to: '/article/list',
+							to: '/admin/article/list',
 							addition: '/article'
 						},
 						{
 							title: "消息管理",
 							className: "list",
-							to: '/message/list',
+							to: '/admin/message/list',
 							addition: '/message'
 						}
 					]

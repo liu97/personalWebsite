@@ -5,7 +5,7 @@ import config from 'utils/config'
 
 const checkStatus = (response) => {
 	if(response.status===401){
-		window.location.replace(SSO_LOGIN)
+		// window.location.replace('/')
 	}
 	if (response.status >= 200 && response.status < 300) {
 		return response

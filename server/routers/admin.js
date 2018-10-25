@@ -22,7 +22,6 @@ const routers = router.post('/articles/', articlesController.insert_article)
                       .put('/contacts/:id', contactsController.saw_contact)
                       .del('/contacts/:id', contactsController.delete_contact)
                       .get('/contacts/:id', contactsController.get_contact)
-                      .post('/login', apisController.login)
                       
  
 module.exports = routers

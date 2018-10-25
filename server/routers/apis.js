@@ -6,6 +6,7 @@ const apisController = require('./../controllers/apis');
 
 const routers = router.post('/contacts', apisController.contact_me)
                       .post('/articles/like', apisController.like)
+                      .post('/login', apisController.login)
                                             
  
 module.exports = routers

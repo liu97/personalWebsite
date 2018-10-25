@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import { createSimpleAjaxAction } from 'utils/ajax'
+import { createSimpleAjaxAction } from 'utils/ajax';
 
 export const test = createAction('test');
 

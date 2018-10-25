@@ -7,14 +7,19 @@ import {
 	getPutArticleResult,
 	deleteArticleResult,
 	postArticleResult,
-} from './article'
+} from './article';
 
 import {
 	getMessageListResult,
 	deleteMessageResult,
 	getMessageResult,
 	putMessageResult,
-} from './message'
+} from './message';
+
+import {
+	postLoginResult,
+	getLoginStatus,
+} from './login';
 
 const rootReducer = combineReducers({
 	reducerResult,
@@ -27,6 +32,8 @@ const rootReducer = combineReducers({
 	deleteMessageResult,
 	getMessageResult,
 	putMessageResult,
-})
+	postLoginResult,
+	getLoginStatus,
+});
 
 export default rootReducer;
