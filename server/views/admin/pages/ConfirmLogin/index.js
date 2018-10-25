@@ -6,9 +6,9 @@ import renderRoutes from 'utils/renderRoutes';
 class ConfirmLogin extends Component{
     render(){
         return(
-            <div>
+            <React.Fragment>
                 {renderRoutes(routes) }
-            </div>
+            </React.Fragment>
         )
     }
 }
