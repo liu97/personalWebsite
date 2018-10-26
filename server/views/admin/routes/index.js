@@ -1,6 +1,8 @@
 import Login from 'pages/Login';
 import App from 'containers/App';
 import Home from 'pages/Home';
+import ErrorPage from 'pages/Error/ErrorPage';
+import Error from 'pages/Error';
 import ArticleList from 'pages/Article/List';
 import ArticleAdd from 'pages/Article/Add';
 import ArticleDetail from 'pages/Article/Detail';
@@ -53,8 +55,21 @@ const routes = [
         path: '/admin/message/detail',
         component: MessageDetail,
       },
+      {
+        component: Error,
+        requiresAuth: false,
+      },
     ]
-  }
+  },
+  {
+    path: '/ErrorPage',
+    component: ErrorPage,
+    requiresAuth: false,
+  },
+  {
+    component: Error,
+    requiresAuth: false,
+  },
 ]
 
 export default routes

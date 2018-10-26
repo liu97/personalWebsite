@@ -1,5 +1,5 @@
-import React from 'react'
-import { Route, Redirect, Switch } from 'react-router-dom'
+import React from 'react';
+import { Route, Redirect, Switch } from 'react-router-dom';
 const renderRoutes = (routes, authed, authPath = '/login', extraProps = {}, switchProps = {}) => routes ? (
   <Switch {...switchProps}>
     {routes.map((route, i) => (
