@@ -91,7 +91,7 @@ class ArticleDetail extends Component{
 							<Col span={6}></Col>
 							<Col span={6} className={"col-btn"}>
 								<Button type="primary">
-									<Link to={`/article/edit?article_id=${this.search.article_id}`}>编辑</Link>
+									<Link to={`/admin/article/edit?article_id=${this.search.article_id}`}>编辑</Link>
 								</Button>
 							</Col>
 							<Col span={6} className={"col-btn"}>

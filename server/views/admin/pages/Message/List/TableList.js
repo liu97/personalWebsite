@@ -44,7 +44,7 @@ class TableList extends Table{
 			    	col.render = (text, record, index) => {
 			      	return (
 			        	<div className="table-opt">
-				            <Link to={`/message/detail?contact_id=${record.contact_id}`} >查看 </Link>
+				            <Link to={`/admin/message/detail?contact_id=${record.contact_id}`} >查看 </Link>
 				            <a href="javascript:void(0);" onClick={this.deleteMessage.bind(this,record.contact_id)}>删除</a>
 			        	</div>
 			      	)}

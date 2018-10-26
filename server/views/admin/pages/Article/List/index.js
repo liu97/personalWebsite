@@ -43,8 +43,8 @@ class Article extends Table{
 			    	col.render = (text, record, index) => {
 			      	return (
 			        	<div className="table-opt">
-				            <Link to={`/article/detail?article_id=${record.article_id}`} >查看 </Link>
-				            <Link to={`/article/edit?article_id=${record.article_id}`} >编辑 </Link>
+				            <Link to={`/admin/article/detail?article_id=${record.article_id}`} >查看 </Link>
+				            <Link to={`/admin/article/edit?article_id=${record.article_id}`} >编辑 </Link>
 				            <a href="javascript:void(0);" onClick={this.deleteArticle.bind(this,record.article_id)}>删除</a>
 			        	</div>
 			      	)}
@@ -58,7 +58,7 @@ class Article extends Table{
 			<div className={"add-article"}>
 				<Tooltip title="点这添加新文章" placement="left">
 					<Button type="primary" className={"add-btn"}>
-						<Link to={`/article/add`}><Icon type="file-add" theme="outlined" /> 报告，我有新文章要写</Link>
+						<Link to={`/admin/article/add`}><Icon type="file-add" theme="outlined" /> 报告，我有新文章要写</Link>
 					</Button>
 				</Tooltip>
 			</div>
