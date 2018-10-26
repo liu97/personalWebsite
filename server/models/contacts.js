@@ -46,7 +46,6 @@ const contacts = {
         {
             sql = `${sql} where contact_id = '${condition['contact_id']}'`;
         }
-        console.log(sql)
         let result = await dbu.query(sql);
         return result;
     },

@@ -25,7 +25,6 @@ function tags_format(tags){
  * @param {String} dirname 
  */
 async function mkdirsSync(dirname) {  
-    //console.log(dirname);  
     if (fs.existsSync(dirname)) {  
         return true;  
     } else {  
@@ -56,7 +55,6 @@ let operate_article = {
         let article_dir = path.join(config.root,`resources/article/${now_date}`);
         await mkdirsSync(article_dir);
         let article_path = path.join(article_dir,`${article.title}${now_second_date}.md`);
-        console.log(article)
         fs.writeFile(article_path,article['text'],function(err){
             if (err) {
                 return console.error(err);
@@ -126,7 +124,6 @@ let operate_article = {
         let response_data = {status: "error", info: {list:[],count:0}};
         let condition = {}
         let body = ctx.request.body;
-        console.log(body)
         if(ctx.params.id != undefined){
             condition.article_id = ctx.params.id;
         }
@@ -212,7 +209,6 @@ let operate_article = {
         let file_path = ctx.req.file.path.replace(/\\/g, '/');
         file_path = file_path.split(/static[\\\/]/);
         let file_url = file_path[file_path.length-1];
-        console.log(file_url);
         let result = { success: 1,
             message: "上传成功",
             url: file_url

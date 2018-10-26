@@ -23,11 +23,11 @@ const routes = [
   { 
     path: '/admin',
     component: App,
+    requiresAuth: true,
     routes: [
       { path: '/admin/',
         exact: true,
         component: Home,
-        requiresAuth: true,
       },
       {
         path: '/admin/article/add',
@@ -39,11 +39,11 @@ const routes = [
       },
       {
         path: '/admin/article/detail',
-        component: ArticleDetail
+        component: ArticleDetail,
       },
       {
         path: '/admin/article/edit',
-        component: ArticleEdit
+        component: ArticleEdit,
       },
       {
         path: '/admin/message/list',

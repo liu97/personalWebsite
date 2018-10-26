@@ -20,7 +20,7 @@ export default class App extends Component {
   }
   
   render() {
-    const authed = this.props.getLoginStatus ? this.props.getLoginStatus.isLogin : null;
+    const authed = window.sessionStorage.getItem("isLogin") == "true";
     return (
       <div className="app">
         <Header />

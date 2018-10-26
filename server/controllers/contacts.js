@@ -59,7 +59,6 @@ let operate_contact = {
         else{
             ctx.body = response_data;
         }
-        console.log(condition)
         let result = await contact_model.update_contact(condition);
         if(result.affectedRows != 0){
             response_data = {...response_data, status: "success", info: {list: [], count: result.affectedRows}};

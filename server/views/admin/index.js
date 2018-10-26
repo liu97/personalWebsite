@@ -13,8 +13,6 @@ import reduexs from 'reducers';
 import routes from 'routes';
 import ConfirmLogin from 'pages/ConfirmLogin';
 
-const authed = true;
-
 let store = createStore(
 	reduexs,
 	applyMiddleware(thunk)

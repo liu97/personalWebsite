@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import LoginForm from './LoginForm';
 import { connect } from 'react-redux';
 import { PostLoginMessage, Login } from 'actions/login';
+import { message } from 'antd';
 
 @connect(
 	(state, props) => ({
@@ -10,14 +11,24 @@ import { PostLoginMessage, Login } from 'actions/login';
 	})
 )
 class Home extends Component{
+	componentWillMount(){
+		const authed = window.sessionStorage.getItem("isLogin") == "true";
+		if(authed){
+			this.props.history.push('/admin');
+		}
+	}
 	componentWillReceiveProps(newProps){
 		let { postLoginResult } = newProps;
 		const props = this.props;
 		if(postLoginResult !== props.postLoginResult && postLoginResult && postLoginResult.isLoading === false){
-			console.log(postLoginResult)
 			if(postLoginResult.code == 1){
-				props.dispatch(Login())
-				props.history.push('/admin/');
+				window.sessionStorage.setItem("isLogin", true);
+				window.localStorage.setItem("access_token", postLoginResult.token);
+				const bcakURL = props.location.state ? props.location.state.from.pathname : '/admin';
+				props.history.push(bcakURL);
+			}
+			else{
+				message.error(postLoginResult.message);
 			}
 		}
 	}

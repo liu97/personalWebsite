@@ -1,11 +1,13 @@
 import 'whatwg-fetch';
 import { createAction, handleActions } from 'redux-actions';
 import { isObject, obj2String } from 'utils/object';
-import config from 'utils/config'
+import config, { authPath } from 'utils/config';
 
 const checkStatus = (response) => {
 	if(response.status===401){
-		// window.location.replace('/')
+		window.sessionStorage.setItem('isLogin', false);
+		alert('身份过期，请重新登录！');
+		location.reload();
 	}
 	if (response.status >= 200 && response.status < 300) {
 		return response
@@ -17,7 +19,12 @@ const checkStatus = (response) => {
 
 const send = (url, options, cb, method = 'post') => {
 	method = method.toLowerCase();
-	let initObj = {}
+	let initObj = {};
+	let headers = {
+		'Accept': 'application/json',
+		'Content-Type': 'application/json',
+		'Authorization': `Bearer ${localStorage.getItem('access_token') || ''}`, // 从sessionStorage中获取access token
+	}
 	if (method == 'get' || method == 'delete') { // 如果是GET请求，拼接url
 		if(Object.keys(options).indexOf('id') != -1){
 			url += '/' + options['id'];
@@ -28,17 +35,15 @@ const send = (url, options, cb, method = 'post') => {
 		}
 		initObj = {
 		  	method: method,
-		  	credentials: 'include'
+			credentials: 'include',
+			headers: new Headers(headers),
 		}
 	} 
 	else {
 		initObj = {
 		  	method,
 		  	credentials: 'include',
-		  	headers: new Headers({
-		    	'Accept': 'application/json',
-		    	'Content-Type': 'application/json',
-		  	}),
+		  	headers: new Headers(headers),
 		  	body: window.JSON.stringify(options),
 		}
 	}
