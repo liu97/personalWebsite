@@ -6,23 +6,41 @@
     font-size: 16px;
     margin: 30px auto;
     width: 90%;
-    padding: 15px;
+    padding: 5px 5px 50px 5px;
     box-shadow: 0 0 3px 1px rgba(0,0,0,0.25);
+    transform: rotate(-2deg);
+    transform-origin: 0 0;
     .message-container{
         padding: 30px 15px;
         box-shadow: 0 0 3px 1px rgba(0,0,0,0.25);
-    }
-    .message-message{
-        margin: 30px 0;
-        .col-key{
-            font-weight: bold;
-            text-align: right;
+        transform-origin: 0 0;
+        position: relative;
+        animation: messageContainer 1s ease-out 1s forwards;
+        .message-clip{
+            font-size: 30px;
+            position: absolute;
+            top: -8px;
+            left: -8px
         }
-        .col-value{
-            text-align: left;
+        .message-message{
+            margin: 40px 0;
+            .col-key{
+                font-weight: bold;
+                text-align: right;
+            }
+            .col-value{
+                text-align: left;
+            }
         }
     }
-    .message-btn{
-        text-align: center;
+    @keyframes messageContainer
+    {
+        0% {transform: rotate(0deg)}
+        10% {transform: rotate(0.8deg)}
+        70% {transform: rotate(1deg)}
+        100% {transform: rotate(2deg)}
     }
+}
+.message-btn{
+    text-align: center;
 }

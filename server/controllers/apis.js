@@ -50,7 +50,7 @@ let operate_api = {
                     name: user[0].user_name,
                     id: user[0].user_id
                 }
-                const token = jwt.sign(userToken, config.secret, {expiresIn: '1h'})  // 签发token
+                const token = jwt.sign(userToken, config.secret, {expiresIn: '6h'})  // 签发token
                 ctx.body = {
                     message: '成功',
                     token,

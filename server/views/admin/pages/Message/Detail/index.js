@@ -2,7 +2,7 @@ import './index.less';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, NavLink, withRouter } from 'react-router-dom';
-import { Row, Col, Spin, Popover,Button } from 'antd';
+import { Row, Col, Spin, Popover, Button, Icon } from 'antd';
 import { getMessageMessage, putMessageMessage } from 'actions/message/';
 import { getGivenSearch } from 'utils/location';
 
@@ -44,9 +44,9 @@ class ArticleDetail extends Component{
 				<div className={'message-header'}>消息管理 / 查看消息</div>
 				<div className={'message-detail'}>
 					<div className={'message-container'}>
+						<Icon type="paper-clip" className={'message-clip'} />
 						<div>{message && message.message}</div>
-					</div>
-					<div className={'message-message'}>
+						<div className={'message-message'}>
 						<Row>
 							<Col span={4} className={"col-btn"}>
 								<Row>
@@ -74,11 +74,12 @@ class ArticleDetail extends Component{
 							</Col>
 						</Row>
 					</div>
-					<div className={'message-btn'}>
-						<Button type="primary" onClick={this.goBack}>
-							返回
-						</Button>
 					</div>
+				</div>
+				<div className={'message-btn'}>
+					<Button type="primary" onClick={this.goBack}>
+						返回
+					</Button>
 				</div>
 			</Spin>
 		)
