@@ -1,4 +1,5 @@
 const contact_model = require('../models/contacts');
+const get_file = require('../utils/file');
 
 let operate_contact = {
     /**
@@ -39,6 +40,10 @@ let operate_contact = {
         let contacts = await contact_model.get_contact(condition);
         let contact_count = await contact_model.get_contact_count(condition);
         if(contacts.length != 0 && contact_count.length != 0){
+            for(let i = 0; i < contacts.length; i++){
+                let contact = contacts[i];
+                contact.message = await get_file(contact.contact_path)
+            }
             response_data = {...response_data, status: "success", info: {list:contacts, ...contact_count}}
         }
         ctx.body = response_data;

@@ -10,6 +10,7 @@
     box-shadow: 0 0 3px 1px rgba(0,0,0,0.25);
     transform: rotate(-2deg);
     transform-origin: 0 0;
+    animation: messageDetail 1s ease-out 1s forwards;
     .message-container{
         padding: 30px 15px;
         box-shadow: 0 0 3px 1px rgba(0,0,0,0.25);
@@ -36,9 +37,15 @@
     @keyframes messageContainer
     {
         0% {transform: rotate(0deg)}
-        10% {transform: rotate(0.8deg)}
-        70% {transform: rotate(1deg)}
-        100% {transform: rotate(2deg)}
+        10% {transform: rotate(0deg)}
+        70% {transform: rotate(0.2deg)}
+        100% {transform: rotate(1.2deg)}
+    }
+    @keyframes messageDetail
+    {
+        0% {transform: rotate(-2deg)}
+        10% {transform: rotate(-1.2deg)}
+        100% {transform: rotate(-1.2deg)}
     }
 }
 .message-btn{

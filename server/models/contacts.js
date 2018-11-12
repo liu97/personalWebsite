@@ -6,8 +6,8 @@ const contacts = {
      * @param {Object} obj 
      */
     async insert_contacts(obj){
-        let sql = "insert into contacts (name,email,message,time,saw) values ?;"
-        let result = await dbu.query(sql,[[[obj.name,obj.email,obj.message,obj.time,obj.saw]]])
+        let sql = "insert into contacts (name,email,contact_path,time,saw) values ?;"
+        let result = await dbu.query(sql,[[[obj.name,obj.email,obj.contact_path,obj.time,obj.saw]]])
         return result;
     },
     /**

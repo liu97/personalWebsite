@@ -65,18 +65,11 @@ CREATE TABLE `contacts` (
   `contact_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `message` varchar(255) DEFAULT NULL,
+  `contact_path` varchar(255) DEFAULT NULL,
   `time` varchar(255) DEFAULT NULL,
   `saw` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`contact_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of contacts
--- ----------------------------
-INSERT INTO `contacts` VALUES ('1', '刘传富', '1139472029@qq.com', 'hahh', '2018/06/07/08/20/10', '否');
-INSERT INTO `contacts` VALUES ('63', '华东交通大学国际学院', '429240967@qq.com', '你好！', '2018/06/07/08/16/01', '否');
-INSERT INTO `contacts` VALUES ('64', '1', '2', '3', '2018/06/07/09/10/04', '否');
 
 -- ----------------------------
 -- Table structure for tags

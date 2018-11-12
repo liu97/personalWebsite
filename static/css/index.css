@@ -116,7 +116,8 @@ body,html{
 }
 /*关于我*/
 #page_main_about_me{
-	background: url(../images/index/about_me.png); 
+	background: url(../images/index/about_me.png);
+	background-size: cover; 
 	background-attachment: fixed;
 }
 /*关于我的遮罩*/
@@ -168,6 +169,7 @@ body,html{
 /*博客页*/
 #page_main_blogs{
 	background: url(../images/index/blogs.png);
+	background-size: cover;
 	background-attachment: fixed;
 	overflow: hidden;
 }
@@ -280,6 +282,7 @@ body,html{
 /*联系页*/
 #page_main_contact{
 	background: url(../images/index/contact.png);
+	background-size: cover;
 	background-attachment: fixed;
 }
 /*联系页主要内容*/

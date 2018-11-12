@@ -40,6 +40,13 @@ class TableList extends Table{
 	addCustomCloumns() {
 		COLUMNS.forEach((col) => {
 			switch (col.key) {
+				case 'message':
+					col.render = (text, record, index) => {
+						if(text.length > 100){
+							return text.slice(0,100) + '...';
+						}
+					}
+					break;
 			  	case 'opt': {
 			    	col.render = (text, record, index) => {
 			      	return (
@@ -60,7 +67,7 @@ class TableList extends Table{
         else{
             query.saw = this.additionQuery[this.props.type];
         }
-    }
+	}
 }
 
 export default TableList

@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const path = require('path');
+const fs = require('fs');
 const xss = require('node-xss').clean;
 
 const contact_model = require('../models/contacts');
@@ -7,6 +9,21 @@ const article_model = require('../models/articles');
 const user_model = require('../models/users');
 const datetime = require('../utils/datetime');
 const config = require('../../config');
+
+/**
+ * 同步创建多级目录
+ * @param {String} dirname 
+ */
+async function mkdirsSync(dirname) {  
+    if (fs.existsSync(dirname)) {  
+        return true;  
+    } else {  
+        if (await mkdirsSync(path.dirname(dirname))) {  
+            fs.mkdirSync(dirname);  
+            return true;  
+        }  
+    }  
+} 
 
 
 let operate_api = {
@@ -31,14 +48,30 @@ let operate_api = {
      * @param {Object} ctx 
      */
     async contact_me(ctx){
-        let body_contact = xss(ctx.request.body);
+        let body_contact = ctx.request.body;
+        console.log(body_contact.message.length);
         let contact = {name:null,email:null,message:null,time:datetime.getNowDatetime(),saw:'no'};
         Object.assign(contact,body_contact);
+        // 将消息内容写入存储
+        let now_date = new Date().toLocaleDateString();
+        let now_second_date = new Date().getTime();
+        let contact_dir = path.join(config.root,`resources/message/${now_date}`);
+        await mkdirsSync(contact_dir);
+        let contact_path = path.join(contact_dir,`${contact.name}${now_second_date}.md`);
+        fs.writeFile(contact_path,contact['message'],function(err){
+            if (err) {
+                return console.error(err);
+            }
+        });
+        contact.contact_path = `resources/message/${now_date}/${contact.name}${now_second_date}.md`;
         let result = await contact_model.insert_contacts(contact)
         ctx.body = result;
     },
 
     async login(ctx){
+        // let salt = bcrypt.genSaltSync(10);// 10 is by default
+        // let hash = bcrypt.hashSync('liu970923', salt); // salt is inclued in generated hash 
+        // console.log(hash);
         const data = ctx.request.body;
         const user = await user_model.get_user({user_name: data.userName});  // 查询用户
         // 判断用户是否存在
