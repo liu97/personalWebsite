@@ -29,7 +29,7 @@ class ArticleAdd extends Component{
 			if(postArticleResult.info.count != 0){
 				message.info("提交成功",0.5);
 				setTimeout(function(){
-					props.history.push('/article/list');
+					props.history.push('admin/article/list');
 				},600);
 			}
 		}

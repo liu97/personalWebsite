@@ -95,7 +95,7 @@ class ArticleForm extends React.Component {
           {...formItemLayout}
           label="Upload"
         >
-          <Upload name="editormd-image-file" action="api/articles/uploadImg/" listType="picture" fileList={this.state.fileList} onChange={this.changeUpload}>
+          <Upload name="editormd-image-file" action="api/admin/articles/uploadImg/" listType="picture" fileList={this.state.fileList} onChange={this.changeUpload}>
             <Button>
               <Icon type="upload" /> Click to upload
             </Button>
