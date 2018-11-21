@@ -1,5 +1,10 @@
 // 這邊使用 HtmlWebpackPlugin，將 bundle 好的 <script> 插入到 body。${__dirname} 為 ES6 語法對應到 __dirname  
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const webpack = require('webpack');
+
 const path = require('path');
 
 const rootPath = path.join(__dirname, '..');
@@ -12,7 +17,7 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 
 module.exports = {
-  devtool: 'eval-source-map',
+  // devtool: 'eval-source-map', // 生产环境应该去掉，否则打包文件会很大
   // 檔案起始點從 entry 進入，因為是陣列所以也可以是多個檔案
   entry: [
     './server/views/admin/index.js',
@@ -37,11 +42,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use:["style-loader","css-loader","postcss-loader"],
+        use:["style-loader",MiniCssExtractPlugin.loader,"css-loader","postcss-loader"], // 注意顺序
       },
       {
         test: /\.less$/,
-        use:["style-loader","css-loader","postcss-loader","less-loader"],
+        use:["style-loader",MiniCssExtractPlugin.loader,"css-loader","postcss-loader","less-loader"],
       },
       {
         test: /.(gif|jpg|png$)/,
@@ -85,5 +90,32 @@ module.exports = {
     },
   },
   // plugins 放置所使用的外掛
-  plugins: [HTMLWebpackPluginConfig],
+  plugins: [
+    HTMLWebpackPluginConfig,
+    new MiniCssExtractPlugin({
+        // Options similar to the same options in webpackOptions.output
+        // both options are optional
+        filename: "[name].[chunkhash:8].css",
+        chunkFilename: "[id].css"
+    }),
+    new WebpackParallelUglifyPlugin({
+        uglifyJS: {
+            output: {
+                beautify: false, //不需要格式化
+                comments: false //不保留注释
+            },
+            compress: {
+                warnings: false, // 在UglifyJs删除没有用到的代码时不输出警告
+                drop_console: true, // 删除所有的 `console` 语句，可以兼容ie浏览器
+                collapse_vars: true, // 内嵌定义了但是只用到一次的变量
+                reduce_vars: true // 提取出出现多次但是没有定义成变量去引用的静态值
+            }
+        }
+    }),
+     new CompressionPlugin({ // 将静态资源压缩，并生成.gz文件
+                filename:  '[path].gz[query]',
+                algorithm:  'gzip',
+                test:  /\.js$|\.css$|\.html$/
+        })
+  ],
 };
