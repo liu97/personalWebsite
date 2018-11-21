@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import { Spin, message } from 'antd';
-import ArticleForm from 'components/ArticleForm';
 
+import ArticleForm from 'components/ArticleForm';
 import { fetchArticleMessage, putArticleMessage } from 'actions/article/';
 import { getGivenSearch } from 'utils/location';
 import { getProxyURL } from 'utils/config';
@@ -22,7 +22,11 @@ class ArticleEdit extends Component{
 		this.proxyURL = getProxyURL();
 	}
 	componentDidMount(){
-		this.setMessage();
+		// 按需加载mditor的js和css
+		import (/* webpackChunkName: "mditor" */ 'plugins/mditor/css/mditor.min.css');
+		import(/* webpackChunkName: "mditor" */ 'plugins/mditor/js/mditor.min.js').then(() => {
+			this.setMessage();
+		})
 	}
 	componentWillReceiveProps(newProps){
 		let { ArticleMessageResult, getPutArticleResult } = newProps;

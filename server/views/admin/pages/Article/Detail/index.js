@@ -20,7 +20,11 @@ class ArticleDetail extends Component{
 		this.search = getGivenSearch(this.props,['article_id']);
 	}
 	componentDidMount(){
-		this.setMessage();
+		// 按需加载mditor的js和css
+		import (/* webpackChunkName: "mditor" */ 'plugins/mditor/css/mditor.min.css');
+		import(/* webpackChunkName: "mditor" */ 'plugins/mditor/js/mditor.min.js').then(() => {
+			this.setMessage();
+		})
 	}
 	componentWillReceiveProps(newProps){
 		let { ArticleMessageResult } = newProps;
