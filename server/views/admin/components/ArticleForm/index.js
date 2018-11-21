@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Form, Icon, Input, Button, Upload, Row, Col } from 'antd';
 
+import { requestFront } from 'utils/config';
+
 const FormItem = Form.Item;
 
 @Form.create()
@@ -16,7 +18,7 @@ class ArticleForm extends React.Component {
         name: props.article.img_path.split(/[\\\/]/).slice(-1),
         status: 'done',
         response: {message: "defaulted", success: 1, url: props.article.img_path},
-        url: 'api/'+props.article.img_path
+        url: `${requestFront ? requestFront : ''}${props.article.img_path}`
       }] : []
     }
   }
@@ -95,7 +97,7 @@ class ArticleForm extends React.Component {
           {...formItemLayout}
           label="Upload"
         >
-          <Upload name="editormd-image-file" action="api/admin/articles/uploadImg/" listType="picture" fileList={this.state.fileList} onChange={this.changeUpload}>
+          <Upload name="editormd-image-file" action={`${requestFront ? requestFront : ''}/admin/articles/uploadImg/`} listType="picture" fileList={this.state.fileList} onChange={this.changeUpload}>
             <Button>
               <Icon type="upload" /> Click to upload
             </Button>

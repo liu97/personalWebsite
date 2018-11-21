@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import { createAction, handleActions } from 'redux-actions';
 import { isObject, obj2String } from 'utils/object';
-import config, { authPath } from 'utils/config';
+import config, { requestFront,authPath } from 'utils/config';
 
 const checkStatus = (response) => {
 	if(response.status===401){
@@ -24,6 +24,9 @@ const send = (url, options, cb, method = 'post') => {
 		'Accept': 'application/json',
 		'Content-Type': 'application/json',
 		'Authorization': `Bearer ${localStorage.getItem('access_token') || ''}`, // 从sessionStorage中获取access token
+	}
+	if(requestFront){
+		url = requestFront + url;
 	}
 	if (method == 'get' || method == 'delete') { // 如果是GET请求，拼接url
 		if(Object.keys(options).indexOf('id') != -1){
