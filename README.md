@@ -33,4 +33,4 @@ module.exports = config
 > npm run server
 
 启动管理系统服务
-> npm run web
+> npm run start

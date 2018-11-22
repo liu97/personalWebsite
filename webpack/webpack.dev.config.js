@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // ，將 bundle 好的 <script> 插入到 body
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -12,7 +13,7 @@ const rootPath = path.join(__dirname, '..');
 const appPath = path.join(rootPath, 'server/views/admin');
 
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
-    template: `${appPath}/index.html`,
+    template: path.join(appPath, 'index.html'),
     filename: 'index.html',
     inject: 'body',
 });
@@ -23,7 +24,7 @@ module.exports = {
         path.join(rootPath, 'server/views/admin/index.js'),
     ],
     output: { // 项目产出
-        path: `${rootPath}/dist`,
+        path: path.join(rootPath, 'dist'),
         filename: 'js/index.bundle.js', // 主入口的文件名
         chunkFilename: "js/[name].chunk.js", // 非主入口的文件名
     },
@@ -112,7 +113,6 @@ module.exports = {
     },
     // plugins 放置所使用的插件
     plugins: [
-        HTMLWebpackPluginConfig,
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
@@ -153,15 +153,6 @@ module.exports = {
             threadPool: happyThreadPool, // 共享进程池
             verbose: true, // 允许 HappyPack 输出日志
         }),
-        // new HappyPack({
-        //     id: 'happyStyle', // 用id来标识 happypack处理那里类文件
-        //     loaders: [{ // 如何处理  用法和loader 的配置一样
-        //       loader: 'style-loader',
-        //     }],
-        //     cache: true, // 缓存加载器
-        //     threadPool: happyThreadPool, // 共享进程池
-        //     verbose: true, // 允许 HappyPack 输出日志
-        // })
         new HappyPack({
             id: 'happyCss', // 用id来标识 happypack处理那里类文件
             loaders: [{ // 如何处理  用法和loader 的配置一样
@@ -179,6 +170,14 @@ module.exports = {
             cache: true, // 缓存加载器
             threadPool: happyThreadPool, // 共享进程池
             verbose: true, // 允许 HappyPack 输出日志
+        }),
+        new webpack.DllReferencePlugin({
+            manifest: require(path.join(rootPath, 'dist', 'manifest.json')),
+        }),
+        HTMLWebpackPluginConfig,
+        new AddAssetHtmlPlugin({  // 在htmlwebpack后插入一个AddAssetHtmlPlugin插件，用于将vendor插入打包后的页面
+            filepath: path.join(rootPath, 'dist/js/vendor.dll.js'), 
+            includeSourcemap: false 
         })
     ],
 };
