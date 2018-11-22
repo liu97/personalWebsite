@@ -1,11 +1,12 @@
-// 這邊使用 HtmlWebpackPlugin，將 bundle 好的 <script> 插入到 body。${__dirname} 為 ES6 語法對應到 __dirname  
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // ，將 bundle 好的 <script> 插入到 body
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const webpack = require('webpack');
-
 const path = require('path');
+const HappyPack = require('happypack');
+const os = require('os');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 const rootPath = path.join(__dirname, '..');
 const appPath = path.join(rootPath, 'server/views/admin');
@@ -18,36 +19,41 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
     devtool: 'eval-source-map', // 生产环境应该去掉，否则打包文件会很大
-    // 檔案起始點從 entry 進入，因為是陣列所以也可以是多個檔案
-    entry: [
-        './server/views/admin/index.js',
+    entry: [ // 项目入口
+        path.join(rootPath, 'server/views/admin/index.js'),
     ],
-    // output 是放入產生出來的結果的相關參數
-    output: {
+    output: { // 项目产出
         path: `${rootPath}/dist`,
-        filename: 'js/index.bundle.js',
-        chunkFilename: "js/[name].chunk.js",
+        filename: 'js/index.bundle.js', // 主入口的文件名
+        chunkFilename: "js/[name].chunk.js", // 非主入口的文件名
     },
     module: {
-    	// rules 則是放欲使用的 loaders
+    	// rules 放要使用的 loaders
         rules: [
           {
               test: /\.js$/,
               exclude: /node_modules/,
-              loader: 'babel-loader',
-              query: {
-                  plugins: [                                             
-                      ["import", {libraryName: "antd", style: "css"}]   //需要配置的地方
-                  ]                                                    
-              }
+              include: appPath,
+              loader: 'happypack/loader?id=happyBabel',
           },
           {
               test: /\.css$/,
-              use:["style-loader",MiniCssExtractPlugin.loader,"css-loader","postcss-loader"], // 注意顺序
+              use:[
+                  "style-loader",
+                  MiniCssExtractPlugin.loader,
+                  "happyPack/loader?id=happyCss",
+                  "postcss-loader"
+              ], // 注意顺序
           },
           {
               test: /\.less$/,
-              use:["style-loader",MiniCssExtractPlugin.loader,"css-loader","postcss-loader","less-loader"],
+              use:[
+                  "style-loader",
+                  MiniCssExtractPlugin.loader,
+                  "happyPack/loader?id=happyCss",
+                  "postcss-loader",
+                  "happyPack/loader?id=happyLess"
+              ],
           },
           {
               test: /.(gif|jpg|png$)/,
@@ -60,7 +66,7 @@ module.exports = {
               }]
           },
           {
-              test: /\.(eot|woff2?|ttf|svg)$/,        
+              test: /\.(eot|woff2?|ttf|svg)$/,     
               use: [{            
                   loader: "url-loader",            
                   options: {              
@@ -88,7 +94,7 @@ module.exports = {
             plugins: path.join(appPath, 'plugins'),
         }    
     },
-    // devServer 則是 webpack-dev-server 設定
+    // webpack-dev-server 
     devServer: {
         inline: true,
         port: 8008,
@@ -104,7 +110,7 @@ module.exports = {
             }
         },
     },
-    // plugins 放置所使用的外掛
+    // plugins 放置所使用的插件
     plugins: [
         HTMLWebpackPluginConfig,
         new MiniCssExtractPlugin({
@@ -131,6 +137,48 @@ module.exports = {
             filename:  '[path].gz[query]',
             algorithm:  'gzip',
             test:  /\.js$|\.css$|\.html$/
+        }),
+        new HappyPack({
+            id: 'happyBabel', // 用id来标识 happypack处理那里类文件
+            loaders: [{ // 如何处理  用法和loader 的配置一样
+              loader: 'babel-loader',
+              query: {
+                  cacheDirectory:  true,
+                  plugins: [                                             
+                      ["import", {libraryName: "antd", style: "css"}]   //需要配置的地方
+                  ]                                                    
+              }
+            }],
+            cache: true, // 缓存加载器
+            threadPool: happyThreadPool, // 共享进程池
+            verbose: true, // 允许 HappyPack 输出日志
+        }),
+        // new HappyPack({
+        //     id: 'happyStyle', // 用id来标识 happypack处理那里类文件
+        //     loaders: [{ // 如何处理  用法和loader 的配置一样
+        //       loader: 'style-loader',
+        //     }],
+        //     cache: true, // 缓存加载器
+        //     threadPool: happyThreadPool, // 共享进程池
+        //     verbose: true, // 允许 HappyPack 输出日志
+        // })
+        new HappyPack({
+            id: 'happyCss', // 用id来标识 happypack处理那里类文件
+            loaders: [{ // 如何处理  用法和loader 的配置一样
+              loader: 'css-loader',
+            }],
+            cache: true, // 缓存加载器
+            threadPool: happyThreadPool, // 共享进程池
+            verbose: true, // 允许 HappyPack 输出日志
+        }),
+        new HappyPack({
+            id: 'happyLess', // 用id来标识 happypack处理那里类文件
+            loaders: [{ // 如何处理  用法和loader 的配置一样
+              loader: 'less-loader',
+            }],
+            cache: true, // 缓存加载器
+            threadPool: happyThreadPool, // 共享进程池
+            verbose: true, // 允许 HappyPack 输出日志
         })
     ],
 };

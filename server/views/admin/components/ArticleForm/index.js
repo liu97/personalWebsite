@@ -18,7 +18,7 @@ class ArticleForm extends React.Component {
         name: props.article.img_path.split(/[\\\/]/).slice(-1),
         status: 'done',
         response: {message: "defaulted", success: 1, url: props.article.img_path},
-        url: `${requestFront ? requestFront : ''}${props.article.img_path}`
+        url: `${requestFront ? requestFront : ''}/${props.article.img_path}`
       }] : []
     }
   }

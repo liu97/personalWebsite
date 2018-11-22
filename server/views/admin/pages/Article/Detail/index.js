@@ -87,8 +87,8 @@ class ArticleDetail extends Component{
 						<Row>
 							<Col span={8} className={"col-key col"}>封面：</Col>
 							<Col span={16} className={"col"}>
-								<Popover placement="left" content={<img className={"cover"} src={article && `${requestFront ? requestFront : ''}${article.img_path}`}></img>}>
-									<img className={"article-cover"} src={article && `${requestFront ? requestFront : ''}${article.img_path}`}></img>
+								<Popover placement="left" content={<img className={"cover"} src={article && `${requestFront ? requestFront : ''}/${article.img_path}`}></img>}>
+									<img className={"article-cover"} src={article && `${requestFront ? requestFront : ''}/${article.img_path}`}></img>
 								</Popover>
 							</Col>
 						</Row>
