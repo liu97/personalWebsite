@@ -1,5 +1,5 @@
 import './index.less';
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchArticleList, deleteArticleMessage } from 'actions/article';
@@ -9,6 +9,7 @@ import { Button, Icon, Tooltip  } from 'antd';
 
 
 @connect(
+  // eslint-disable-next-line no-unused-vars
   (state, props) => ({
     reducerResult: state.reducerResult,
 	listResult: state.getArticleResult,
@@ -23,7 +24,7 @@ class Article extends Table{
 		this.fetchList = fetchArticleList;
 		this.hasReset = true;
 		this.hasDownload = false;
-		this.conPrefix = "article-container";
+		this.conPrefix = 'article-container';
 	}
 	componentWillReceiveProps(newProps){
 		let { deleteResult } = newProps;
@@ -40,6 +41,7 @@ class Article extends Table{
 		COLUMNS.forEach((col) => {
 			switch (col.key) {
 			  	case 'opt': {
+			    	// eslint-disable-next-line no-unused-vars
 			    	col.render = (text, record, index) => {
 			      	return (
 			        	<div className="table-opt">
@@ -49,16 +51,16 @@ class Article extends Table{
 			        	</div>
 			      	)}
 			    	break;
-			  	} 
+			  	}
 			}
 		})
 	}
 	addButtonTool = () => {
 		return (
-			<div className={"add-article"}>
+			<div className={'add-article'}>
 				<Tooltip title="点这添加新文章" placement="left">
-					<Button type="primary" className={"add-btn"}>
-						<Link to={`/admin/article/add`}><Icon type="file-add" theme="outlined" /> 报告，我有新文章要写</Link>
+					<Button type="primary" className={'add-btn'}>
+						<Link to={'/admin/article/add'}><Icon type="file-add" theme="outlined" /> 报告，我有新文章要写</Link>
 					</Button>
 				</Tooltip>
 			</div>

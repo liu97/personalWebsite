@@ -1,7 +1,6 @@
 import './index.less';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { Form, Icon, Input, Button, Upload, Row, Col } from 'antd';
 
 import { requestFront } from 'utils/config';
@@ -15,9 +14,10 @@ class ArticleForm extends React.Component {
     this.state = {
       fileList: props.article ? [{
         uid: +new Date(),
+        // eslint-disable-next-line no-useless-escape
         name: props.article.img_path.split(/[\\\/]/).slice(-1),
         status: 'done',
-        response: {message: "defaulted", success: 1, url: props.article.img_path},
+        response: {message: 'defaulted', success: 1, url: props.article.img_path},
         url: `${requestFront ? requestFront : ''}/${props.article.img_path}`
       }] : []
     }
@@ -112,12 +112,12 @@ class ArticleForm extends React.Component {
         <FormItem>
           <Row>
             <Col span={6}></Col>
-            <Col span={6} className={"col-btn"}>
+            <Col span={6} className={'col-btn'}>
               <Button type="primary" htmlType="submit">
                 确定
               </Button>
             </Col>
-            <Col span={6} className={"col-btn"}>
+            <Col span={6} className={'col-btn'}>
               <Button onClick={this.goBack}>
                 返回
               </Button>

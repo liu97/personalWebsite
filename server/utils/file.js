@@ -4,7 +4,7 @@ const config = require('../../config')
 /**
  * 读取文件方法
  * @param  {string} filePath 文件相对根目录的路径
- * @return {string} 
+ * @return {string}
  */
 async function file ( filePath ) {
     let absolute_path = path.join(config.root,filePath);

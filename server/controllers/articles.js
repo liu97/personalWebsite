@@ -22,27 +22,27 @@ function tags_format(tags){
 }
 /**
  * 同步创建多级目录
- * @param {String} dirname 
+ * @param {String} dirname
  */
-async function mkdirsSync(dirname) {  
-    if (fs.existsSync(dirname)) {  
-        return true;  
-    } else {  
-        if (await mkdirsSync(path.dirname(dirname))) {  
-            fs.mkdirSync(dirname);  
-            return true;  
-        }  
-    }  
-}  
-  
+async function mkdirsSync(dirname) {
+    if (fs.existsSync(dirname)) {
+        return true;
+    } else {
+        if (await mkdirsSync(path.dirname(dirname))) {
+            fs.mkdirSync(dirname);
+            return true;
+        }
+    }
+}
+
 let operate_article = {
     /**
      * 新增文章
-     * @param {Object} ctx 
+     * @param {Object} ctx
      */
     async insert_article(ctx){
 
-        let response_data = {status: "error", info: {list:[],count:0}};
+        let response_data = {status: 'error', info: {list:[],count:0}};
         // let cover_path = ctx.req.file.path;
         // cover_path = cover_path.split(/static[\\\/]/);
         // let img_path = cover_path[cover_path.length-1];
@@ -82,19 +82,19 @@ let operate_article = {
                 await to_models.insert_to(result[0].tag_id,new_article.insertId);
             }
         }
-        
+
         if(new_article.affectedRows != 0){
-            response_data = {...response_data, status: "success", info: {list: [], count: new_article.affectedRows}};
+            response_data = {...response_data, status: 'success', info: {list: [], count: new_article.affectedRows}};
         }
         ctx.body = response_data;
-        
+
     },
     /**
-     * 删除文章   
-     * @param {Object} ctx 
+     * 删除文章
+     * @param {Object} ctx
      */
     async delete_article(ctx){
-        let response_data = {status: "error", info: {list:[],count:0}};
+        let response_data = {status: 'error', info: {list:[],count:0}};
         let article_id;
         if(ctx.params.id != undefined){
             article_id = ctx.params.id;
@@ -112,16 +112,17 @@ let operate_article = {
             tags[i].number--;
             await tag_models.upload_tag(tags[i]);
         }
-        // 删除对应文章,因为设置了外键CASCADE，所以tag_to_article对应数据会自动删除 
+        // 删除对应文章,因为设置了外键CASCADE，所以tag_to_article对应数据会自动删除
+        // eslint-disable-next-line no-unused-vars
         let result = await article_models.delete_article(article_id);
         ctx.body = {...response_data, info: {list:[],count:1}, 'msg': '删除成功'};
     },
     /**
      * 更新文章
-     * @param {Object} ctx 
+     * @param {Object} ctx
      */
     async update_article(ctx){
-        let response_data = {status: "error", info: {list:[],count:0}};
+        let response_data = {status: 'error', info: {list:[],count:0}};
         let condition = {}
         let body = ctx.request.body;
         if(ctx.params.id != undefined){
@@ -167,16 +168,16 @@ let operate_article = {
         article.last_modify_time = datetime.getNowDatetime();
         let result = await article_models.update_article(article);
         if(result.affectedRows != 0){
-            response_data = {...response_data, status: "success", info: {list: [], count: result.affectedRows}};
+            response_data = {...response_data, status: 'success', info: {list: [], count: result.affectedRows}};
         }
         ctx.body = response_data;
     },
     /**
      * 获取文章
-     * @param {Object} ctx 
+     * @param {Object} ctx
      */
     async get_article(ctx){
-        let response_data = {status: "error", info: {list:[],count:0}};
+        let response_data = {status: 'error', info: {list:[],count:0}};
         let articles = [];
         let count = 0;
         let condition = {};
@@ -196,27 +197,28 @@ let operate_article = {
                 let article = articles[i];
                 article.article_content = await get_file(article.article_path)
             }
-            response_data = {...response_data, status: "success", info:{list:articles, ...count}}
+            response_data = {...response_data, status: 'success', info:{list:articles, ...count}}
             ctx.body = response_data;
         }
-       
+
     },
     /**
      * 上传图片
-     * @param {Object} ctx 
+     * @param {Object} ctx
      */
-    async upload_img(ctx){ 
+    async upload_img(ctx){
         let file_path = ctx.req.file.path.replace(/\\/g, '/');
+        // eslint-disable-next-line no-useless-escape
         file_path = file_path.split(/static[\\\/]/);
         let file_url = file_path[file_path.length-1];
         let result = { success: 1,
-            message: "上传成功",
+            message: '上传成功',
             url: file_url
-        }; 	   
+        };
         ctx.body = result
     },
 
-    
+
 };
 
 module.exports = operate_article;

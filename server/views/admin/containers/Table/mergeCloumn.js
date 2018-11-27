@@ -1,24 +1,10 @@
-/**
- * @Author:      skyeGao
- * @Email:       yingyinggao@sohu-inc.com
- * @DateTime:    2018-07-11 18:48:39
- * @Description: 列表table 
- */
-
-
 'use strict';
 import './index.less'
 import _ from 'lodash'
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router'
-import { Button, Spin, Switch } from 'antd'
-import moment from 'moment'
+import { Spin } from 'antd'
 import Panel from 'components/panel'
 import SearchTable from 'components/SearchTable'
-import { modifySuccess } from 'utils/tip'
-import { addQuery, getQuery } from 'utils/str'
-import { toPercent, toYuan } from 'utils/number'
 
 const PREFIX = 'table-mergeColumn'
 export default class TableCommon extends Component {
@@ -32,22 +18,10 @@ export default class TableCommon extends Component {
     this.addCustomCloumns();
   }
 
-  componentWillReceiveProps(nextProps) {
-    // 修改表格内容后刷新表格示例
-
-  }
   componentDidMount() {}
 
   // 处理内容需要特殊处理的列
   addCustomCloumns() {
-    COLUMNS.forEach((col) => {
-      switch (col.key) {
-
-        case 'operate':
-
-          break;
-      }
-    })
   }
 
   triggerSubmit() {

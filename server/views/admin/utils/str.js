@@ -1,35 +1,24 @@
-/*
-* @Usage: 
-* @Description: 
-* @Author: 刘炳礼
-* @Email: bingliliu@sohu-inc.com
-* @Date:   2017-05-08 16:34:49
-*/
-
-
-'use strict';
-
 import _ from 'lodash'
 
-export const cnLen = (str)=> {    
-  var len = 0;  
-  if (str) {  
-	  for (var i=0; i<str.length; i++) {    
-	      if (str.charCodeAt(i)>127 || str.charCodeAt(i)==94) {    
-	           len += 2;    
-	       } else {    
-	           len ++;    
-	       }    
-	   }    
+export const cnLen = (str)=> {
+  var len = 0;
+  if (str) {
+	  for (var i=0; i<str.length; i++) {
+	      if (str.charCodeAt(i)>127 || str.charCodeAt(i)==94) {
+	           len += 2;
+	       } else {
+	           len ++;
+	       }
+	   }
 	 }
-  return len;    
-}   
+  return len;
+}
 
 export const addQuery = (queryObj, props, path) => {
 	let query = props.location.query||{};
 	path = path||props.location.pathname.replace(/^\//, '');
 	_.extend(query, queryObj)
-	
+
 	query = Object.keys(query).
 		map(key=>query[key]?key+'='+query[key]:key).
 		join('&')
@@ -54,7 +43,7 @@ export const updateQuery = (query, props, path) => {
 	props.history.push(url);
 
 	return url;
-} 
+}
 
 export const getQuery = (key, props) => {
 	let query = props.location.query||{};
@@ -62,7 +51,7 @@ export const getQuery = (key, props) => {
 }
 
 export const getQueryString = (name) => {
-	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
 	var r = window.location.search.substr(1).match(reg);
 	if (r != null) return unescape(r[2]); return null;
 }
@@ -74,7 +63,7 @@ export const stringifyQuery = (query) => {
 		join('&')
 
 	return query;
-} 
+}
 
 export const urldecode = (str, charset, callback) => {
     window._urlDecodeFn_ = callback;
@@ -90,7 +79,7 @@ export const openQuery = (queryObj, props, path) => {
 	let query = props.location.query||{};
 	path = path||props.location.pathname.replace(/^\//, '');
 	_.extend(query, queryObj)
-	
+
 	query = Object.keys(query).
 		map(key=>query[key]?key+'='+query[key]:key).
 		join('&')

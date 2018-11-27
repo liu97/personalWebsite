@@ -4,12 +4,12 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 // import { connect } from 'react-redux'
 import 'components/index.less'
-import { Table, Button, Select, Popover,Row, Col, Affix } from 'antd'
+import { Table, Button } from 'antd'
 import SearchForm from '../searchForm'
 import {getFromStorage} from 'utils/storage'
-const Option = Select.Option;
 
 export default class SearchTable extends Component {
+  // eslint-disable-next-line react/sort-comp
   beforeSorter = null;
   constructor(props) {
     super(props)
@@ -25,8 +25,14 @@ export default class SearchTable extends Component {
 
     this.onChange = this.onChange.bind(this)
   }
-
-  componentWillReceiveProps(nextProps){
+  componentDidMount() {
+    this.setState({
+      selectedRowKeys:[],
+    });
+  	this.onSubmit(this.getFormValue())
+  	//this.props.form.submit((a)=>{console.log(a())})
+  }
+  UNSAFE_componentWillReceiveProps(nextProps){
     if(this.props.selectedRowKeys!==nextProps.selectedRowKeys&&nextProps.selectedRowKeys){
       this.setState({
         selectedRowKeys: nextProps.selectedRowKeys
@@ -34,7 +40,7 @@ export default class SearchTable extends Component {
     }
   }
 
-  onSubmit(query, current = 1, pageSize=20,pageChangePlg) {
+  onSubmit(query, current = 1, pageChangePlg) {
     this.setState({
       current: 1,
       selectedRowKeys:[],
@@ -58,16 +64,8 @@ export default class SearchTable extends Component {
         }
       }
     }
-    
-    this.props.onChange && this.props.onChange(pagination, filters, sorter);
-  }
 
-  componentDidMount() {
-    this.setState({
-      selectedRowKeys:[],
-    });
-  	this.onSubmit(this.getFormValue())
-  	//this.props.form.submit((a)=>{console.log(a())})
+    this.props.onChange && this.props.onChange(pagination, filters, sorter);
   }
 
   componentWillUnmount(){
@@ -98,6 +96,7 @@ export default class SearchTable extends Component {
     return query
   }
 
+  // eslint-disable-next-line no-unused-vars
   _handleSelectionChange=(selectedRowKeys, selectedRows)=>{
   	this.setState({
   		selectedRowKeys: selectedRowKeys
@@ -137,7 +136,7 @@ export default class SearchTable extends Component {
             customerPage,
         } = this.props
 
-    //此处这么做是为了解决 强制分页要回到首页 
+    //此处这么做是为了解决 强制分页要回到首页
     let _current = _self.state.current;
     if (current !== undefined) {
       _current = _self.state.current === current ? _self.state.current : 1;
@@ -186,13 +185,13 @@ export default class SearchTable extends Component {
         }
         if (item.type === 'pointText') {
           return (<p key={index}
-            style={{ lineHeight: '30px',
-              color: item.textColor ? item.textColor : 'red' }}
-          >{item.text}</p>)
+                      style={{ lineHeight: '30px',
+                      color: item.textColor ? item.textColor : 'red' }}
+                  >{item.text}</p>)
         }
         return (<Button key={index} type={item.type}
-          onClick={this.tableButtonClick(item)}
-        >{item.text}</Button>)
+                    onClick={this.tableButtonClick(item)}
+                >{item.text}</Button>)
       })
     }
 
@@ -214,7 +213,7 @@ export default class SearchTable extends Component {
       }
     }
     return (
-      <div className="search-form-table">        
+      <div className="search-form-table">
         {
           hideQuery ?
           null :
@@ -240,7 +239,7 @@ export default class SearchTable extends Component {
           { buttons }
         </div>
           {this.props.tableTools&&this.props.tableTools}
-        
+
           {this.getTabelTools&&this.getTabelTools()}
           <Table
             columns={this.state.showColumns || columns }
@@ -254,7 +253,7 @@ export default class SearchTable extends Component {
             bordered={ this.props.bordered }
             onRowClick={ onRowClick }
           />
-        
+
       </div>
     )
   }

@@ -7,21 +7,21 @@ const filter_markdown = require('../utils/filter_markdown');
 let blogs = {
     /**
      * 获取blogs页初始数据
-     * @param {Object} ctx 
+     * @param {Object} ctx
      */
     async get_blogs(ctx){
-        let response_data = {status: "err"};
+        let response_data = {status: 'err'};
         let articles;
         let article_count;
         let pageSize = ctx.query.pageSize ? ctx.query.pageSize : 8;
         let start = ctx.query.start ? ctx.query.start : 0 ;
-        
+
         let tags = await tag_model.get_all_tags();
-        
+
         let condition = {};
         if(ctx.query.tag != undefined){
             articles = await article_model.get_article_by_tag_limit(ctx.query.tag, parseInt(start), parseInt(pageSize));
-            
+
             article_count = await article_model.get_article_count_by_tag(ctx.query.tag);
         }
         else{
@@ -51,7 +51,7 @@ let blogs = {
             ctx.status = 404;
             ctx.body = response_data;
         }
-        
+
     }
 };
 

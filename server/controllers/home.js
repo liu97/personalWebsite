@@ -5,7 +5,7 @@ const filter_markdown = require('../utils/filter_markdown');
 
 let home = {
     async get_home(ctx){
-        let data = {status: "err"};
+        let data = {status: 'err'};
 
         let about_me = await article_model.get_article({type: 'about_me'});
         about_me[0].article_content = await get_file(about_me[0].article_path);
@@ -25,7 +25,7 @@ let home = {
         else{
             ctx.body = data;
         }
-        
+
     }
 }
 

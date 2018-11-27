@@ -10,6 +10,6 @@ const articlesController = require('./../controllers/articles')
 const routers = router
                       .get('/', articlesController.get_article)
                       .get('/:id', articlesController.get_article)
-                      
- 
+
+
 module.exports = routers

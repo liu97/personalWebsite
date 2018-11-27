@@ -4,12 +4,13 @@ const views = require('koa-views')
 const koaStatic = require('koa-static')
 const bodyParser = require('koa-bodyparser')
 const koaLogger = require('koa-logger')
-const session = require('koa-session-minimal')
-const MysqlStore = require('koa-mysql-session')
+// const session = require('koa-session-minimal')
+// const MysqlStore = require('koa-mysql-session')
 
 const jwt = require('jsonwebtoken') // 用于签发、解析`token`
 const jwtKoa = require('koa-jwt') // 用于路由权限控制
 const util = require('util')
+// eslint-disable-next-line no-unused-vars
 const verify = util.promisify(jwt.verify) // 解密
 
 const config = require('./../config')

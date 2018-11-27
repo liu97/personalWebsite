@@ -1,7 +1,7 @@
 // 判断是否为对象
 export const isObject = (obj) => {
 	var type = Object.prototype.toString.call(obj);
-	if(type == "[object Object]"){
+	if(type == '[object Object]'){
 		return true;
 	}
 	return false;

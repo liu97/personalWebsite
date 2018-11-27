@@ -2,13 +2,13 @@ const dbu = require('../utils/db-util');
 /**
  * sql与result的对应情况
  * values   ? ? ? [1,2,3]
- *          (?)   [[[1,2,3]]] 
- *          ?     [1] or 1 
+ *          (?)   [[[1,2,3]]]
+ *          ?     [1] or 1
  */
 let user = {
     async get_user(condition){
         let addition = ['start', 'pageSize', 'desc'];
-        let sql = "select * from users";
+        let sql = 'select * from users';
         let i = 0;
         for(let item of Object.keys(condition)){
             if(addition.indexOf(item) != -1){

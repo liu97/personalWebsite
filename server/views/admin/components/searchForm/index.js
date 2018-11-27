@@ -35,7 +35,7 @@ const { RangePicker } = DatePicker;
   },
 })
 
-export default class SearchForm extends Component {
+class SearchForm extends Component {
   constructor(props) {
     super(props)
     this.onSubmit = this.onSubmit.bind(this)
@@ -74,8 +74,8 @@ export default class SearchForm extends Component {
           delete (query[key])
         } else if(key === 'time'){
           const time = query[key]
-          query['startDate'] = time[0].format("YYYY-MM-DD")
-          query['endDate'] = time[1].format("YYYY-MM-DD")
+          query['startDate'] = time[0].format('YYYY-MM-DD')
+          query['endDate'] = time[1].format('YYYY-MM-DD')
           delete (query[key])
         }
       })
@@ -140,11 +140,11 @@ export default class SearchForm extends Component {
     const set = new Set(this.getTplTitle())
     const dataSource = [...set]
 
-    const onSelect = (value) => { }
+    const onSelect = () => { }
     return this.fieldDecorator(item)(
       <AutoComplete
         dataSource={dataSource}
-        filterOption={true}
+        filterOption
         onSelect={onSelect}
         placeholder=""
       />
@@ -222,7 +222,7 @@ export default class SearchForm extends Component {
       </Select>
     )
   }
-  
+
   getRangePicker(item) {
     const { setFieldsValue } = this.props.form
     return this.fieldDecorator(_.extend({}, item, { initialValue: [moment(), moment()] }))(
@@ -252,12 +252,12 @@ export default class SearchForm extends Component {
   getMultiSelect(item) {
     const { setFieldsValue } = this.props.form;
     return this.fieldDecorator(item)(<MultiSelect
-      keyName={item.key}
-      id={item.value}
-      text={item.text}
-      options={item.options}
-      onFieldsChange={setFieldsValue}
-    />)
+                                        keyName={item.key}
+                                        id={item.value}
+                                        text={item.text}
+                                        options={item.options}
+                                        onFieldsChange={setFieldsValue}
+                                     />)
   }
 
   getDomWidth(refstext){
@@ -273,9 +273,9 @@ export default class SearchForm extends Component {
           realWidth = _allWidth,                            //实际宽度，默认为总宽度
           reallen = searchCount;                            //实际一行显示个数，默认为表单个数
       this.setState({ formAffix: _allWidth })
-      let affixDiv = document.getElementsByClassName("ant-affix");
+      let affixDiv = document.getElementsByClassName('ant-affix');
       if(affixDiv.length && _allWidth>0){
-          Array.prototype.forEach.call(affixDiv, function(item, i) {
+          Array.prototype.forEach.call(affixDiv, function(item) {
               item.style.width = _allWidth + 'px';       //affix没有响应式，给antd里的div设置宽度。
           });
       }
@@ -305,18 +305,18 @@ export default class SearchForm extends Component {
              itemWidth: realW
           })
       }
-     
+
   }
+  // eslint-disable-next-line no-unused-vars
   renderRow(arr, index) {
-    const { formColsNum, form } = this.props;
+    const { formColsNum } = this.props;
     // eslint-disable-next-line no-unneeded-ternary
     const cols = formColsNum ? formColsNum : 4;
-    const { getFieldDecorator } = form
     return (
       <QueueAnim>
         {
           arr.map((item, key) => (
-            <Col md={24 / cols} key={key} style={{display:item.show === false?"none":"",width:this.state.itemWidth}}>
+            <Col md={24 / cols} key={key} style={{display:item.show === false?'none':'',width:this.state.itemWidth}}>
               <FormItem label={item.label} labelCol={{ span: 6 }}
                 wrapperCol={{ span: 18 }}
               >
@@ -397,3 +397,5 @@ export default class SearchForm extends Component {
     )
   }
 }
+
+export default SearchForm;

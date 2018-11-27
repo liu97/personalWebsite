@@ -28,9 +28,7 @@ const datatime = {
     } else {
       _date = new Date()
     }
-    
-    let parsedDate
-    let parseTime 
+
     let parseDatetime
 
     let yearNum = _date.getFullYear()
@@ -49,7 +47,7 @@ const datatime = {
       .replace('hh', hourNum)
       .replace('mm', minNum)
       .replace('ss', secNum)
-    
+
     return parseDatetime
   },
 

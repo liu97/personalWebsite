@@ -50,11 +50,10 @@ export const COLUMNS = [
       width: 50,
     }
   ]
-  
-  
+
+
   export const QUERY = [
-    
+
   ]
-  
-  
-  
+
+

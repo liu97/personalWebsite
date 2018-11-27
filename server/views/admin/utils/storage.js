@@ -1,6 +1,3 @@
-/**
- * Created by xulei on 2017/9/25.
- */
 function getStorage(storageType = 'local') {
   if (storageType === 'local') {
     return window.localStorage

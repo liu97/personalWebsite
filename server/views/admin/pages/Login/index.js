@@ -2,28 +2,29 @@ import './index.less';
 import React, { Component } from 'react';
 import LoginForm from './LoginForm';
 import { connect } from 'react-redux';
-import { PostLoginMessage, Login } from 'actions/login';
+import { PostLoginMessage } from 'actions/login';
 import { message } from 'antd';
 
 @connect(
+	// eslint-disable-next-line no-unused-vars
 	(state, props) => ({
 		postLoginResult: state.postLoginResult
 	})
 )
 class Home extends Component{
-	componentWillMount(){
-		const authed = window.sessionStorage.getItem("isLogin") == "true";
+	UNSAFE_componentWillMount(){
+		const authed = window.sessionStorage.getItem('isLogin') == 'true';
 		if(authed){
 			this.props.history.push('/admin');
 		}
 	}
-	componentWillReceiveProps(newProps){
+	UNSAFE_componentWillReceiveProps(newProps){
 		let { postLoginResult } = newProps;
 		const props = this.props;
 		if(postLoginResult !== props.postLoginResult && postLoginResult && postLoginResult.isLoading === false){
 			if(postLoginResult.code == 1){
-				window.sessionStorage.setItem("isLogin", true);
-				window.localStorage.setItem("access_token", postLoginResult.token);
+				window.sessionStorage.setItem('isLogin', true);
+				window.localStorage.setItem('access_token', postLoginResult.token);
 				const bcakURL = props.location.state ? props.location.state.from.pathname : '/admin';
 				props.history.push(bcakURL);
 			}

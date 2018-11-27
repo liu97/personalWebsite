@@ -39,6 +39,7 @@ export const item2Obj = (arr) => {
 }
 
 export const addKeyTitle = (arr, keyName, titleName) => {
+	// eslint-disable-next-line no-unused-vars
 	arr.forEach((item, index)=>{
 		item.key = item[keyName]
 		item.title = item[titleName]
@@ -86,9 +87,9 @@ export const arr2tree = (arr, rules) => {
 }
 
 export const getMaximin = (arr,maximin) => {
-	if (maximin == "max") {
+	if (maximin == 'max') {
 		return Math.max.apply(Math, arr);
-	} else if (maximin == "min") {
+	} else if (maximin == 'min') {
 		return Math.min.apply(Math, arr);
 	}
 }

@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const path = require('path');
 const fs = require('fs');
-const xss = require('node-xss').clean;
+// const xss = require('node-xss').clean;
 
 const contact_model = require('../models/contacts');
 const article_model = require('../models/articles');
@@ -12,40 +12,40 @@ const config = require('../../config');
 
 /**
  * 同步创建多级目录
- * @param {String} dirname 
+ * @param {String} dirname
  */
-async function mkdirsSync(dirname) {  
-    if (fs.existsSync(dirname)) {  
-        return true;  
-    } else {  
-        if (await mkdirsSync(path.dirname(dirname))) {  
-            fs.mkdirSync(dirname);  
-            return true;  
-        }  
-    }  
-} 
+async function mkdirsSync(dirname) {
+    if (fs.existsSync(dirname)) {
+        return true;
+    } else {
+        if (await mkdirsSync(path.dirname(dirname))) {
+            fs.mkdirSync(dirname);
+            return true;
+        }
+    }
+}
 
 
 let operate_api = {
     /**
      * 点赞
-     * @param {Object} ctx 
+     * @param {Object} ctx
      */
     async like(ctx){
-        let response_data = {status:"error"}
+        let response_data = {status:'error'}
         let condition = ctx.request.body;
         let article = await article_model.get_article(condition);
         article = article[0];
         article.praise++;
-        let result = await article_model.update_article(article); 
+        let result = await article_model.update_article(article);
         if(result.affectedRows == 1){
-            response_data.status = "success"
+            response_data.status = 'success'
         }
         ctx.body = response_data;
     },
     /**
      * 发消息联系我
-     * @param {Object} ctx 
+     * @param {Object} ctx
      */
     async contact_me(ctx){
         let body_contact = ctx.request.body;
@@ -70,7 +70,7 @@ let operate_api = {
 
     async login(ctx){
         // let salt = bcrypt.genSaltSync(10);// 10 is by default
-        // let hash = bcrypt.hashSync('liu970923', salt); // salt is inclued in generated hash 
+        // let hash = bcrypt.hashSync('liu970923', salt); // salt is inclued in generated hash
         // console.log(hash);
         const data = ctx.request.body;
         const user = await user_model.get_user({user_name: data.userName});  // 查询用户
@@ -89,14 +89,14 @@ let operate_api = {
                     token,
                     code: 1
                 }
-            } 
+            }
             else {
                 ctx.body = {
                     code: -1,
                     message: '用户名或密码错误'
                 }
             }
-        } 
+        }
         else {
             ctx.body = {
                 code: -1,
@@ -104,6 +104,6 @@ let operate_api = {
             }
         }
     },
-    
+
 }
 module.exports = operate_api;

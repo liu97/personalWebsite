@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import { createAction, handleActions } from 'redux-actions';
 import { isObject, obj2String } from 'utils/object';
-import config, { requestFront,authPath } from 'utils/config';
+import config, { requestFront } from 'utils/config';
 
 const checkStatus = (response) => {
 	if(response.status===401){
@@ -41,7 +41,7 @@ const send = (url, options, cb, method = 'post') => {
 			credentials: 'include',
 			headers: new Headers(headers),
 		}
-	} 
+	}
 	else {
 		initObj = {
 		  	method,
@@ -64,10 +64,10 @@ const send = (url, options, cb, method = 'post') => {
 }
 
 
-const requestPosts = (postTitle) => createAction(postTitle+"Request");	
-const receivePosts = (postTitle) => createAction(postTitle+"Receive");
+const requestPosts = (postTitle) => createAction(postTitle+'Request');
+const receivePosts = (postTitle) => createAction(postTitle+'Receive');
 
-export const createSimpleAjaxAction = (url, postTitle, method="post", hadInitial) => {
+export const createSimpleAjaxAction = (url, postTitle, method='post', hadInitial) => {
 	return (postMessage) =>{
 		if(!isObject(postMessage)){
 			 postMessage = {};
@@ -75,6 +75,7 @@ export const createSimpleAjaxAction = (url, postTitle, method="post", hadInitial
 		if(hadInitial){
 			postMessage = {...postMessage, ...config};
 		}
+		// eslint-disable-next-line no-unused-vars
 		return (dispatch, getState) => {
 			dispatch(requestPosts(postTitle)());
 			send( url, postMessage, json => dispatch(receivePosts(postTitle)(json)), method );
@@ -85,6 +86,7 @@ export const createSimpleAjaxAction = (url, postTitle, method="post", hadInitial
 export const createSimpleAjaxReduce = (postTitle) => {
 	return handleActions(
 	{
+		// eslint-disable-next-line no-unused-vars
 		[postTitle+'Request']: (state, action) => ({
 			info: {},
 			...state,

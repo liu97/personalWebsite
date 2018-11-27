@@ -5,7 +5,7 @@ class Home extends Component{
 	render(){
 		return (
 			<div className={'home'}>
-				<span>{"欢迎来到博客管理系统"}</span>
+				<span>{'欢迎来到博客管理系统'}</span>
 			</div>
 		)
 	}

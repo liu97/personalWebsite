@@ -29,24 +29,7 @@ export default class multiSelect extends Component {
     this.handleSave = this.handleSave.bind(this)
     this.hide = this.hide.bind(this)
   }
-
-  handleToggleSelect() {
-    this.setState({
-      open: !this.state.open,
-    })
-  }
-
-
-  hide(event) {
-    if (event.target.closest('.multi-select')) {
-      return;
-    }
-    this.setState({
-      open: false,
-    })
-  }
-
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     let options = clone(this.props.options, true)
     const values = this.props.value
     options = this.initData(options, values)
@@ -58,6 +41,21 @@ export default class multiSelect extends Component {
 
   componentWillUnmount() {
     document.removeEventListener('click', this.hide)
+  }
+
+  handleToggleSelect() {
+    this.setState({
+      open: !this.state.open,
+    })
+  }
+
+  hide(event) {
+    if (event.target.closest('.multi-select')) {
+      return;
+    }
+    this.setState({
+      open: false,
+    })
   }
 
   initData(options, values) {

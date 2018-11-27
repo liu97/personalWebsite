@@ -3,26 +3,15 @@
 import _ from 'lodash'
 
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router'
-import { Button, Spin, Switch } from 'antd'
-import moment from 'moment'
+import { Spin } from 'antd'
 import SearchTable from 'components/SearchTable'
-import { modifySuccess } from 'utils/tip'
-import { addQuery, getQuery } from 'utils/str'
-import { toPercent, toYuan } from 'utils/number'
 
 export default class TableAdd extends Component {
-
-
     constructor(props) {
         super(props)
 
         this.state = {
         }
-
-
-
         this.currentPage = 1
         this.query = {}
         this.pageSize = 20
@@ -32,22 +21,15 @@ export default class TableAdd extends Component {
 
     }
 
-    componentWillReceiveProps(nextProps) {
-
+    UNSAFE_componentWillReceiveProps(nextProps) {
         // 修改表格内容后刷新表格示例
         let batchChangeCampaignOpStatusResult = nextProps.batchChangeCampaignOpStatusResult;
         if (batchChangeCampaignOpStatusResult !== this.props.batchChangeCampaignOpStatusResult &&
                 batchChangeCampaignOpStatusResult && batchChangeCampaignOpStatusResult.loading === false && !batchChangeCampaignOpStatusResult.hasError) {
 
             this.triggerSubmit()
-
         }
-
-
     }
-
-
-    componentDidMount() {}
 
     // 处理内容需要特殊处理的列
     addCustomCloumns() {
@@ -74,11 +56,11 @@ export default class TableAdd extends Component {
         }))
     }
 
-    _clear = () => { 
-        
+    _clear = () => {
+
     }
     addButtonTool = () => {
-        
+
     }
     _handleAdd = () => {
         let actions = this.props.actions;

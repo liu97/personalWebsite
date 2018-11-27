@@ -1,5 +1,5 @@
 import './index.less';
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Table from 'containers/Table/Common';
@@ -8,6 +8,7 @@ import { fetchMessageList, deleteMessageMessage } from 'actions/message/';
 
 
 @connect(
+	// eslint-disable-next-line no-unused-vars
 	(state, props) => ({
         listResult: state.getMessageListResult,
         deleteMessageResult: state.deleteMessageResult
@@ -20,10 +21,10 @@ class TableList extends Table{
 		this.queryConfig = QUERY;
         this.fetchList = fetchMessageList;
         this.hideQuery = true;
-        this.conPrefix = "message-tablelist";
+        this.conPrefix = 'message-tablelist';
         this.additionQuery = {
-            not: "no",
-            visited: "yes"
+            not: 'no',
+            visited: 'yes'
         }
 	}
 	componentWillReceiveProps(newProps){
@@ -41,6 +42,7 @@ class TableList extends Table{
 		COLUMNS.forEach((col) => {
 			switch (col.key) {
 				case 'message':
+					// eslint-disable-next-line no-unused-vars
 					col.render = (text, record, index) => {
 						if(text.length > 100){
 							return text.slice(0,100) + '...';
@@ -48,6 +50,7 @@ class TableList extends Table{
 					}
 					break;
 			  	case 'opt': {
+			    	// eslint-disable-next-line no-unused-vars
 			    	col.render = (text, record, index) => {
 			      	return (
 			        	<div className="table-opt">
@@ -56,12 +59,12 @@ class TableList extends Table{
 			        	</div>
 			      	)}
 			    	break;
-			  	} 
+			  	}
 			}
 		})
     }
     filterParams = (query) =>{
-        if(this.props.type == "all"){
+        if(this.props.type == 'all'){
             return ;
         }
         else{

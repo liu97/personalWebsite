@@ -1,6 +1,6 @@
-const allConfig = require("./../../config")
+const allConfig = require('./../../config')
 const config = allConfig.database
-const mysql = require("mysql")
+const mysql = require('mysql')
 
 const pool = mysql.createPool({
   host     :  config.HOST,
@@ -12,6 +12,7 @@ const pool = mysql.createPool({
 let query = function( sql, values ) {
 
   return new Promise(( resolve, reject ) => {
+    // eslint-disable-next-line no-unused-vars
     let qq = pool.getConnection(function(err, connection) {
       if (err) {
         resolve( err )

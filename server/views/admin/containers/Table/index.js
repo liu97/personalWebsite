@@ -1,24 +1,8 @@
-/**
- * @Author:      skyeGao
- * @Email:       yingyinggao@sohu-inc.com
- * @DateTime:    2018-07-11 18:48:39
- * @Description: 列表table 
- */
-
-
-'use strict';
-
 import _ from 'lodash'
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router'
-import { Button, Spin, Switch } from 'antd'
-import moment from 'moment'
+import { Spin } from 'antd'
 import Panel from 'components/panel'
 import SearchTable from 'components/SearchTable'
-import { modifySuccess } from 'utils/tip'
-import { addQuery, getQuery } from 'utils/str'
-import { toPercent, toYuan } from 'utils/number'
 import { getFromStorage } from 'utils/storage'
 
 export default class TableCommon extends Component {
@@ -33,14 +17,7 @@ export default class TableCommon extends Component {
     this.addCustomCloumns();
   }
 
-  getDefaultSelectedRowKeys=()=>{
-    if(this.props.triggerPrevClickPlgResult&&this.props.triggerPrevClickPlgResult.prev){
-      return window.JSON.parse(getFromStorage('step2-1-selected','session'))
-    }
-    return {}
-  }
-
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // 修改表格内容后刷新表格示例
     let batchChangeCampaignOpStatusResult = nextProps.batchChangeCampaignOpStatusResult;
     if (batchChangeCampaignOpStatusResult !== this.props.batchChangeCampaignOpStatusResult &&
@@ -49,18 +26,14 @@ export default class TableCommon extends Component {
     }
   }
 
-  componentWillMount(){ }
-
-  componentDidMount() { }
-
+  getDefaultSelectedRowKeys=()=>{
+    if(this.props.triggerPrevClickPlgResult&&this.props.triggerPrevClickPlgResult.prev){
+      return window.JSON.parse(getFromStorage('step2-1-selected','session'))
+    }
+    return {}
+  }
   // 处理内容需要特殊处理的列
   addCustomCloumns() {
-    COLUMNS.forEach((col) => {
-      switch (col.key) {
-        case 'operate':
-          break;
-      }
-    })
   }
 
   triggerSubmit() {
@@ -76,7 +49,7 @@ export default class TableCommon extends Component {
 
     this.filterParams && this.filterParams(this.query);
     this.filterCurrentPage && this.filterCurrentPage(this.currentPage);
-    
+
     this.fetchList && this.fetchList({
       ...query,
       page: this.currentPage,
@@ -138,7 +111,7 @@ export default class TableCommon extends Component {
       }
     })
   }
-  
+
 
   showCurrentPageSelected(){
     let selected = [];
@@ -160,7 +133,6 @@ export default class TableCommon extends Component {
         return Object.assign(item.creative, item.group);
       })
     }
-    const { showEcho, defaultSelectedRowKeys, triggerPrevClickPlgResult } = this.props
     let rowSelectionConfig = {
       selectedRowKeys: this.showCurrentPageSelected && this.showCurrentPageSelected(),
       onChange: this.handleSelectionChange
@@ -177,7 +149,7 @@ export default class TableCommon extends Component {
               searchList={this.queryConfig}
               tableData={listResult.info.list}
               currentPage={this.currentPage}
-              customerPage={true}
+              customerPage
               totalCount={listResult.info.pagination.total}
               hideQuery={this.hideQuery||false}
               rowSelection={ this.showSelectedRowKeys ? rowSelectionConfig : null}

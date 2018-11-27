@@ -1,7 +1,7 @@
 import './index.less';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Spin, message } from 'antd';
 
 import ArticleForm from 'components/ArticleForm';
@@ -9,6 +9,7 @@ import { fetchArticleMessage, putArticleMessage } from 'actions/article/';
 import { getGivenSearch } from 'utils/location';
 import { getProxyURL } from 'utils/config';
 @connect(
+	// eslint-disable-next-line no-unused-vars
 	(state, props) => ({
 		ArticleMessageResult: state.getArticleMessageResult,
 		getPutArticleResult: state.getPutArticleResult
@@ -23,12 +24,12 @@ class ArticleEdit extends Component{
 	}
 	componentDidMount(){
 		// 按需加载mditor的js和css
-		import (/* webpackChunkName: "mditor" */ 'plugins/mditor/css/mditor.min.css');
+		import(/* webpackChunkName: "mditor" */ 'plugins/mditor/css/mditor.min.css');
 		import(/* webpackChunkName: "mditor" */ 'plugins/mditor/js/mditor.min.js').then(() => {
 			this.setMessage();
 		})
 	}
-	componentWillReceiveProps(newProps){
+	UNSAFE_componentWillReceiveProps(newProps){
 		let { ArticleMessageResult, getPutArticleResult } = newProps;
 		const props = this.props;
 		if(ArticleMessageResult !== this.props.ArticleMessageResult && ArticleMessageResult && ArticleMessageResult.isLoading === false) {
@@ -36,7 +37,7 @@ class ArticleEdit extends Component{
 		}
 		if(getPutArticleResult !== this.props.getPutArticleResult && getPutArticleResult && getPutArticleResult.isLoading === false){
 			if(getPutArticleResult.info.count != 0){
-				message.info("修改成功",0.5);
+				message.info('修改成功',0.5);
 				setTimeout(function(){
 					props.history.goBack();
 				},600);
@@ -50,6 +51,7 @@ class ArticleEdit extends Component{
 		this.props.dispatch(fetchArticleMessage(search));
 		//设置外部editor
 		const ele_textarea = document.getElementById('md_editor');
+		// eslint-disable-next-line no-undef
 		const mditor =  Mditor.fromTextarea(ele_textarea);
 		mditor.height='99%'
 		this.mditor = mditor;
@@ -58,7 +60,7 @@ class ArticleEdit extends Component{
 	handleSubmit = (values) => {
 		values.article_path = this.article.article_path;
 		values.text = this.mditor.value;
-		values.article_id = getGivenSearch(this.props,"article_id");
+		values.article_id = getGivenSearch(this.props,'article_id');
 		this.props.dispatch(putArticleMessage(values));
 	}
 
@@ -74,13 +76,13 @@ class ArticleEdit extends Component{
 						<textarea id="md_editor"></textarea>
 					</div>
 					<div className={'edit-message'}>
-						{article && <ArticleForm 
-										article={article} 
+						{article && <ArticleForm
+										article={article}
 										handleSubmit={this.handleSubmit}
-									>
+						            >
 									</ArticleForm>
 						}
-						
+
 					</div>
 				</div>
 			</Spin>

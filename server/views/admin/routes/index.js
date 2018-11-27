@@ -22,7 +22,7 @@ const routes = [
     component: Login,
     requiresAuth: false,
   },
-  { 
+  {
     path: '/admin',
     component: App,
     requiresAuth: true,

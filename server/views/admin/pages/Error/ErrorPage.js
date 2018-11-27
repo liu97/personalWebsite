@@ -9,8 +9,8 @@ class ErrorPage extends Component{
                 <div className={'error-back'}>
                     <span className={'error-tips'}>We are looking for your page... But We can't find it</span>
                     <span>
-                        <a href="javascript:void(0)" onClick={()=>{this.props.history.goBack()}}>Go Back </a> 
-                        or 
+                        <a href="javascript:void(0)" onClick={()=>{this.props.history.goBack()}}>Go Back </a>
+                        or
                         <a href="javascript:void(0)" onClick={()=>{this.props.history.push('/')}}> Go Home</a>
                     </span>
                 </div>

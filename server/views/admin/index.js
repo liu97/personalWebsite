@@ -2,7 +2,6 @@ import './index.less'
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { authPath } from 'utils/config';
 import {HashRouter as Router} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -15,7 +14,7 @@ let store = createStore(
 	applyMiddleware(thunk)
 );
 ReactDOM.render(
-  <Provider store={store}>  
+  <Provider store={store}>
     <Router>
       <ConfirmLogin></ConfirmLogin>
     </Router>
