@@ -1,13 +1,3 @@
-/*
-* @Usage:
-* @Description:
-* @Author: 刘炳礼
-* @Email: bingliliu@sohu-inc.com
-* @Date:   2017-04-17 15:40:10
-*/
-
-
-'use strict';
 import _ from 'lodash'
 
 var arrayToTree = require('array-to-tree');
