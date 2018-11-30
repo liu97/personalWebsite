@@ -3,5 +3,4 @@ resources/
 static/upload_images/
 .vscode/
 *.log
-debug.log
 dist/
