@@ -4,6 +4,8 @@ import LoginForm from './LoginForm';
 import { connect } from 'react-redux';
 import { PostLoginMessage } from 'actions/login';
 import { message } from 'antd';
+import { getCookie } from 'utils/cookie';
+import { setCookie } from 'utils/cookie';
 
 @connect(
 	// eslint-disable-next-line no-unused-vars
@@ -13,7 +15,7 @@ import { message } from 'antd';
 )
 class Home extends Component{
 	UNSAFE_componentWillMount(){
-		const authed = window.sessionStorage.getItem('isLogin') == 'true';
+		const authed = getCookie('isLogin') == 'true';
 		if(authed){
 			this.props.history.push('/admin');
 		}
@@ -23,7 +25,7 @@ class Home extends Component{
 		const props = this.props;
 		if(postLoginResult !== props.postLoginResult && postLoginResult && postLoginResult.isLoading === false){
 			if(postLoginResult.code == 1){
-				window.sessionStorage.setItem('isLogin', true);
+				setCookie('isLogin', true);
 				window.localStorage.setItem('access_token', postLoginResult.token);
 				const bcakURL = props.location.state ? props.location.state.from.pathname : '/admin';
 				props.history.push(bcakURL);

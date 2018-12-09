@@ -2,10 +2,11 @@ import 'whatwg-fetch';
 import { createAction, handleActions } from 'redux-actions';
 import { isObject, obj2String } from 'utils/object';
 import config, { requestFront } from 'utils/config';
+import { setCookie } from 'utils/cookie';
 
 const checkStatus = (response) => {
 	if(response.status===401){
-		window.sessionStorage.setItem('isLogin', false);
+		setCookie('isLogin', false);
 		alert('身份过期，请重新登录！');
 		location.reload();
 	}

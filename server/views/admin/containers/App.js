@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // import { renderRoutes } from 'react-router-config';
 import renderRoutes from 'utils/renderRoutes';
 import { authPath } from 'utils/config';
+import { getCookie } from 'utils/cookie';
 import Header from 'containers/Header';
 import Left from 'containers/Left';
 
@@ -20,7 +21,7 @@ class App extends Component {
   }
 
   render() {
-    const authed = window.sessionStorage.getItem('isLogin') == 'true';
+    const authed = getCookie('isLogin') == 'true';
     return (
       <div className="app">
         <Header />
