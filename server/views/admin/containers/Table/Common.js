@@ -15,6 +15,7 @@ export default class TableAdd extends Component {
         this.currentPage = 1
         this.query = {}
         this.pageSize = 20
+        this.rowKey = 'id'
 
 
         this.addCustomCloumns();
@@ -111,6 +112,7 @@ export default class TableAdd extends Component {
                         hasResetBtn={this.hasReset}
                         hasDownloadBtn={this.hasDownload}
                         hideQuery={this.hideQuery}
+                        rowKey={this.rowKey}
                     />
                 </Spin>
             </div>

@@ -313,7 +313,7 @@ class SearchForm extends Component {
     // eslint-disable-next-line no-unneeded-ternary
     const cols = formColsNum ? formColsNum : 4;
     return (
-      <QueueAnim>
+      <QueueAnim key={index}>
         {
           arr.map((item, key) => (
             <Col md={24 / cols} key={key} style={{display:item.show === false?'none':'',width:this.state.itemWidth}}>

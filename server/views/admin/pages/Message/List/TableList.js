@@ -22,6 +22,7 @@ class TableList extends Table{
         this.fetchList = fetchMessageList;
         this.hideQuery = true;
         this.conPrefix = 'message-tablelist';
+        this.rowKey = 'contact_id';
         this.additionQuery = {
             not: 'no',
             visited: 'yes'
@@ -47,6 +48,7 @@ class TableList extends Table{
 						if(text.length > 100){
 							return text.slice(0,100) + '...';
 						}
+						return text;
 					}
 					break;
 			  	case 'opt': {

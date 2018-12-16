@@ -25,6 +25,7 @@ class Article extends Table{
 		this.hasReset = true;
 		this.hasDownload = false;
 		this.conPrefix = 'article-container';
+		this.rowKey = 'article_id';
 	}
 	componentWillReceiveProps(newProps){
 		let { deleteResult } = newProps;

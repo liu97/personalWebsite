@@ -12,18 +12,20 @@ export default class SearchTable extends Component {
   // eslint-disable-next-line react/sort-comp
   beforeSorter = null;
   constructor(props) {
-    super(props)
-    this.onSubmit = this.onSubmit.bind(this)
-    this.getFormValue = this.getFormValue.bind(this)
-    this.pageSize = this.props.pageSize || 20
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.getFormValue = this.getFormValue.bind(this);
+    this.pageSize = this.props.pageSize || 20;
     this.state = {
       current: 1,
       scroll: props.scroll,
     	showColumns: getFromStorage ? (window.JSON.parse(getFromStorage('showColumns')) || props.columns) : props.columns,
       selectedRowKeys: []
-    }
+    };
 
-    this.onChange = this.onChange.bind(this)
+    this.myRef = React.createRef();
+
+    this.onChange = this.onChange.bind(this);
   }
   componentDidMount() {
     this.setState({
@@ -86,9 +88,9 @@ export default class SearchTable extends Component {
     if (this.props.hideQuery) {
       return {}
     }
-    const form = this.props.formRef ? this.props.formRef : 'searchForm'
+    const form = this.props.formRef ? this.props.formRef : this.myRef
     // eslint-disable-next-line react/no-string-refs
-    const query = this.refs[form].getFieldsValue?this.refs[form].getFieldsValue():{};
+    const query = form.getFieldsValue?form.getFieldsValue():{};
     Object.keys(query).map((key) => {
      // console.log(key, query[key]);
       (query[key] === undefined||query[key] === '') && delete (query[key])
@@ -134,6 +136,7 @@ export default class SearchTable extends Component {
             onChange,
             selRender,
             customerPage,
+            rowKey,
         } = this.props
 
     //此处这么做是为了解决 强制分页要回到首页
@@ -148,7 +151,7 @@ export default class SearchTable extends Component {
       //current: _self.state.current,
       current:customerPage?currentPage:_current,
       showSizeChanger: showSizeChanger===false?false:true,
-      defaultPageSize: pageSizeOptions ? pageSizeOptions[0] : '20',
+      defaultPageSize: pageSizeOptions ? pageSizeOptions[0] : 20,
       showQuickJumper: true,
       showTotal(count) {
         return `共 ${count} 条`
@@ -156,7 +159,7 @@ export default class SearchTable extends Component {
       pageSizeOptions: pageSizeOptions || ['10', '20', '50', '100'],
       onChange(current, pageSize) {
         const query = _self.getFormValue();
-        _self.pageSize = pageSize;
+        _self.pageSize =  pageSize;
         if(!pageNoSubmit){
           _self.onSubmit(query, current, pageSize,'pageChange')
         }
@@ -218,7 +221,7 @@ export default class SearchTable extends Component {
           hideQuery ?
           null :
           <SearchForm
-            ref={this.props.formRef ? this.props.formRef : 'searchForm'}
+            ref={this.props.formRef ? this.props.formRef : this.myRef}
             onSubmit={this.onSubmit}
             manual={_self.props.manual}
             searchList={searchList}
@@ -252,6 +255,7 @@ export default class SearchTable extends Component {
             current={this.state.current}
             bordered={ this.props.bordered }
             onRowClick={ onRowClick }
+            rowKey={ rowKey }
           />
 
       </div>

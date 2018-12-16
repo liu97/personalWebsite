@@ -67,7 +67,7 @@ class ArticleForm extends React.Component {
             rules: [{ required: true, message: '请输入标题!' }],
             initialValue: article && article.title,
           })(
-            <Input placeholder="标题" ini/>
+            <Input placeholder="标题"/>
           )}
         </FormItem>
         <FormItem
@@ -90,7 +90,7 @@ class ArticleForm extends React.Component {
             rules: [{ required: true, message: '请输入文章类型!' }],
             initialValue: article && article.type,
           })(
-            <Input placeholder="文章类型" ini/>
+            <Input placeholder="文章类型" />
           )}
         </FormItem>
         <FormItem
