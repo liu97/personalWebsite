@@ -1,5 +1,7 @@
-# personalWebsite
-使用React + jquery + node.js + mysql 搭建的个人博客,分为前台页面和后台管理页面
+# 个人博客管理系统
+前台页面：jquery
+后台页面：React + React-Router + Redux
+后端：Node.js + Koa2 + MySQL
 
 ## 项目初始化
 ### 1、安装依赖包
